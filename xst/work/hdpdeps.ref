@@ -1,0 +1,38 @@
+V3 15
+FL "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/debouncer.vhd" 2012/02/21.15:17:37 M.63c
+EN work/db_fsm 1329837562 \
+      FL "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/debouncer.vhd" \
+      PB ieee/std_logic_1164 1277201847 PB ieee/NUMERIC_STD 1277201848
+AR work/db_fsm/arch 1329837563 \
+      FL "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/debouncer.vhd" \
+      EN work/db_fsm 1329837562
+FL "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/edge_detector.vhd" 2012/02/21.16:09:38 M.63c
+EN work/rotation_detector 1329837566 \
+      FL "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/edge_detector.vhd" \
+      PB ieee/std_logic_1164 1277201847
+AR work/rotation_detector/Behavioral 1329837567 \
+      FL "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/edge_detector.vhd" \
+      EN work/rotation_detector 1329837566 AR work/db_fsm/arch 1329837563
+FL "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/fsm_logic.vhd" 2012/02/21.16:04:42 M.63c
+EN work/system_logic 1329837568 \
+      FL "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/fsm_logic.vhd" \
+      PB ieee/std_logic_1164 1277201847 PB ieee/NUMERIC_STD 1277201848
+AR work/system_logic/Behavioral 1329837569 \
+      FL "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/fsm_logic.vhd" \
+      EN work/system_logic 1329837568
+FL "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/lcdserializer.vhd" 2012/02/21.15:41:45 M.63c
+EN work/lcd_serializer 1329837564 \
+      FL "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/lcdserializer.vhd" \
+      PB ieee/std_logic_1164 1277201847
+AR work/lcd_serializer/Behavioral 1329837565 \
+      FL "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/lcdserializer.vhd" \
+      EN work/lcd_serializer 1329837564
+FL "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.vhd" 2012/02/21.16:19:17 M.63c
+EN work/overall_system 1329837570 \
+      FL "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.vhd" \
+      PB ieee/std_logic_1164 1277201847
+AR work/overall_system/Behavioral 1329837571 \
+      FL "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.vhd" \
+      EN work/overall_system 1329837570 AR work/lcd_serializer/Behavioral 1329837565 \
+      AR work/rotation_detector/Behavioral 1329837567 \
+      AR work/system_logic/Behavioral 1329837569

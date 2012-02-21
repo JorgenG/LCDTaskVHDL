@@ -39,20 +39,64 @@ entity overall_system is
            RESETLCD : out  STD_LOGIC;
            CS : out  STD_LOGIC;
            A0 : out  STD_LOGIC;
-           SCLK : out  STD_LOGIC;
-           DEBUGLED1 : out  STD_LOGIC;
-           DEBUGLED2 : out  STD_LOGIC);
+			  btn : in STD_LOGIC_VECTOR(2 downto 0);
+			  debugled1, debugled2 : out std_logic; 
+           SCLK : out  STD_LOGIC);
 end overall_system;
 
 architecture Behavioral of overall_system is
+	signal V_CW_SIG, V_CCW_SIG, H_CW_SIG, H_CCW_SIG, 
+				LCD_READY_SIG, LCD_START_SIG : STD_LOGIC;
+	signal LCD_BYTE_SIG : STD_LOGIC_VECTOR(7 downto 0);
+	signal RESET_LCD_OUT : STD_LOGIC;
 
 begin
+	
+	RESET_LCD_OUT <= '1';
+	SCLK <= CLK;
+	
+	debugled1 <= '1';
+	debugled2 <= '1';
+
 	LCD_SERIALIZER : entity work.lcd_serializer (Behavioral)
 	port map(
 		clk => CLK,
-		reset => open,
-		sw => ROT_A,
-		db => DB_ROT_A
+		lcd_start => LCD_START_SIG,
+		lcd_byte => LCD_BYTE_SIG,
+		lcd_ready => LCD_READY_SIG,
+		cs => CS,
+		si => SI
+	);
+	
+	HORIZONTAL_KNOB : entity work.rotation_detector (Behavioral)
+	port map(
+		clk => CLK,
+		rot_a => H_ROT_A,
+		rot_b => H_ROT_B,
+		cw => H_CW_SIG,
+		ccw => H_CCW_SIG	
+	);
+
+	VERTICAL_KNOB : entity work.rotation_detector (Behavioral)
+	port map(
+		clk => CLK,
+		rot_a => V_ROT_A,
+		rot_b => V_ROT_B,
+		cw => V_CW_SIG,
+		ccw => V_CCW_SIG
+	);
+	
+	SYSTEM_LOGIC : entity work.system_logic (Behavioral)
+	port map(
+		clk => CLK,
+		h_cw => H_CW_SIG,
+		h_ccw => H_CCW_SIG,
+		v_cw => V_CW_SIG,
+		v_ccw => V_CCW_SIG,
+		lcd_byte => LCD_BYTE_SIG,
+		lcd_start => LCD_START_SIG,
+		lcd_isdata => A0,
+		lcd_ready => LCD_READY_SIG
 	);
 
 end Behavioral;

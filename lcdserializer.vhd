@@ -32,12 +32,9 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity lcd_serializer is
     Port ( LCD_BYTE : in  STD_LOGIC_VECTOR(7 downto 0);
            LCD_START : in  STD_LOGIC;
-           DATA_CMD : in  STD_LOGIC;
 			  CLK : in STD_LOGIC;
            LCD_READY : out  STD_LOGIC;
            SI : out  STD_LOGIC;
-           SCLK : out  STD_LOGIC;
-           A0 : out  STD_LOGIC;
            CS : out  STD_LOGIC
   );
 end lcd_serializer;
@@ -47,9 +44,8 @@ architecture Behavioral of lcd_serializer is
 	type STATE_TYPE is (idle, data0, data1, data2, data3, data4, data5, data6, data7);
 	signal STATE_REG, STATE_NEXT : STATE_TYPE;
 	signal DATA_NEXT, DATA_REG : STD_LOGIC;
-	signal CS_NEXT, CS_REG : STD_LOGIC;
+	signal CS_NEXT, CS_REG : STD_LOGIC; -- Chip select is active low.
 	signal LCD_READY_NEXT, LCD_READY_REG : STD_LOGIC;
-	signal A0_NEXT, A0_REG : STD_LOGIC;
 begin
 
 	process(CLK)
@@ -59,15 +55,12 @@ begin
 				DATA_REG <= DATA_NEXT;
 				CS_REG <= CS_NEXT;
 				LCD_READY_REG <= LCD_READY_NEXT;
-				A0_REG <= A0_NEXT;
 			end if;
       
 	end process;
 	
-	SCLK <= CLK;
 	SI <= DATA_REG;
 	LCD_READY <= LCD_READY_REG;
-	A0 <= A0_REG;
 	CS <= CS_REG;
 	
 	process(CLK, STATE_REG)
@@ -75,7 +68,6 @@ begin
 			DATA_NEXT <= '0';
 			CS_NEXT <= '0';
 			LCD_READY_NEXT <= '0';
-			A0_NEXT <= DATA_CMD;
 			STATE_NEXT <= STATE_REG;
 			
 			case STATE_REG is

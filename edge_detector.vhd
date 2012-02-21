@@ -38,10 +38,9 @@ entity rotation_detector is
 end rotation_detector;
 
 architecture Behavioral of rotation_detector is
-	type STATES is (idle, cw, ccw);
+	type STATES is (idle, cw_state, ccw_state);
 	signal STATE_REG, STATE_NEXT : STATES;
 	signal DELAY_A_REG : STD_LOGIC;
-	signal DELAY_TICK_A, DELAY_TICK_B : STD_LOGIC;
 	signal DB_ROT_A, DB_ROT_B : STD_LOGIC;
 	signal TICK_A : STD_LOGIC;
 begin
@@ -49,7 +48,7 @@ begin
 	DEBOUNCE_A : entity work.db_fsm (arch)
 	port map(
 		clk => CLK,
-		reset => open,
+		reset => '0',
 		sw => ROT_A,
 		db => DB_ROT_A
 	);
@@ -57,7 +56,7 @@ begin
 	DEBOUNCE_B : entity work.db_fsm (arch)
 	port map(
 		clk => CLK,
-		reset => open,
+		reset => '0',
 		sw => ROT_B,
 		db => DB_ROT_B
 	);
@@ -81,13 +80,13 @@ begin
 		case STATE_REG is
 			when idle =>
 				if(TICK_A = '1' and DB_ROT_B ='0') then
-					STATE_NEXT <= cw;
+					STATE_NEXT <= cw_state;
 				elsif(TICK_A = '1' and DB_ROT_B ='1') then
-					STATE_NEXT <= ccw;
+					STATE_NEXT <= ccw_state;
 				end if;
-			when cw =>
+			when cw_state =>
 				CW <= '1';
-			when ccw =>
+			when ccw_state =>
 				CCW <= '1';
 		end case;
 	end process;

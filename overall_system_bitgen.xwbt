@@ -1,0 +1,8 @@
+INTSTYLE=ise
+INFILE=D:\FPGA Prosjekter\Digitale Systemer\Xilinx\LCDTaskDigSys\overall_system.ncd
+OUTFILE=D:\FPGA Prosjekter\Digitale Systemer\Xilinx\LCDTaskDigSys\overall_system.bit
+FAMILY=Spartan3A and Spartan3AN
+PART=xc3s400a-4ft256
+WORKINGDIR=D:\FPGA Prosjekter\Digitale Systemer\Xilinx\LCDTaskDigSys
+LICENSE=WebPack
+USER_INFO=0_0_318

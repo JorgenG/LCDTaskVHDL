@@ -1,0 +1,5 @@
+vhdl work "D:\FPGA Prosjekter\Digitale Systemer\Xilinx\LCDTaskDigSys\debouncer.vhd"
+vhdl work "D:\FPGA Prosjekter\Digitale Systemer\Xilinx\LCDTaskDigSys\lcdserializer.vhd"
+vhdl work "D:\FPGA Prosjekter\Digitale Systemer\Xilinx\LCDTaskDigSys\fsm_logic.vhd"
+vhdl work "D:\FPGA Prosjekter\Digitale Systemer\Xilinx\LCDTaskDigSys\edge_detector.vhd"
+vhdl work "D:\FPGA Prosjekter\Digitale Systemer\Xilinx\LCDTaskDigSys\overall_system.vhd"

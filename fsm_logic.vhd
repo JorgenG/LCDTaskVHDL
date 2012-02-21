@@ -22,7 +22,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
+use IEEE.NUMERIC_STD.ALL;
 
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx primitives in this code.
@@ -33,19 +33,19 @@ entity system_logic is
     Port ( H_CW, H_CCW, V_CW, V_CCW, LCD_READY : in  STD_LOGIC;
            CLK : in  STD_LOGIC;
 			  LCD_BYTE : out STD_LOGIC_VECTOR(7 downto 0);
-			  LCD_START, LCD_ISDATA, LCD_CS : out STD_LOGIC);
+			  LCD_START, LCD_ISDATA : out STD_LOGIC);
 
 end system_logic;
 
 architecture Behavioral of system_logic is
-	signal COUNTER_REG, COUNTER_NEXT : unsigned(8 downto 0);
+	signal COUNTER_REG, COUNTER_NEXT : integer:=8;
 	signal CUR_PAGE_REG, CUR_PAGE_NEXT, NEW_PAGE_REG, NEW_PAGE_NEXT : STD_LOGIC_VECTOR(3 downto 0);
 	signal CUR_COL_REG, CUR_COL_NEXT, NEW_COL_REG, NEW_COL_NEXT : STD_LOGIC_VECTOR(7 downto 0);
 	signal LCD_BYTE_REG, LCD_BYTE_NEXT : STD_LOGIC_VECTOR(7 downto 0);
-	signal LCD_START_REG, LCD_START_NEXT, LCD_ISDATA_REG, LCD_ISDATA_NEXT, LCD_CS_REG, LCD_CS_NEXT : STD_LOGIC;
+	signal LCD_START_REG, LCD_START_NEXT, LCD_ISDATA_REG, LCD_ISDATA_NEXT : STD_LOGIC;
 	type STATES is (	INIT0, INIT1, INIT2, INIT3, INIT4, INIT5, INIT6, INIT7, INIT8, INIT9,
-							INIT10, INIT11, INIT12, INIT13, INIT14, INIT15, IDLE, UP1, UP2, UP3, DOWN1, DOWN2, DOWN3, LEFT1, LEFT2, LEFT3,
-							RIGHT1, RIGHT2, RIGHT3, CLEARCURRENT, DRAWNEXT1, DRAWNEXT2, DRAWNEXT3, DRAWNEXT4 );
+							INIT10, INIT11, INIT12, INIT13, INIT14, INIT15, INIT16, INIT17, IDLE, UP, DOWN, LEFT,
+							RIGHT, CLEARCURRENT, DRAWNEXT1, DRAWNEXT2, DRAWNEXT3, DRAWNEXT4 );
 	signal STATE_REG, STATE_NEXT : STATES;					
 begin
 	
@@ -57,7 +57,6 @@ begin
 			LCD_START_REG <= LCD_START_NEXT;
 			LCD_ISDATA_REG <= LCD_ISDATA_NEXT;
 			COUNTER_REG <= COUNTER_NEXT;
-			LCD_CS_REG <= LCD_CS_NEXT;
 			CUR_PAGE_REG <= CUR_PAGE_NEXT;
 			NEW_PAGE_REG <= NEW_PAGE_NEXT;
 			CUR_COL_REG <= CUR_COL_NEXT;
@@ -74,7 +73,6 @@ begin
 		LCD_BYTE_NEXT <= "00000000";
 		LCD_START_NEXT <= '0';
 		LCD_ISDATA_NEXT <= '0';
-		LCD_CS_REG <= '1'; -- Set to '0' when writing CMD or DATA.
 		CUR_COL_NEXT <= CUR_COL_REG;
 		NEW_COL_NEXT <= NEW_COL_REG;
 		CUR_PAGE_NEXT <= CUR_PAGE_REG;
@@ -84,7 +82,6 @@ begin
 			when INIT0 =>
 				LCD_BYTE_NEXT <= "01000000";
 				LCD_START_NEXT <= '1';
-				LCD_CS_NEXT <= '0';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
 					COUNTER_NEXT <= 8;
@@ -93,7 +90,6 @@ begin
 			when INIT1 =>
 				LCD_BYTE_NEXT <= "10100001";
 				LCD_START_NEXT <= '1';
-				LCD_CS_NEXT <= '0';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
 					COUNTER_NEXT <= 8;
@@ -102,7 +98,6 @@ begin
 			when INIT2 =>
 				LCD_BYTE_NEXT <= "11000000";
 				LCD_START_NEXT <= '1';
-				LCD_CS_NEXT <= '0';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
 					COUNTER_NEXT <= 8;
@@ -111,7 +106,6 @@ begin
 			when INIT3 =>
 				LCD_BYTE_NEXT <= "10100110";
 				LCD_START_NEXT <= '1';
-				LCD_CS_NEXT <= '0';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
 					COUNTER_NEXT <= 8;
@@ -120,7 +114,6 @@ begin
 			when INIT4 =>
 				LCD_BYTE_NEXT <= "10100010";
 				LCD_START_NEXT <= '1';
-				LCD_CS_NEXT <= '0';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
 					COUNTER_NEXT <= 8;
@@ -129,7 +122,6 @@ begin
 			when INIT5 =>
 				LCD_BYTE_NEXT <= "00101111";
 				LCD_START_NEXT <= '1';
-				LCD_CS_NEXT <= '0';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
 					COUNTER_NEXT <= 8;
@@ -138,7 +130,6 @@ begin
 			when INIT6 =>
 				LCD_BYTE_NEXT <= "11111000";
 				LCD_START_NEXT <= '1';
-				LCD_CS_NEXT <= '0';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
 					COUNTER_NEXT <= 8;
@@ -147,7 +138,6 @@ begin
 			when INIT7 =>
 				LCD_BYTE_NEXT <= "00000000";
 				LCD_START_NEXT <= '1';
-				LCD_CS_NEXT <= '0';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
 					COUNTER_NEXT <= 8;
@@ -156,7 +146,6 @@ begin
 			when INIT8 =>
 				LCD_BYTE_NEXT <= "00100011";
 				LCD_START_NEXT <= '1';
-				LCD_CS_NEXT <= '0';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
 					COUNTER_NEXT <= 8;
@@ -165,7 +154,6 @@ begin
 			when INIT9 =>
 				LCD_BYTE_NEXT <= "10000001";
 				LCD_START_NEXT <= '1';
-				LCD_CS_NEXT <= '0';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
 					COUNTER_NEXT <= 8;
@@ -174,7 +162,6 @@ begin
 			when INIT10 =>
 				LCD_BYTE_NEXT <= "00011111";
 				LCD_START_NEXT <= '1';
-				LCD_CS_NEXT <= '0';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
 					COUNTER_NEXT <= 8;
@@ -183,7 +170,6 @@ begin
 			when INIT11 =>
 				LCD_BYTE_NEXT <= "10101100";
 				LCD_START_NEXT <= '1';
-				LCD_CS_NEXT <= '0';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
 					COUNTER_NEXT <= 8;
@@ -192,7 +178,6 @@ begin
 			when INIT12 =>
 				LCD_BYTE_NEXT <= "00000000";
 				LCD_START_NEXT <= '1';
-				LCD_CS_NEXT <= '0';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
 					COUNTER_NEXT <= 8;
@@ -201,7 +186,6 @@ begin
 			when INIT13 =>
 				LCD_BYTE_NEXT <= "10101111";
 				LCD_START_NEXT <= '1';
-				LCD_CS_NEXT <= '0';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
 					COUNTER_NEXT <= 8;
@@ -211,7 +195,6 @@ begin
 			when INIT14 =>
 				LCD_BYTE_NEXT <= "10110000";
 				LCD_START_NEXT <= '1';
-				LCD_CS_NEXT <= '0';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
 					COUNTER_NEXT <= 8;
@@ -219,9 +202,34 @@ begin
 				end if;
 					
 			when INIT15 =>
+				LCD_BYTE_NEXT <= "00010000";
+				LCD_START_NEXT <= '1';
+				COUNTER_NEXT <= COUNTER_REG - 1;
+				if(COUNTER_REG = 0) then
+					COUNTER_NEXT <= 8;
+					STATE_NEXT <= INIT16;
+				end if;
+				
+			when INIT16 =>
+			LCD_BYTE_NEXT <= "00000000";
+			LCD_START_NEXT <= '1';
+			COUNTER_NEXT <= COUNTER_REG - 1;
+			if(COUNTER_REG = 0) then
+				COUNTER_NEXT <= 8;
+				STATE_NEXT <= INIT17;
+			end if;
+			
+			when INIT17 =>
+			LCD_BYTE_NEXT <= "11111111";
+			LCD_START_NEXT <= '1';
+			LCD_ISDATA <= '1';
+			COUNTER_NEXT <= COUNTER_REG - 1;
+			if(COUNTER_REG = 0) then
+				COUNTER_NEXT <= 8;
+				STATE_NEXT <= IDLE;
+			end if;
 				
 			when IDLE =>
-				LCD_CS_NEXT <= '1';
 				if(V_CW = '1') then
 					STATE_NEXT <= UP;
 				elsif(V_CCW = '1') then
@@ -236,32 +244,32 @@ begin
 				if(CUR_PAGE_REG = "0000") then
 					NEW_PAGE_NEXT <= "0100";
 				else
-					NEW_PAGE_NEXT <= CUR_PAGE_REG - "0001";
+					NEW_PAGE_NEXT <= std_logic_vector(unsigned(CUR_PAGE_REG) - 1);
 				end if;
 			when DOWN =>
 				STATE_NEXT <= CLEARCURRENT;
 				if(CUR_PAGE_REG = "0100") then
 					NEW_PAGE_NEXT <= "0000";
 				else
-					NEW_PAGE_NEXT <= CUR_PAGE_REG + "0001";
+					NEW_PAGE_NEXT <= std_logic_vector(unsigned(CUR_PAGE_REG) + 1);
 				end if;
 			when LEFT =>
 				STATE_NEXT <= CLEARCURRENT;
 				if(CUR_COL_REG = "00000000") then
 					NEW_COL_NEXT <= "10000011";
 				else
-					NEW_COL_NEXT <= CUR_COL_REG - "00000001";
+					NEW_COL_NEXT <= std_logic_vector(unsigned(CUR_COL_REG) - 1);
 				end if;
 			when RIGHT =>
 				STATE_NEXT <= CLEARCURRENT;
 				if(CUR_COL_REG = "10000011") then
 					NEW_COL_NEXT <= "00000000";
 				else
-					NEW_COL_NEXT <= CUR_COL_REG + "00000001";
+					NEW_COL_NEXT <= std_logic_vector(unsigned(CUR_COL_REG) + 1);
 				end if;
 			when CLEARCURRENT =>
 				LCD_BYTE_NEXT <= "00000000";
-				ISDATA_NEXT <= '1';
+				LCD_ISDATA_NEXT <= '1';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
 					COUNTER_NEXT <= 8;
@@ -269,7 +277,7 @@ begin
 				end if;
 				
 			when DRAWNEXT1 => -- Set correct page
-				LCD_BYTE_NEXT <= "1011" + NEW_PAGE_REG;
+				LCD_BYTE_NEXT <= "1011" & NEW_PAGE_REG;
 				LCD_START_NEXT <= '1';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
@@ -278,7 +286,7 @@ begin
 				end if;
 				
 			when DRAWNEXT2 =>
-				LCD_BYTE_NEXT <= "0001" + NEW_COL_REG(7 downto 4);
+				LCD_BYTE_NEXT <= "0001" & NEW_COL_REG(7 downto 4);
 				LCD_START_NEXT <= '1';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
@@ -287,7 +295,7 @@ begin
 				end if;
 				
 			when DRAWNEXT3 =>
-				LCD_BYTE_NEXT <= "0001" + NEW_COL_REG(3 downto 0);
+				LCD_BYTE_NEXT <= "0001" & NEW_COL_REG(3 downto 0);
 				LCD_START_NEXT <= '1';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
@@ -298,7 +306,7 @@ begin
 			when DRAWNEXT4 =>
 				LCD_BYTE_NEXT <= "11111111";
 				LCD_START_NEXT <= '1';
-				ISDATA_NEXT <= '1';
+				LCD_ISDATA_NEXT <= '1';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
 					COUNTER_NEXT <= 8;

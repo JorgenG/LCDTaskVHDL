@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2012-02-21T15:43:39</DateModified>
+  <DateModified>2012-02-21T16:19:00</DateModified>
   <ModuleName>overall_system</ModuleName>
-  <SummaryTimeStamp>2012-02-21T15:41:19</SummaryTimeStamp>
-  <SavedFilePath>D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/iseconfig/lcdserializer.xreport</SavedFilePath>
+  <SummaryTimeStamp>Unknown</SummaryTimeStamp>
+  <SavedFilePath>D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/iseconfig/overall_system.xreport</SavedFilePath>
   <ImplementationReportsDirectory>D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys</ImplementationReportsDirectory>
-  <DateInitialized>2012-02-21T15:43:38</DateInitialized>
+  <DateInitialized>2012-02-21T16:18:59</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
  </header>
  <body>
