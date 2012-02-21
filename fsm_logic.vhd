@@ -29,15 +29,15 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity fsm_logic is
+entity system_logic is
     Port ( H_CW, H_CCW, V_CW, V_CCW, LCD_READY : in  STD_LOGIC;
            CLK : in  STD_LOGIC;
 			  LCD_BYTE : out STD_LOGIC_VECTOR(7 downto 0);
 			  LCD_START, LCD_ISDATA, LCD_CS : out STD_LOGIC);
 
-end fsm_logic;
+end system_logic;
 
-architecture Behavioral of fsm_logic is
+architecture Behavioral of system_logic is
 	signal COUNTER_REG, COUNTER_NEXT : unsigned(8 downto 0);
 	signal CUR_PAGE_REG, CUR_PAGE_NEXT, NEW_PAGE_REG, NEW_PAGE_NEXT : STD_LOGIC_VECTOR(3 downto 0);
 	signal CUR_COL_REG, CUR_COL_NEXT, NEW_COL_REG, NEW_COL_NEXT : STD_LOGIC_VECTOR(7 downto 0);

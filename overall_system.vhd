@@ -47,7 +47,13 @@ end overall_system;
 architecture Behavioral of overall_system is
 
 begin
-
+	LCD_SERIALIZER : entity work.lcd_serializer (Behavioral)
+	port map(
+		clk => CLK,
+		reset => open,
+		sw => ROT_A,
+		db => DB_ROT_A
+	);
 
 end Behavioral;
 
