@@ -44,10 +44,10 @@ Setup/Hold to clock CLK
             |Max Setup to|Max Hold to |                  | Clock  |
 Source      | clk (edge) | clk (edge) |Internal Clock(s) | Phase  |
 ------------+------------+------------+------------------+--------+
-H_ROT_A     |    3.191(R)|   -0.361(R)|SCLK_OBUF         |   0.000|
-H_ROT_B     |    1.960(R)|   -0.675(R)|SCLK_OBUF         |   0.000|
-V_ROT_A     |    2.170(R)|   -0.579(R)|SCLK_OBUF         |   0.000|
-V_ROT_B     |    2.613(R)|   -0.806(R)|SCLK_OBUF         |   0.000|
+H_ROT_A     |    2.648(R)|   -0.853(R)|SCLK_OBUF         |   0.000|
+H_ROT_B     |    1.402(R)|   -0.201(R)|SCLK_OBUF         |   0.000|
+V_ROT_A     |    2.219(R)|   -0.315(R)|SCLK_OBUF         |   0.000|
+V_ROT_B     |    2.187(R)|   -0.320(R)|SCLK_OBUF         |   0.000|
 ------------+------------+------------+------------------+--------+
 
 Clock CLK to Pad
@@ -55,8 +55,9 @@ Clock CLK to Pad
             | clk (edge) |                  | Clock  |
 Destination |   to PAD   |Internal Clock(s) | Phase  |
 ------------+------------+------------------+--------+
-CS          |    7.510(R)|SCLK_OBUF         |   0.000|
-SI          |    8.675(R)|SCLK_OBUF         |   0.000|
+A0          |    8.558(R)|SCLK_OBUF         |   0.000|
+CS          |    7.668(R)|SCLK_OBUF         |   0.000|
+SI          |    8.096(R)|SCLK_OBUF         |   0.000|
 ------------+------------+------------------+--------+
 
 Clock to Setup on destination clock CLK
@@ -64,25 +65,25 @@ Clock to Setup on destination clock CLK
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-CLK            |    6.121|         |         |         |
+CLK            |    6.451|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 Pad to Pad
 ---------------+---------------+---------+
 Source Pad     |Destination Pad|  Delay  |
 ---------------+---------------+---------+
-CLK            |SCLK           |    6.537|
+CLK            |SCLK           |    6.052|
 ---------------+---------------+---------+
 
 
-Analysis completed Tue Feb 21 16:20:17 2012 
+Analysis completed Wed Feb 22 09:04:48 2012 
 --------------------------------------------------------------------------------
 
 Trace Settings:
 -------------------------
 Trace Settings 
 
-Peak Memory Usage: 174 MB
+Peak Memory Usage: 173 MB
 
 
 

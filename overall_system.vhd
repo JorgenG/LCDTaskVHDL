@@ -46,14 +46,14 @@ end overall_system;
 
 architecture Behavioral of overall_system is
 	signal V_CW_SIG, V_CCW_SIG, H_CW_SIG, H_CCW_SIG, 
-				LCD_READY_SIG, LCD_START_SIG : STD_LOGIC;
+				LCD_READY_SIG, LCD_START_SIG, LCD_ISDATA_SIG, LCD_CLK : STD_LOGIC;
 	signal LCD_BYTE_SIG : STD_LOGIC_VECTOR(7 downto 0);
-	signal RESET_LCD_OUT : STD_LOGIC;
 
 begin
 	
-	RESET_LCD_OUT <= '1';
-	SCLK <= CLK;
+	RESETLCD <= '1';
+	SCLK <= LCD_CLK;
+	A0 <= LCD_ISDATA_SIG;
 	
 	debugled1 <= '1';
 	debugled2 <= '1';
@@ -64,6 +64,7 @@ begin
 		lcd_start => LCD_START_SIG,
 		lcd_byte => LCD_BYTE_SIG,
 		lcd_ready => LCD_READY_SIG,
+		lcd_clk => LCD_CLK,
 		cs => CS,
 		si => SI
 	);
@@ -95,7 +96,7 @@ begin
 		v_ccw => V_CCW_SIG,
 		lcd_byte => LCD_BYTE_SIG,
 		lcd_start => LCD_START_SIG,
-		lcd_isdata => A0,
+		lcd_isdata => LCD_ISDATA_SIG,
 		lcd_ready => LCD_READY_SIG
 	);
 

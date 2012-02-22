@@ -38,9 +38,10 @@ entity system_logic is
 end system_logic;
 
 architecture Behavioral of system_logic is
+	constant N: integer:=17; -- Clock cycles the LCD_Serializer uses from IDle -> idle
 	signal COUNTER_REG, COUNTER_NEXT : integer:=8;
-	signal CUR_PAGE_REG, CUR_PAGE_NEXT, NEW_PAGE_REG, NEW_PAGE_NEXT : STD_LOGIC_VECTOR(3 downto 0);
-	signal CUR_COL_REG, CUR_COL_NEXT, NEW_COL_REG, NEW_COL_NEXT : STD_LOGIC_VECTOR(7 downto 0);
+	signal CUR_PAGE_REG, CUR_PAGE_NEXT, NEW_PAGE_REG, NEW_PAGE_NEXT : STD_LOGIC_VECTOR(3 downto 0):= (others => '0');
+	signal CUR_COL_REG, CUR_COL_NEXT, NEW_COL_REG, NEW_COL_NEXT : STD_LOGIC_VECTOR(7 downto 0):= (others => '0');
 	signal LCD_BYTE_REG, LCD_BYTE_NEXT : STD_LOGIC_VECTOR(7 downto 0);
 	signal LCD_START_REG, LCD_START_NEXT, LCD_ISDATA_REG, LCD_ISDATA_NEXT : STD_LOGIC;
 	type STATES is (	INIT0, INIT1, INIT2, INIT3, INIT4, INIT5, INIT6, INIT7, INIT8, INIT9,
@@ -48,6 +49,10 @@ architecture Behavioral of system_logic is
 							RIGHT, CLEARCURRENT, DRAWNEXT1, DRAWNEXT2, DRAWNEXT3, DRAWNEXT4 );
 	signal STATE_REG, STATE_NEXT : STATES;					
 begin
+	
+	LCD_BYTE <= LCD_BYTE_REG;
+	LCD_START <= LCD_START_REG;
+	LCD_ISDATA <= LCD_ISDATA_REG;
 	
 	process(CLK)
 	begin
@@ -63,9 +68,6 @@ begin
 			NEW_COL_REG <= NEW_COL_NEXT;
 		end if;
 	end process;
-
-	LCD_BYTE <= LCD_BYTE_REG;
-	LCD_START <= LCD_START_REG;
 	
 	process(CLK, STATE_REG, LCD_READY, V_CW, V_CCW, H_CW, H_CCW)
 	begin
@@ -84,7 +86,7 @@ begin
 				LCD_START_NEXT <= '1';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
-					COUNTER_NEXT <= 8;
+					COUNTER_NEXT <= N;
 					STATE_NEXT <= INIT1;
 				end if;
 			when INIT1 =>
@@ -92,7 +94,7 @@ begin
 				LCD_START_NEXT <= '1';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
-					COUNTER_NEXT <= 8;
+					COUNTER_NEXT <= N;
 					STATE_NEXT <= INIT2;
 				end if;
 			when INIT2 =>
@@ -100,7 +102,7 @@ begin
 				LCD_START_NEXT <= '1';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
-					COUNTER_NEXT <= 8;
+					COUNTER_NEXT <= N;
 					STATE_NEXT <= INIT3;
 				end if;
 			when INIT3 =>
@@ -108,7 +110,7 @@ begin
 				LCD_START_NEXT <= '1';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
-					COUNTER_NEXT <= 8;
+					COUNTER_NEXT <= N;
 					STATE_NEXT <= INIT4;
 				end if;
 			when INIT4 =>
@@ -116,7 +118,7 @@ begin
 				LCD_START_NEXT <= '1';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
-					COUNTER_NEXT <= 8;
+					COUNTER_NEXT <= N;
 					STATE_NEXT <= INIT5;
 				end if;
 			when INIT5 =>
@@ -124,7 +126,7 @@ begin
 				LCD_START_NEXT <= '1';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
-					COUNTER_NEXT <= 8;
+					COUNTER_NEXT <= N;
 					STATE_NEXT <= INIT6;
 				end if;
 			when INIT6 =>
@@ -132,7 +134,7 @@ begin
 				LCD_START_NEXT <= '1';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
-					COUNTER_NEXT <= 8;
+					COUNTER_NEXT <= N;
 					STATE_NEXT <= INIT7;
 				end if;
 			when INIT7 =>
@@ -140,7 +142,7 @@ begin
 				LCD_START_NEXT <= '1';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
-					COUNTER_NEXT <= 8;
+					COUNTER_NEXT <= N;
 					STATE_NEXT <= INIT8;
 				end if;
 			when INIT8 =>
@@ -148,7 +150,7 @@ begin
 				LCD_START_NEXT <= '1';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
-					COUNTER_NEXT <= 8;
+					COUNTER_NEXT <= N;
 					STATE_NEXT <= INIT9;
 				end if;
 			when INIT9 =>
@@ -156,7 +158,7 @@ begin
 				LCD_START_NEXT <= '1';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
-					COUNTER_NEXT <= 8;
+					COUNTER_NEXT <= N;
 					STATE_NEXT <= INIT10;
 				end if;
 			when INIT10 =>
@@ -164,7 +166,7 @@ begin
 				LCD_START_NEXT <= '1';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
-					COUNTER_NEXT <= 8;
+					COUNTER_NEXT <= N;
 					STATE_NEXT <= INIT11;
 				end if;
 			when INIT11 =>
@@ -172,7 +174,7 @@ begin
 				LCD_START_NEXT <= '1';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
-					COUNTER_NEXT <= 8;
+					COUNTER_NEXT <= N;
 					STATE_NEXT <= INIT12;
 				end if;
 			when INIT12 =>
@@ -180,7 +182,7 @@ begin
 				LCD_START_NEXT <= '1';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
-					COUNTER_NEXT <= 8;
+					COUNTER_NEXT <= N;
 					STATE_NEXT <= INIT13;
 				end if;
 			when INIT13 =>
@@ -188,7 +190,7 @@ begin
 				LCD_START_NEXT <= '1';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
-					COUNTER_NEXT <= 8;
+					COUNTER_NEXT <= N;
 					STATE_NEXT <= INIT14;
 				end if;
 				
@@ -197,7 +199,7 @@ begin
 				LCD_START_NEXT <= '1';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
-					COUNTER_NEXT <= 8;
+					COUNTER_NEXT <= N;
 					STATE_NEXT <= INIT15;
 				end if;
 					
@@ -206,7 +208,7 @@ begin
 				LCD_START_NEXT <= '1';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
-					COUNTER_NEXT <= 8;
+					COUNTER_NEXT <= N;
 					STATE_NEXT <= INIT16;
 				end if;
 				
@@ -215,17 +217,17 @@ begin
 			LCD_START_NEXT <= '1';
 			COUNTER_NEXT <= COUNTER_REG - 1;
 			if(COUNTER_REG = 0) then
-				COUNTER_NEXT <= 8;
+				COUNTER_NEXT <= N;
 				STATE_NEXT <= INIT17;
 			end if;
 			
 			when INIT17 =>
 			LCD_BYTE_NEXT <= "11111111";
 			LCD_START_NEXT <= '1';
-			LCD_ISDATA <= '1';
+			LCD_ISDATA_NEXT <= '1';
 			COUNTER_NEXT <= COUNTER_REG - 1;
 			if(COUNTER_REG = 0) then
-				COUNTER_NEXT <= 8;
+				COUNTER_NEXT <= N;
 				STATE_NEXT <= IDLE;
 			end if;
 				
@@ -272,7 +274,7 @@ begin
 				LCD_ISDATA_NEXT <= '1';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
-					COUNTER_NEXT <= 8;
+					COUNTER_NEXT <= N;
 					STATE_NEXT <= DRAWNEXT1;
 				end if;
 				
@@ -281,7 +283,7 @@ begin
 				LCD_START_NEXT <= '1';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
-					COUNTER_NEXT <= 8;
+					COUNTER_NEXT <= N;
 					STATE_NEXT <= DRAWNEXT2;
 				end if;
 				
@@ -290,7 +292,7 @@ begin
 				LCD_START_NEXT <= '1';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
-					COUNTER_NEXT <= 8;
+					COUNTER_NEXT <= N;
 					STATE_NEXT <= DRAWNEXT3;
 				end if;
 				
@@ -299,7 +301,7 @@ begin
 				LCD_START_NEXT <= '1';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
-					COUNTER_NEXT <= 8;
+					COUNTER_NEXT <= N;
 					STATE_NEXT <= DRAWNEXT4;
 				end if;
 			
@@ -309,7 +311,7 @@ begin
 				LCD_ISDATA_NEXT <= '1';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
-					COUNTER_NEXT <= 8;
+					COUNTER_NEXT <= N;
 					STATE_NEXT <= IDLE;
 				end if;
 			
