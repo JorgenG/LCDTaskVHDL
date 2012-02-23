@@ -1,5 +1,0 @@
-vhdl work "debouncer.vhd"
-vhdl work "lcdserializer.vhd"
-vhdl work "fsm_logic.vhd"
-vhdl work "edge_detector.vhd"
-vhdl work "overall_system.vhd"

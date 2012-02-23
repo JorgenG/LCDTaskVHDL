@@ -1,5 +1,0 @@
-work	"debouncer.vhd"
-work	"edge_detector.vhd"
-work	"fsm_logic.vhd"
-work	"lcdserializer.vhd"
-work	"overall_system.vhd"
