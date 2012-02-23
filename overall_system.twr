@@ -4,7 +4,7 @@ Copyright (c) 1995-2010 Xilinx, Inc.  All rights reserved.
 
 C:\Xilinx\12.2\ISE_DS\ISE\bin\nt64\unwrapped\trce.exe -intstyle ise -v 3 -s 4
 -n 3 -fastpaths -xml overall_system.twx overall_system.ncd -o
-overall_system.twr overall_system.pcf
+overall_system.twr overall_system.pcf -ucf constraints.ucf
 
 Design file:              overall_system.ncd
 Physical constraint file: overall_system.pcf
@@ -44,10 +44,10 @@ Setup/Hold to clock CLK
             |Max Setup to|Max Hold to |                  | Clock  |
 Source      | clk (edge) | clk (edge) |Internal Clock(s) | Phase  |
 ------------+------------+------------+------------------+--------+
-H_ROT_A     |    2.648(R)|   -0.853(R)|SCLK_OBUF         |   0.000|
-H_ROT_B     |    1.402(R)|   -0.201(R)|SCLK_OBUF         |   0.000|
-V_ROT_A     |    2.219(R)|   -0.315(R)|SCLK_OBUF         |   0.000|
-V_ROT_B     |    2.187(R)|   -0.320(R)|SCLK_OBUF         |   0.000|
+H_ROT_A     |    3.250(R)|   -0.575(R)|CLK_BUFGP         |   0.000|
+H_ROT_B     |    1.557(R)|   -0.426(R)|CLK_BUFGP         |   0.000|
+V_ROT_A     |    1.721(R)|   -0.515(R)|CLK_BUFGP         |   0.000|
+V_ROT_B     |    2.889(R)|   -1.121(R)|CLK_BUFGP         |   0.000|
 ------------+------------+------------+------------------+--------+
 
 Clock CLK to Pad
@@ -55,9 +55,10 @@ Clock CLK to Pad
             | clk (edge) |                  | Clock  |
 Destination |   to PAD   |Internal Clock(s) | Phase  |
 ------------+------------+------------------+--------+
-A0          |    8.558(R)|SCLK_OBUF         |   0.000|
-CS          |    7.668(R)|SCLK_OBUF         |   0.000|
-SI          |    8.096(R)|SCLK_OBUF         |   0.000|
+A0          |    8.448(R)|CLK_BUFGP         |   0.000|
+CS          |    7.327(R)|CLK_BUFGP         |   0.000|
+SCLK        |    8.774(R)|CLK_BUFGP         |   0.000|
+SI          |    8.612(R)|CLK_BUFGP         |   0.000|
 ------------+------------+------------------+--------+
 
 Clock to Setup on destination clock CLK
@@ -65,25 +66,18 @@ Clock to Setup on destination clock CLK
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-CLK            |    6.451|         |         |         |
+CLK            |    6.454|         |         |         |
 ---------------+---------+---------+---------+---------+
 
-Pad to Pad
----------------+---------------+---------+
-Source Pad     |Destination Pad|  Delay  |
----------------+---------------+---------+
-CLK            |SCLK           |    6.052|
----------------+---------------+---------+
 
-
-Analysis completed Wed Feb 22 09:04:48 2012 
+Analysis completed Thu Feb 23 09:26:16 2012 
 --------------------------------------------------------------------------------
 
 Trace Settings:
 -------------------------
 Trace Settings 
 
-Peak Memory Usage: 173 MB
+Peak Memory Usage: 175 MB
 
 
 

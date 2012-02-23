@@ -32,6 +32,7 @@ use IEEE.NUMERIC_STD.ALL;
 entity system_logic is
     Port ( H_CW, H_CCW, V_CW, V_CCW, LCD_READY : in  STD_LOGIC;
            CLK : in  STD_LOGIC;
+			  DEBUGLED : out STD_LOGIC_VECTOR(2 downto 0);
 			  LCD_BYTE : out STD_LOGIC_VECTOR(7 downto 0);
 			  LCD_START, LCD_ISDATA : out STD_LOGIC);
 
@@ -39,12 +40,13 @@ end system_logic;
 
 architecture Behavioral of system_logic is
 	constant N: integer:=17; -- Clock cycles the LCD_Serializer uses from IDle -> idle
-	signal COUNTER_REG, COUNTER_NEXT : integer:=8;
+	signal COUNTER_REG, COUNTER_NEXT : integer:=N;
+	signal BOOTTIME_REG, BOOTTIME_NEXT : integer:=100;
 	signal CUR_PAGE_REG, CUR_PAGE_NEXT, NEW_PAGE_REG, NEW_PAGE_NEXT : STD_LOGIC_VECTOR(3 downto 0):= (others => '0');
 	signal CUR_COL_REG, CUR_COL_NEXT, NEW_COL_REG, NEW_COL_NEXT : STD_LOGIC_VECTOR(7 downto 0):= (others => '0');
 	signal LCD_BYTE_REG, LCD_BYTE_NEXT : STD_LOGIC_VECTOR(7 downto 0);
 	signal LCD_START_REG, LCD_START_NEXT, LCD_ISDATA_REG, LCD_ISDATA_NEXT : STD_LOGIC;
-	type STATES is (	INIT0, INIT1, INIT2, INIT3, INIT4, INIT5, INIT6, INIT7, INIT8, INIT9,
+	type STATES is (	BOOTTIME, INIT0, INIT1, INIT2, INIT3, INIT4, INIT5, INIT6, INIT7, INIT8, INIT9,
 							INIT10, INIT11, INIT12, INIT13, INIT14, INIT15, INIT16, INIT17, IDLE, UP, DOWN, LEFT,
 							RIGHT, CLEARCURRENT, DRAWNEXT1, DRAWNEXT2, DRAWNEXT3, DRAWNEXT4 );
 	signal STATE_REG, STATE_NEXT : STATES;					
@@ -66,6 +68,7 @@ begin
 			NEW_PAGE_REG <= NEW_PAGE_NEXT;
 			CUR_COL_REG <= CUR_COL_NEXT;
 			NEW_COL_REG <= NEW_COL_NEXT;
+			BOOTTIME_REG <= BOOTTIME_NEXT;
 		end if;
 	end process;
 	
@@ -81,6 +84,11 @@ begin
 		NEW_PAGE_NEXT <= NEW_PAGE_REG;
 		
 		case STATE_REG is
+			when BOOTTIME =>
+				BOOTTIME_NEXT <= BOOTTIME_REG - 1;
+				if(BOOTTIME_REG = 0) then
+					STATE_NEXT <= INIT0;
+				end if;
 			when INIT0 =>
 				LCD_BYTE_NEXT <= "01000000";
 				LCD_START_NEXT <= '1';
@@ -222,9 +230,9 @@ begin
 			end if;
 			
 			when INIT17 =>
-			LCD_BYTE_NEXT <= "11111111";
+			LCD_BYTE_NEXT <= "10100101";
 			LCD_START_NEXT <= '1';
-			LCD_ISDATA_NEXT <= '1';
+			--LCD_ISDATA_NEXT <= '0';
 			COUNTER_NEXT <= COUNTER_REG - 1;
 			if(COUNTER_REG = 0) then
 				COUNTER_NEXT <= N;
@@ -232,6 +240,9 @@ begin
 			end if;
 				
 			when IDLE =>
+				DEBUGLED(0) <= '1';
+				DEBUGLED(1) <= '0';
+				DEBUGLED(2) <= '1';
 				if(V_CW = '1') then
 					STATE_NEXT <= UP;
 				elsif(V_CCW = '1') then
@@ -297,7 +308,7 @@ begin
 				end if;
 				
 			when DRAWNEXT3 =>
-				LCD_BYTE_NEXT <= "0001" & NEW_COL_REG(3 downto 0);
+				LCD_BYTE_NEXT <= "0000" & NEW_COL_REG(3 downto 0);
 				LCD_START_NEXT <= '1';
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then

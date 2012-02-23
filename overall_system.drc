@@ -1,7 +1,7 @@
 Release 12.2 Drc M.63c (nt64)
 Copyright (c) 1995-2010 Xilinx, Inc.  All rights reserved.
 
-Wed Feb 22 09:04:51 2012
+Thu Feb 23 09:26:20 2012
 
 drc -z overall_system.ncd overall_system.pcf
 

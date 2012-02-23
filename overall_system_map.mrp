@@ -9,33 +9,33 @@ Target Device  : xc3s400a
 Target Package : ft256
 Target Speed   : -4
 Mapper Version : spartan3a -- $Revision: 1.52 $
-Mapped Date    : Wed Feb 22 09:03:58 2012
+Mapped Date    : Thu Feb 23 09:25:34 2012
 
 Design Summary
 --------------
 Number of errors:      0
 Number of warnings:    0
 Logic Utilization:
-  Total Number Slice Registers:         154 out of   7,168    2%
-    Number used as Flip Flops:          122
-    Number used as Latches:              32
-  Number of 4 input LUTs:               192 out of   7,168    2%
+  Total Number Slice Registers:         232 out of   7,168    3%
+    Number used as Flip Flops:          168
+    Number used as Latches:              64
+  Number of 4 input LUTs:               229 out of   7,168    3%
 Logic Distribution:
-  Number of occupied Slices:            147 out of   3,584    4%
-    Number of Slices containing only related logic:     147 out of     147 100%
-    Number of Slices containing unrelated logic:          0 out of     147   0%
+  Number of occupied Slices:            189 out of   3,584    5%
+    Number of Slices containing only related logic:     189 out of     189 100%
+    Number of Slices containing unrelated logic:          0 out of     189   0%
       *See NOTES below for an explanation of the effects of unrelated logic.
-  Total Number of 4 input LUTs:         203 out of   7,168    2%
-    Number used as logic:               192
-    Number used as a route-thru:         11
+  Total Number of 4 input LUTs:         244 out of   7,168    3%
+    Number used as logic:               229
+    Number used as a route-thru:         15
 
   The Slice Logic Distribution report is not meaningful if the design is
   over-mapped for a non-slice resource or if Placement fails.
 
-  Number of bonded IOBs:                 12 out of     195    6%
-  Number of BUFGMUXs:                     2 out of      24    8%
+  Number of bonded IOBs:                 13 out of     195    6%
+  Number of BUFGMUXs:                     3 out of      24   12%
 
-Average Fanout of Non-Clock Nets:                2.58
+Average Fanout of Non-Clock Nets:                2.27
 
 Peak Memory Usage:  256 MB
 Total REAL time to MAP completion:  3 secs 
@@ -87,12 +87,6 @@ Xilinx software updates or new releases.
 Section 3 - Informational
 -------------------------
 INFO:Security:54 - 'xc3s400a' is a WebPack part.
-INFO:LIT:243 - Logical network btn<2> has no load.
-INFO:LIT:395 - The above info message is repeated 2 more times for the following
-   (max. 5 shown):
-   btn<1>,
-   btn<0>
-   To see the details of these info messages, please use the -detail switch.
 INFO:MapLib:562 - No environment variables are currently set.
 INFO:LIT:244 - All of the single ended outputs in this design are using slew
    rate limited output drivers. The delay on speed critical single ended outputs
@@ -130,8 +124,9 @@ Section 6 - IOB Properties
 | SI                                 | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW    |              |          | 0 / 0    | 3STATE           |
 | V_ROT_A                            | IBUF             | INPUT     | LVCMOS25             |       |          |         |              |          | 0 / 0    |                  |
 | V_ROT_B                            | IBUF             | INPUT     | LVCMOS25             |       |          |         |              |          | 0 / 0    |                  |
-| debugled1                          | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW    |              |          | 0 / 0    | 3STATE           |
-| debugled2                          | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW    |              |          | 0 / 0    | 3STATE           |
+| debugled<0>                        | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW    |              |          | 0 / 0    | 3STATE           |
+| debugled<1>                        | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW    |              |          | 0 / 0    | 3STATE           |
+| debugled<2>                        | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW    |              |          | 0 / 0    | 3STATE           |
 +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Section 7 - RPMs

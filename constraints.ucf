@@ -1,5 +1,4 @@
-NET "clk" LOC = C10;
-NET "reset" LOC = H4;
+NET "clk" LOC = N9;
 NET "h_rot_a" LOC = A8;
 NET "h_rot_b" LOC = B8;
 NET "v_rot_a" LOC = D13;
@@ -10,9 +9,6 @@ NET "cs" LOC = A9;
 NET "a0" LOC = A11;
 NET "sclk" LOC = B12;
 
-NET "debugled1" LOC = D4;
-NET "debugled2" LOC = D5;
-
-NET "btn<0>" LOC = K3;
-NET "btn<1>" LOC = H5;
-NET "btn<2>" LOC = L3;
+NET "debugled<0>" LOC = D8;
+NET "debugled<1>" LOC = A7;
+NET "debugled<2>" LOC = D7;

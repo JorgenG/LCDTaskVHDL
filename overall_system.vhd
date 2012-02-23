@@ -39,8 +39,7 @@ entity overall_system is
            RESETLCD : out  STD_LOGIC;
            CS : out  STD_LOGIC;
            A0 : out  STD_LOGIC;
-			  btn : in STD_LOGIC_VECTOR(2 downto 0);
-			  debugled1, debugled2 : out std_logic; 
+			  debugled : out std_logic_vector(2 downto 0); 
            SCLK : out  STD_LOGIC);
 end overall_system;
 
@@ -55,9 +54,6 @@ begin
 	SCLK <= LCD_CLK;
 	A0 <= LCD_ISDATA_SIG;
 	
-	debugled1 <= '1';
-	debugled2 <= '1';
-
 	LCD_SERIALIZER : entity work.lcd_serializer (Behavioral)
 	port map(
 		clk => CLK,
@@ -97,7 +93,8 @@ begin
 		lcd_byte => LCD_BYTE_SIG,
 		lcd_start => LCD_START_SIG,
 		lcd_isdata => LCD_ISDATA_SIG,
-		lcd_ready => LCD_READY_SIG
+		lcd_ready => LCD_READY_SIG,
+		debugled => DEBUGLED
 	);
 
 end Behavioral;

@@ -1,4 +1,20 @@
 //! **************************************************************************
-// Written by: Map M.63c on Wed Feb 22 09:04:01 2012
+// Written by: Map M.63c on Thu Feb 23 09:25:37 2012
 //! **************************************************************************
+
+SCHEMATIC START;
+COMP "H_ROT_A" LOCATE = SITE "A8" LEVEL 1;
+COMP "H_ROT_B" LOCATE = SITE "B8" LEVEL 1;
+COMP "SCLK" LOCATE = SITE "B12" LEVEL 1;
+COMP "A0" LOCATE = SITE "A11" LEVEL 1;
+COMP "debugled<0>" LOCATE = SITE "D8" LEVEL 1;
+COMP "debugled<1>" LOCATE = SITE "A7" LEVEL 1;
+COMP "debugled<2>" LOCATE = SITE "D7" LEVEL 1;
+COMP "CS" LOCATE = SITE "A9" LEVEL 1;
+COMP "SI" LOCATE = SITE "A12" LEVEL 1;
+COMP "CLK" LOCATE = SITE "N9" LEVEL 1;
+COMP "RESETLCD" LOCATE = SITE "A10" LEVEL 1;
+COMP "V_ROT_A" LOCATE = SITE "D13" LEVEL 1;
+COMP "V_ROT_B" LOCATE = SITE "C13" LEVEL 1;
+SCHEMATIC END;
 

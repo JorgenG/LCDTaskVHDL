@@ -11,7 +11,7 @@ entity db_fsm is
 end db_fsm;
 
 architecture arch of db_fsm is
-   constant N: integer:=11;  -- 2^14 * 62.5 ns = 1.024 ms tick (16 MHz clock) = 3.84 ms debouncer
+   constant N: integer:=14;  -- 2^14 * 62.5 ns = 1.024 ms tick (16 MHz clock) = 3.84 ms debouncer
    signal q_reg, q_next: unsigned(N-1 downto 0);
    signal m_tick: std_logic;
    type eg_state_type is (zero,wait1_1,wait1_2,wait1_3,

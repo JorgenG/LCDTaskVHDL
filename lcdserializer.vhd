@@ -87,6 +87,7 @@ begin
 					STATE_NEXT <= wait0;
 					
 				when wait0 =>
+					DATA_NEXT <= LCD_BYTE(7);
 					LCD_CLK_NEXT <= '1';
 					STATE_NEXT <= data1;
 					
@@ -95,6 +96,7 @@ begin
 					STATE_NEXT <= wait1;
 					
 				when wait1 =>
+					DATA_NEXT <= LCD_BYTE(6);
 					LCD_CLK_NEXT <= '1';
 					STATE_NEXT <= data2;
 					
@@ -103,6 +105,7 @@ begin
 					STATE_NEXT <= wait2;
 					
 				when wait2 =>
+					DATA_NEXT <= LCD_BYTE(5);
 					LCD_CLK_NEXT <= '1';
 					STATE_NEXT <= data3;
 					
@@ -111,6 +114,7 @@ begin
 					STATE_NEXT <= wait3;
 					
 				when wait3 =>
+					DATA_NEXT <= LCD_BYTE(4);
 					LCD_CLK_NEXT <= '1';
 					STATE_NEXT <= data4;
 					
@@ -119,6 +123,7 @@ begin
 					STATE_NEXT <= wait4;
 					
 				when wait4 =>
+					DATA_NEXT <= LCD_BYTE(3);
 					LCD_CLK_NEXT <= '1';
 					STATE_NEXT <= data5;
 					
@@ -127,6 +132,7 @@ begin
 					STATE_NEXT <= wait5;
 					
 				when wait5 =>
+					DATA_NEXT <= LCD_BYTE(2);
 					LCD_CLK_NEXT <= '1';
 					STATE_NEXT <= data6;
 					
@@ -135,6 +141,7 @@ begin
 					STATE_NEXT <= wait6;
 					
 				when wait6 =>
+					DATA_NEXT <= LCD_BYTE(1);
 					LCD_CLK_NEXT <= '1';
 					STATE_NEXT <= data7;
 					
@@ -143,6 +150,7 @@ begin
 					STATE_NEXT <= wait7;	
 
 				when wait7 =>
+					DATA_NEXT <= LCD_BYTE(0);
 					LCD_CLK_NEXT <= '1';
 					STATE_NEXT <= idle;
 				
