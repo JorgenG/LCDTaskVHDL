@@ -49,35 +49,38 @@ architecture Behavioral of system_logic is
 	type cmd_array is array(0 to 13) of std_logic_vector(7 downto 0);
 	
 	signal initcommands : cmd_array;
+	signal clearpage2 : cmd_array;
+	signal clearpage3 : cmd_array;
+	signal clearpage4 : cmd_array;
+	
 	signal CMDCOUNTER_REG, CMDCOUNTER_NEXT : integer:=0;
 	signal COUNTER_REG, COUNTER_NEXT : integer:=N;
 	signal CLEARCOUNTER_REG, CLEARCOUNTER_NEXT : integer:=DRAWZEROS;
-	signal BOOTTIME_REG, BOOTTIME_NEXT : integer:=50;
 	signal RESET_REG, RESET_NEXT : std_logic;
 	signal CUR_PAGE_REG, CUR_PAGE_NEXT, NEW_PAGE_REG, NEW_PAGE_NEXT : integer:=0;
 	signal CUR_COL_REG, CUR_COL_NEXT, NEW_COL_REG, NEW_COL_NEXT : integer:=0;
 	signal LCD_BYTE_REG, LCD_BYTE_NEXT : STD_LOGIC_VECTOR(7 downto 0);
 	signal LCD_START_REG, LCD_START_NEXT, LCD_ISDATA_REG, LCD_ISDATA_NEXT : STD_LOGIC;
-	type STATES is (	BOOTTIME, INIT, IDLE, UP, DOWN, LEFT,
+	type STATES is (	INIT, IDLE, UP, DOWN, LEFT,
 							RIGHT, CLEARCURRENT1, CLEARCURRENT2, CLEARCURRENT3, DRAWNEXT1, DRAWNEXT2, DRAWNEXT3, DRAWNEXT4, SETPAGE1, SETPAGE2, SETPAGE3, SETPAGE4, SENDZEROS1, SENDZEROS2, SENDZEROS3, SENDZEROS4,
 							SETCOLP2A, SETCOLP2B, SETCOLP3A, SETCOLP3B, SETCOLP4A, SETCOLP4B);
 	signal STATE_REG, STATE_NEXT : STATES;					
 begin
 
-	initcommands(0) <= "01000000";
-	initcommands(1) <= "10100001";
-	initcommands(2) <= "11000000";
-	initcommands(3) <= "10100110";
-	initcommands(4) <= "10100010";
-	initcommands(5) <= "00101111";
-	initcommands(6) <= "11111000";
-	initcommands(7) <= "00000000";
-	initcommands(8) <= "00100011";
-	initcommands(9) <= "10000001";
-	initcommands(10) <= "00011111";
-	initcommands(11) <= "10101100";
-	initcommands(12) <= "00000000";
-	initcommands(13) <= "10101111";
+	initcommands(0) <= "01000000"; -- Display start line 0
+	initcommands(1) <= "10100001"; -- Set ADC to reverse
+	initcommands(2) <= "11000000"; -- Set common output COM0 - COM31
+	initcommands(3) <= "10100110"; -- Display normal
+	initcommands(4) <= "10100010"; -- Set LCD bias to 1/9
+	initcommands(5) <= "00101111"; -- Set power control. BOoster regulator and follower on
+	initcommands(6) <= "11111000"; -- Set internal booster to 3x/4x
+	initcommands(7) <= "00000000"; -- Set internal booster to 3x/4x
+	initcommands(8) <= "00100011"; -- Set V0 Voltage regulator for contrast
+	initcommands(9) <= "10000001"; -- Set electronic volume mode for contrast
+	initcommands(10) <= "00011111";-- Set electronic volume mode for contrast
+	initcommands(11) <= "10101100";-- Set static indicator off
+	initcommands(12) <= "00000000";-- Set static indicator off
+	initcommands(13) <= "10101111";-- Set display on
 	
 	LCD_BYTE <= LCD_BYTE_REG;
 	LCD_START <= LCD_START_REG;
@@ -96,7 +99,6 @@ begin
 			NEW_PAGE_REG <= NEW_PAGE_NEXT;
 			CUR_COL_REG <= CUR_COL_NEXT;
 			NEW_COL_REG <= NEW_COL_NEXT;
-			BOOTTIME_REG <= BOOTTIME_NEXT;
 			RESET_REG <= RESET_NEXT;
 			CLEARCOUNTER_REG <= CLEARCOUNTER_NEXT;
 			CMDCOUNTER_REG <= CMDCOUNTER_NEXT;
@@ -118,14 +120,7 @@ begin
 		COUNTER_NEXT <= COUNTER_REG;
 		CMDCOUNTER_NEXT <= CMDCOUNTER_REG;
 		
-		case STATE_REG is
-			when BOOTTIME =>
-				BOOTTIME_NEXT <= BOOTTIME_REG - 1;
-				RESET_NEXT <= '0';
-				if(BOOTTIME_REG = 0) then
-					STATE_NEXT <= INIT0;
-				end if;
-				
+		case STATE_REG is				
 			-- Load all commands
 			when INIT =>
 				LCD_BYTE_NEXT <= initcommands(CMDCOUNTER_REG);
@@ -273,21 +268,19 @@ begin
 					STATE_NEXT <= DRAWNEXT1;
 				end if;
 				
-			when IDLE =>								
-				DEBUGLED(2) <= '1';
+			when IDLE =>				
 				CUR_PAGE_NEXT <= NEW_PAGE_REG;
 				CUR_COL_NEXT <= NEW_COL_REG;
 				if(V_CW = '1') then
-					STATE_NEXT <= UP;
-				elsif(V_CCW = '1') then
 					STATE_NEXT <= DOWN;
+				elsif(V_CCW = '1') then
+					STATE_NEXT <= UP;
 				elsif(H_CW ='1') then
 					STATE_NEXT <= RIGHT;
 				elsif(H_CCW ='1') then
 					STATE_NEXT <= LEFT;
 				end if;
 			when UP =>
-				DEBUGLED(0) <= '1';
 				STATE_NEXT <= CLEARCURRENT1;
 				if(CUR_PAGE_REG = 0) then
 					NEW_PAGE_NEXT <= 3;
@@ -295,7 +288,6 @@ begin
 					NEW_PAGE_NEXT <= CUR_PAGE_REG - 1;
 				end if;
 			when DOWN =>
-				DEBUGLED(0) <= '0';
 				STATE_NEXT <= CLEARCURRENT1;
 				if(CUR_PAGE_REG = 3) then
 					NEW_PAGE_NEXT <= 0;
@@ -310,7 +302,6 @@ begin
 					NEW_COL_NEXT <= CUR_COL_REG - 1;
 				end if;
 			when RIGHT =>
-				DEBUGLED(1) <= '1';
 				STATE_NEXT <= CLEARCURRENT1;
 				if(CUR_COL_REG = 131) then
 					NEW_COL_NEXT <= 0;

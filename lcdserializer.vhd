@@ -85,6 +85,7 @@ begin
 					CS_NEXT <= '1';					
 					LCD_READY_NEXT <= '1';
 					if(LCD_START = '1') then
+						LCD_READY_NEXT <= '0';
 						STATE_NEXT <= data0;
 					end if;
 					
@@ -158,6 +159,7 @@ begin
 				when wait7 =>
 					DATA_NEXT <= LCD_BYTE(0);
 					LCD_CLK_NEXT <= '1';
+					LCD_READY_NEXT <= '1';
 					STATE_NEXT <= idle;
 				
 			end case;
