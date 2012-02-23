@@ -44,10 +44,10 @@ Setup/Hold to clock CLK
             |Max Setup to|Max Hold to |                  | Clock  |
 Source      | clk (edge) | clk (edge) |Internal Clock(s) | Phase  |
 ------------+------------+------------+------------------+--------+
-H_ROT_A     |    1.971(R)|   -0.455(R)|CLK_BUFGP         |   0.000|
-H_ROT_B     |    1.970(R)|   -0.714(R)|CLK_BUFGP         |   0.000|
-V_ROT_A     |    2.399(R)|   -0.475(R)|CLK_BUFGP         |   0.000|
-V_ROT_B     |    3.112(R)|   -0.730(R)|CLK_BUFGP         |   0.000|
+H_ROT_A     |    1.791(R)|   -0.295(R)|CLK_BUFGP         |   0.000|
+H_ROT_B     |    2.788(R)|   -0.671(R)|CLK_BUFGP         |   0.000|
+V_ROT_A     |    1.234(R)|   -0.041(R)|CLK_BUFGP         |   0.000|
+V_ROT_B     |    1.812(R)|   -0.555(R)|CLK_BUFGP         |   0.000|
 ------------+------------+------------+------------------+--------+
 
 Clock CLK to Pad
@@ -55,11 +55,11 @@ Clock CLK to Pad
             | clk (edge) |                  | Clock  |
 Destination |   to PAD   |Internal Clock(s) | Phase  |
 ------------+------------+------------------+--------+
-A0          |    8.371(R)|CLK_BUFGP         |   0.000|
-CS          |    7.628(R)|CLK_BUFGP         |   0.000|
-RESETLCD    |    7.282(R)|CLK_BUFGP         |   0.000|
-SCLK        |    8.747(R)|CLK_BUFGP         |   0.000|
-SI          |    8.978(R)|CLK_BUFGP         |   0.000|
+A0          |    7.597(R)|CLK_BUFGP         |   0.000|
+CS          |    7.656(R)|CLK_BUFGP         |   0.000|
+RESETLCD    |    8.209(R)|CLK_BUFGP         |   0.000|
+SCLK        |    8.156(R)|CLK_BUFGP         |   0.000|
+SI          |    7.889(R)|CLK_BUFGP         |   0.000|
 ------------+------------+------------------+--------+
 
 Clock to Setup on destination clock CLK
@@ -67,18 +67,18 @@ Clock to Setup on destination clock CLK
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-CLK            |    7.411|         |         |         |
+CLK            |    7.654|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 
-Analysis completed Thu Feb 23 16:30:06 2012 
+Analysis completed Thu Feb 23 22:33:01 2012 
 --------------------------------------------------------------------------------
 
 Trace Settings:
 -------------------------
 Trace Settings 
 
-Peak Memory Usage: 179 MB
+Peak Memory Usage: 181 MB
 
 
 

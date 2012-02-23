@@ -45,6 +45,11 @@ end system_logic;
 architecture Behavioral of system_logic is
 	constant N: integer:=16; -- Clock cycles the LCD_Serializer uses from IDle -> idle
 	constant DRAWZEROS: integer:=2243;
+	
+	type cmd_array is array(0 to 13) of std_logic_vector(7 downto 0);
+	
+	signal initcommands : cmd_array;
+	signal CMDCOUNTER_REG, CMDCOUNTER_NEXT : integer:=0;
 	signal COUNTER_REG, COUNTER_NEXT : integer:=N;
 	signal CLEARCOUNTER_REG, CLEARCOUNTER_NEXT : integer:=DRAWZEROS;
 	signal BOOTTIME_REG, BOOTTIME_NEXT : integer:=50;
@@ -53,12 +58,26 @@ architecture Behavioral of system_logic is
 	signal CUR_COL_REG, CUR_COL_NEXT, NEW_COL_REG, NEW_COL_NEXT : integer:=0;
 	signal LCD_BYTE_REG, LCD_BYTE_NEXT : STD_LOGIC_VECTOR(7 downto 0);
 	signal LCD_START_REG, LCD_START_NEXT, LCD_ISDATA_REG, LCD_ISDATA_NEXT : STD_LOGIC;
-	type STATES is (	BOOTTIME, INIT0, INIT1, INIT2, INIT3, INIT4, INIT5, INIT6, INIT7, INIT8, INIT9,
-							INIT10, INIT11, INIT12, INIT13, IDLE, UP, DOWN, LEFT,
+	type STATES is (	BOOTTIME, INIT, IDLE, UP, DOWN, LEFT,
 							RIGHT, CLEARCURRENT1, CLEARCURRENT2, CLEARCURRENT3, DRAWNEXT1, DRAWNEXT2, DRAWNEXT3, DRAWNEXT4, SETPAGE1, SETPAGE2, SETPAGE3, SETPAGE4, SENDZEROS1, SENDZEROS2, SENDZEROS3, SENDZEROS4,
 							SETCOLP2A, SETCOLP2B, SETCOLP3A, SETCOLP3B, SETCOLP4A, SETCOLP4B);
 	signal STATE_REG, STATE_NEXT : STATES;					
 begin
+
+	initcommands(0) <= "01000000";
+	initcommands(1) <= "10100001";
+	initcommands(2) <= "11000000";
+	initcommands(3) <= "10100110";
+	initcommands(4) <= "10100010";
+	initcommands(5) <= "00101111";
+	initcommands(6) <= "11111000";
+	initcommands(7) <= "00000000";
+	initcommands(8) <= "00100011";
+	initcommands(9) <= "10000001";
+	initcommands(10) <= "00011111";
+	initcommands(11) <= "10101100";
+	initcommands(12) <= "00000000";
+	initcommands(13) <= "10101111";
 	
 	LCD_BYTE <= LCD_BYTE_REG;
 	LCD_START <= LCD_START_REG;
@@ -80,6 +99,7 @@ begin
 			BOOTTIME_REG <= BOOTTIME_NEXT;
 			RESET_REG <= RESET_NEXT;
 			CLEARCOUNTER_REG <= CLEARCOUNTER_NEXT;
+			CMDCOUNTER_REG <= CMDCOUNTER_NEXT;
 		end if;
 	end process;
 	
@@ -96,6 +116,7 @@ begin
 		NEW_PAGE_NEXT <= NEW_PAGE_REG;
 		CLEARCOUNTER_NEXT <= CLEARCOUNTER_REG;
 		COUNTER_NEXT <= COUNTER_REG;
+		CMDCOUNTER_NEXT <= CMDCOUNTER_REG;
 		
 		case STATE_REG is
 			when BOOTTIME =>
@@ -104,119 +125,22 @@ begin
 				if(BOOTTIME_REG = 0) then
 					STATE_NEXT <= INIT0;
 				end if;
-			when INIT0 =>
-				LCD_BYTE_NEXT <= "01000000";
+				
+			-- Load all commands
+			when INIT =>
+				LCD_BYTE_NEXT <= initcommands(CMDCOUNTER_REG);
 				LCD_START_NEXT <= '1';
+				
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
 					COUNTER_NEXT <= N;
-					STATE_NEXT <= INIT1;
-				end if;
-			when INIT1 =>
-				LCD_BYTE_NEXT <= "10100001";
-				LCD_START_NEXT <= '1';
-				COUNTER_NEXT <= COUNTER_REG - 1;
-				if(COUNTER_REG = 0) then
-					COUNTER_NEXT <= N;
-					STATE_NEXT <= INIT2;
-				end if;
-			when INIT2 =>
-				LCD_BYTE_NEXT <= "11000000";
-				LCD_START_NEXT <= '1';
-				COUNTER_NEXT <= COUNTER_REG - 1;
-				if(COUNTER_REG = 0) then
-					COUNTER_NEXT <= N;
-					STATE_NEXT <= INIT3;
-				end if;
-			when INIT3 =>
-				LCD_BYTE_NEXT <= "10100110";
-				LCD_START_NEXT <= '1';
-				COUNTER_NEXT <= COUNTER_REG - 1;
-				if(COUNTER_REG = 0) then
-					COUNTER_NEXT <= N;
-					STATE_NEXT <= INIT4;
-				end if;
-			when INIT4 =>
-				LCD_BYTE_NEXT <= "10100010";
-				LCD_START_NEXT <= '1';
-				COUNTER_NEXT <= COUNTER_REG - 1;
-				if(COUNTER_REG = 0) then
-					COUNTER_NEXT <= N;
-					STATE_NEXT <= INIT5;
-				end if;
-			when INIT5 =>
-				LCD_BYTE_NEXT <= "00101111";
-				LCD_START_NEXT <= '1';
-				COUNTER_NEXT <= COUNTER_REG - 1;
-				if(COUNTER_REG = 0) then
-					COUNTER_NEXT <= N;
-					STATE_NEXT <= INIT6;
-				end if;
-			when INIT6 =>
-				LCD_BYTE_NEXT <= "11111000";
-				LCD_START_NEXT <= '1';
-				COUNTER_NEXT <= COUNTER_REG - 1;
-				if(COUNTER_REG = 0) then
-					COUNTER_NEXT <= N;
-					STATE_NEXT <= INIT7;
-				end if;
-			when INIT7 =>
-				LCD_BYTE_NEXT <= "00000000";
-				LCD_START_NEXT <= '1';
-				COUNTER_NEXT <= COUNTER_REG - 1;
-				if(COUNTER_REG = 0) then
-					COUNTER_NEXT <= N;
-					STATE_NEXT <= INIT8;
-				end if;
-			when INIT8 =>
-				LCD_BYTE_NEXT <= "00100011";
-				LCD_START_NEXT <= '1';
-				COUNTER_NEXT <= COUNTER_REG - 1;
-				if(COUNTER_REG = 0) then
-					COUNTER_NEXT <= N;
-					STATE_NEXT <= INIT9;
-				end if;
-			when INIT9 =>
-				LCD_BYTE_NEXT <= "10000001";
-				LCD_START_NEXT <= '1';
-				COUNTER_NEXT <= COUNTER_REG - 1;
-				if(COUNTER_REG = 0) then
-					COUNTER_NEXT <= N;
-					STATE_NEXT <= INIT10;
-				end if;
-			when INIT10 =>
-				LCD_BYTE_NEXT <= "00011111";
-				LCD_START_NEXT <= '1';
-				COUNTER_NEXT <= COUNTER_REG - 1;
-				if(COUNTER_REG = 0) then
-					COUNTER_NEXT <= N;
-					STATE_NEXT <= INIT11;
-				end if;
-			when INIT11 =>
-				LCD_BYTE_NEXT <= "10101100";
-				LCD_START_NEXT <= '1';
-				COUNTER_NEXT <= COUNTER_REG - 1;
-				if(COUNTER_REG = 0) then
-					COUNTER_NEXT <= N;
-					STATE_NEXT <= INIT12;
-				end if;
-			when INIT12 =>
-				LCD_BYTE_NEXT <= "00000000";
-				LCD_START_NEXT <= '1';
-				COUNTER_NEXT <= COUNTER_REG - 1;
-				if(COUNTER_REG = 0) then
-					COUNTER_NEXT <= N;
-					STATE_NEXT <= INIT13;
-				end if;
-			when INIT13 =>
-				LCD_BYTE_NEXT <= "10101111";
-				LCD_START_NEXT <= '1';
-				COUNTER_NEXT <= COUNTER_REG - 1;
-				if(COUNTER_REG = 0) then
-					COUNTER_NEXT <= N;
-					STATE_NEXT <= SETPAGE1;
+					CMDCOUNTER_NEXT <= CMDCOUNTER_REG + 1;
+					if(CMDCOUNTER_REG = 13) then
+						STATE_NEXT <= SETPAGE1;
+					end if;
 				end if;
 				
+				-- Select first page for clearing display.
 			when SETPAGE1 =>
 				LCD_BYTE_NEXT <= "10110000";
 				LCD_START_NEXT <= '1';
@@ -226,6 +150,7 @@ begin
 					STATE_NEXT <= SENDZEROS1;
 				end if;
 				
+				-- Send zeros to entire page 17*132 times -> 
 			when SENDZEROS1 =>
 				LCD_BYTE_NEXT <= "00000000";
 				LCD_START_NEXT <= '1';		
@@ -245,6 +170,7 @@ begin
 					STATE_NEXT <= SETCOLP2A;
 				end if;
 				
+				-- Set column = 0 for writing on new page.
 			when SETCOLP2A =>
 				LCD_BYTE_NEXT <= "00010000";
 				LCD_START_NEXT <= '1';
