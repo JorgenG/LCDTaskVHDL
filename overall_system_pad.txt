@@ -1,7 +1,7 @@
 Release 12.2 - par M.63c (nt64)
 Copyright (c) 1995-2010 Xilinx, Inc.  All rights reserved.
 
-Thu Feb 23 12:25:25 2012
+Thu Feb 23 15:24:39 2012
 
 
 INFO: The IO information is provided in three file formats as part of the Place and Route (PAR) process.  These formats are:
@@ -26,7 +26,7 @@ Pinout by Pin Number:
 |A4        |           |DIFFMTB   |IO_L18P_0             |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
 |A5        |           |DIFFMTB   |IO_L17P_0             |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
 |A6        |           |DIFFMTB   |IO_L15P_0             |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
-|A7        |debugled<1>|IOB       |IO_L13P_0             |OUTPUT   |LVCMOS25*  |0             |12        |SLOW     |NONE**     |         |         |LOCATED   |YES        |NONE            |
+|A7        |debugled<1>|IOB       |IO_L13P_0             |OUTPUT   |LVCMOS25*  |0             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
 |A8        |H_ROT_A    |IBUF      |IO_L12P_0/GCLK10      |INPUT    |LVCMOS25*  |0             |          |         |           |IBUF     |         |LOCATED   |NO         |NONE            |
 |A9        |CS         |IOB       |IO_L10N_0/GCLK7       |OUTPUT   |LVCMOS25*  |0             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
 |A10       |RESETLCD   |IOB       |IO_L08N_0             |OUTPUT   |LVCMOS25*  |0             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
@@ -75,7 +75,7 @@ Pinout by Pin Number:
 |D5        |           |DIFFSTB   |IO_L20N_0/PUDC_B      |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
 |D6        |           |IBUF      |IP_0                  |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
 |D7        |debugled<2>|IOB       |IO_L16P_0             |OUTPUT   |LVCMOS25*  |0             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
-|D8        |debugled<0>|IOB       |IO_L11N_0/GCLK9       |OUTPUT   |LVCMOS25*  |0             |12        |SLOW     |NONE**     |         |         |LOCATED   |YES        |NONE            |
+|D8        |debugled<0>|IOB       |IO_L11N_0/GCLK9       |OUTPUT   |LVCMOS25*  |0             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
 |D9        |           |DIFFSTB   |IO_L09N_0/GCLK5       |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
 |D10       |           |DIFFMTB   |IO_L06P_0             |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
 |D11       |           |DIFFSTB   |IO_L03N_0             |UNUSED   |           |0             |          |         |           |         |         |          |           |                |

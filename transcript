@@ -19,6 +19,8 @@
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Loading package NUMERIC_STD
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
 # -- Compiling entity system_logic
 # -- Compiling architecture Behavioral of system_logic
 # Model Technology ModelSim PE Student Edition vcom 10.0c Compiler 2011.07 Jul 22 2011
@@ -38,6 +40,8 @@
 # -- Loading entity lcd_serializer
 # -- Loading entity rotation_detector
 # -- Loading package NUMERIC_STD
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
 # -- Loading entity system_logic
 # Model Technology ModelSim PE Student Edition vcom 10.0c Compiler 2011.07 Jul 22 2011
 # -- Loading package STANDARD
@@ -67,6 +71,8 @@
 # Loading ieee.std_logic_1164(body)
 # Loading work.tb_system(behavior)
 # Loading ieee.numeric_std(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
 # Loading work.overall_system(behavioral)
 # Loading work.lcd_serializer(behavioral)
 # Loading work.rotation_detector(behavioral)
@@ -74,9 +80,9 @@
 # Loading work.system_logic(behavioral)
 # ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
 #           File in use by:   Hostname:   ProcessID: 5
-#           Attempting to use alternate WLF file "./wlftxqf5zg".
+#           Attempting to use alternate WLF file "./wlft4b7ea6".
 # ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlftxqf5zg
+#           Using alternate file: ./wlft4b7ea6
 # .main_pane.wave.interior.cs.body.pw.wf
 # .main_pane.structure.interior.cs.body.struct
 # .main_pane.objects.interior.cs.body.tree
@@ -98,8 +104,10 @@
 #    Time: 31250 ps  Iteration: 2  Instance: /tb_system/uut/VERTICAL_KNOB/DEBOUNCE_B
 #  
 restart
-add wave sim:/tb_system/uut/LCD_SERIALIZER/*
-add wave sim:/tb_system/uut/SYSTEM_LOGIC/*
+add wave  \
+sim:/tb_system/uut/LCD_SERIALIZER/LCD_BYTE
+add wave  \
+sim:/tb_system/uut/SYSTEM_LOGIC/STATE_REG
 run
 # ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
 #    Time: 0 ps  Iteration: 0  Instance: /tb_system/uut/VERTICAL_KNOB/DEBOUNCE_B
@@ -117,3 +125,4 @@ run
 #    Time: 31250 ps  Iteration: 2  Instance: /tb_system/uut/VERTICAL_KNOB/DEBOUNCE_A
 # ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
 #    Time: 31250 ps  Iteration: 2  Instance: /tb_system/uut/VERTICAL_KNOB/DEBOUNCE_B
+run

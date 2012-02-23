@@ -4,13 +4,13 @@ Copyright (c) 1995-2010 Xilinx, Inc.  All rights reserved.
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.14 secs
+Total CPU time to Xst completion: 0.15 secs
  
 --> Parameter xsthdpdir set to xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.14 secs
+Total CPU time to Xst completion: 0.15 secs
  
 --> Reading design: overall_system.prj
 
@@ -114,8 +114,7 @@ Compiling vhdl file "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/f
 Entity <system_logic> compiled.
 Entity <system_logic> (Architecture <behavioral>) compiled.
 Compiling vhdl file "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.vhd" in Library work.
-Entity <overall_system> compiled.
-Entity <overall_system> (Architecture <behavioral>) compiled.
+Architecture behavioral of Entity overall_system is up to date.
 
 =========================================================================
 *                     Design Hierarchy Analysis                         *
@@ -151,8 +150,8 @@ Analyzing Entity <db_fsm> in library <work> (Architecture <arch>).
 Entity <db_fsm> analyzed. Unit <db_fsm> generated.
 
 Analyzing Entity <system_logic> in library <work> (Architecture <Behavioral>).
-WARNING:Xst:819 - "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/fsm_logic.vhd" line 80: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
-   <CUR_COL_REG>, <NEW_COL_REG>, <CUR_PAGE_REG>, <NEW_PAGE_REG>, <BOOTTIME_REG>, <COUNTER_REG>
+WARNING:Xst:819 - "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/fsm_logic.vhd" line 85: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
+   <CUR_COL_REG>, <NEW_COL_REG>, <CUR_PAGE_REG>, <NEW_PAGE_REG>, <CLEARCOUNTER_REG>, <COUNTER_REG>, <BOOTTIME_REG>
 INFO:Xst:2679 - Register <DEBUGLED<2>> in unit <system_logic> has a constant value of 1 during circuit operation. The register is replaced by logic.
 Entity <system_logic> analyzed. Unit <system_logic> generated.
 
@@ -189,47 +188,52 @@ Unit <lcd_serializer> synthesized.
 
 Synthesizing Unit <system_logic>.
     Related source file is "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/fsm_logic.vhd".
+WARNING:Xst:647 - Input <H_CW> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <V_CW> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <H_CCW> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <LCD_READY> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-INFO:Xst:1799 - State init15 is never reached in FSM <STATE_REG>.
-INFO:Xst:1799 - State init14 is never reached in FSM <STATE_REG>.
-INFO:Xst:1799 - State init16 is never reached in FSM <STATE_REG>.
-INFO:Xst:1799 - State init17 is never reached in FSM <STATE_REG>.
+WARNING:Xst:647 - Input <V_CCW> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:646 - Signal <NEW_PAGE_REG> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <NEW_COL_REG> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+INFO:Xst:1799 - State clearcurrent is never reached in FSM <STATE_REG>.
+INFO:Xst:1799 - State up is never reached in FSM <STATE_REG>.
+INFO:Xst:1799 - State down is never reached in FSM <STATE_REG>.
+INFO:Xst:1799 - State left is never reached in FSM <STATE_REG>.
+INFO:Xst:1799 - State right is never reached in FSM <STATE_REG>.
+INFO:Xst:1799 - State drawnext1 is never reached in FSM <STATE_REG>.
+INFO:Xst:1799 - State drawnext2 is never reached in FSM <STATE_REG>.
+INFO:Xst:1799 - State drawnext3 is never reached in FSM <STATE_REG>.
+INFO:Xst:1799 - State drawnext4 is never reached in FSM <STATE_REG>.
     Found finite state machine <FSM_1> for signal <STATE_REG>.
     -----------------------------------------------------------------------
-    | States             | 25                                             |
-    | Transitions        | 49                                             |
-    | Inputs             | 6                                              |
-    | Outputs            | 25                                             |
+    | States             | 30                                             |
+    | Transitions        | 59                                             |
+    | Inputs             | 3                                              |
+    | Outputs            | 30                                             |
     | Clock              | CLK                       (rising_edge)        |
     | Power Up State     | boottime                                       |
     | Encoding           | automatic                                      |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
 WARNING:Xst:737 - Found 32-bit latch for signal <BOOTTIME_NEXT>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
-WARNING:Xst:737 - Found 32-bit latch for signal <COUNTER_NEXT>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
-INFO:Xst:2371 - HDL ADVISOR - Logic functions respectively driving the data and gate enable inputs of this latch share common terms. This situation will potentially lead to setup/hold violations and, as a result, to simulation problems. This situation may come from an incomplete case statement (all selector values are not covered). You should carefully review if it was in your intentions to describe such a latch.
 WARNING:Xst:737 - Found 1-bit latch for signal <DEBUGLED_1>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
 INFO:Xst:2371 - HDL ADVISOR - Logic functions respectively driving the data and gate enable inputs of this latch share common terms. This situation will potentially lead to setup/hold violations and, as a result, to simulation problems. This situation may come from an incomplete case statement (all selector values are not covered). You should carefully review if it was in your intentions to describe such a latch.
 WARNING:Xst:737 - Found 1-bit latch for signal <DEBUGLED_0>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
 INFO:Xst:2371 - HDL ADVISOR - Logic functions respectively driving the data and gate enable inputs of this latch share common terms. This situation will potentially lead to setup/hold violations and, as a result, to simulation problems. This situation may come from an incomplete case statement (all selector values are not covered). You should carefully review if it was in your intentions to describe such a latch.
-    Found 32-bit subtractor for signal <BOOTTIME_NEXT$sub0000> created at line 94.
+    Found 32-bit subtractor for signal <BOOTTIME_NEXT$sub0000> created at line 101.
     Found 32-bit register for signal <BOOTTIME_REG>.
-    Found 32-bit subtractor for signal <COUNTER_NEXT$addsub0000>.
+    Found 32-bit register for signal <CLEARCOUNTER_REG>.
+    Found 32-bit subtractor for signal <CLEARCOUNTER_REG$addsub0000>.
     Found 32-bit register for signal <COUNTER_REG>.
-    Found 8-bit register for signal <CUR_COL_REG>.
-    Found 4-bit register for signal <CUR_PAGE_REG>.
+    Found 32-bit subtractor for signal <COUNTER_REG$addsub0000>.
     Found 8-bit register for signal <LCD_BYTE_REG>.
     Found 1-bit register for signal <LCD_ISDATA_REG>.
     Found 1-bit register for signal <LCD_START_REG>.
-    Found 8-bit register for signal <NEW_COL_REG>.
-    Found 8-bit addsub for signal <NEW_COL_REG$share0000> created at line 92.
-    Found 4-bit register for signal <NEW_PAGE_REG>.
-    Found 4-bit addsub for signal <NEW_PAGE_REG$share0000> created at line 92.
     Found 1-bit register for signal <RESET_REG>.
     Summary:
 	inferred   1 Finite State Machine(s).
-	inferred  99 D-type flip-flop(s).
-	inferred   4 Adder/Subtractor(s).
+	inferred 107 D-type flip-flop(s).
+	inferred   3 Adder/Subtractor(s).
 Unit <system_logic> synthesized.
 
 
@@ -289,20 +293,17 @@ INFO:Xst:1767 - HDL ADVISOR - Resource sharing has identified that some arithmet
 HDL Synthesis Report
 
 Macro Statistics
-# Adders/Subtractors                                   : 4
- 32-bit subtractor                                     : 2
- 4-bit addsub                                          : 1
- 8-bit addsub                                          : 1
+# Adders/Subtractors                                   : 3
+ 32-bit subtractor                                     : 3
 # Counters                                             : 4
  14-bit up counter                                     : 4
-# Registers                                            : 21
+# Registers                                            : 18
  1-bit register                                        : 14
- 32-bit register                                       : 2
- 4-bit register                                        : 2
- 8-bit register                                        : 3
-# Latches                                              : 4
+ 32-bit register                                       : 3
+ 8-bit register                                        : 1
+# Latches                                              : 3
  1-bit latch                                           : 2
- 32-bit latch                                          : 2
+ 32-bit latch                                          : 1
 
 =========================================================================
 
@@ -338,40 +339,50 @@ Optimizing FSM <VERTICAL_KNOB/DEBOUNCE_B/state_reg/FSM> on signal <state_reg[1:3
  wait0_3 | 111
 ---------------------
 Analyzing FSM <FSM_1> for best encoding.
-Optimizing FSM <SYSTEM_LOGIC/STATE_REG/FSM> on signal <STATE_REG[1:25]> with one-hot encoding.
--------------------------------------------
+Optimizing FSM <SYSTEM_LOGIC/STATE_REG/FSM> on signal <STATE_REG[1:30]> with one-hot encoding.
+------------------------------------------------
  State        | Encoding
--------------------------------------------
- boottime     | 0000000000000000000000001
- init0        | 0000000000000000000000010
- init1        | 0000000000000000000000100
- init2        | 0000000000000000000001000
- init3        | 0000000000000000000010000
- init4        | 0000000000000000000100000
- init5        | 0000000000000000001000000
- init6        | 0000000000000000010000000
- init7        | 0000000000000000100000000
- init8        | 0000000000000001000000000
- init9        | 0000000000000010000000000
- init10       | 0000000000000100000000000
- init11       | 0000000000001000000000000
- init12       | 0000000000010000000000000
- init13       | 0000000000100000000000000
- init14       | unreached
- init15       | unreached
- init16       | unreached
- init17       | unreached
- idle         | 0000000001000000000000000
- up           | 0000000010000000000000000
- down         | 0000000100000000000000000
- left         | 0000010000000000000000000
- right        | 0000001000000000000000000
- clearcurrent | 0000100000000000000000000
- drawnext1    | 0001000000000000000000000
- drawnext2    | 0010000000000000000000000
- drawnext3    | 0100000000000000000000000
- drawnext4    | 1000000000000000000000000
--------------------------------------------
+------------------------------------------------
+ boottime     | 000000000000000000000000000001
+ init0        | 000000000000000000000000000010
+ init1        | 000000000000000000000000000100
+ init2        | 000000000000000000000000001000
+ init3        | 000000000000000000000000010000
+ init4        | 000000000000000000000000100000
+ init5        | 000000000000000000000001000000
+ init6        | 000000000000000000000010000000
+ init7        | 000000000000000000000100000000
+ init8        | 000000000000000000001000000000
+ init9        | 000000000000000000010000000000
+ init10       | 000000000000000000100000000000
+ init11       | 000000000000000001000000000000
+ init12       | 000000000000000010000000000000
+ init13       | 000000000000000100000000000000
+ idle         | 100000000000000000000000000000
+ up           | unreached
+ down         | unreached
+ left         | unreached
+ right        | unreached
+ clearcurrent | unreached
+ drawnext1    | unreached
+ drawnext2    | unreached
+ drawnext3    | unreached
+ drawnext4    | unreached
+ setpage1     | 000000000000001000000000000000
+ setpage2     | 000000000000100000000000000000
+ setpage3     | 000000001000000000000000000000
+ setpage4     | 000010000000000000000000000000
+ sendzeros1   | 000000000000010000000000000000
+ sendzeros2   | 000000000100000000000000000000
+ sendzeros3   | 000001000000000000000000000000
+ sendzeros4   | 010000000000000000000000000000
+ setcolp2a    | 000000000001000000000000000000
+ setcolp2b    | 000000000010000000000000000000
+ setcolp3a    | 000000010000000000000000000000
+ setcolp3b    | 000000100000000000000000000000
+ setcolp4a    | 000100000000000000000000000000
+ setcolp4b    | 001000000000000000000000000000
+------------------------------------------------
 Analyzing FSM <FSM_0> for best encoding.
 Optimizing FSM <LCD_SERIALIZER/STATE_REG/FSM> on signal <STATE_REG[1:17]> with one-hot encoding.
 ----------------------------
@@ -395,63 +406,96 @@ Optimizing FSM <LCD_SERIALIZER/STATE_REG/FSM> on signal <STATE_REG[1:17]> with o
  wait6 | 00100000000000000
  wait7 | 10000000000000000
 ----------------------------
-INFO:Xst:2261 - The FF/Latch <CUR_PAGE_REG_0> in Unit <SYSTEM_LOGIC> is equivalent to the following 11 FFs/Latches, which will be removed : <CUR_PAGE_REG_1> <CUR_PAGE_REG_2> <CUR_PAGE_REG_3> <CUR_COL_REG_0> <CUR_COL_REG_1> <CUR_COL_REG_2> <CUR_COL_REG_3> <CUR_COL_REG_4> <CUR_COL_REG_5> <CUR_COL_REG_6> <CUR_COL_REG_7> 
-WARNING:Xst:1293 - FF/Latch <CUR_PAGE_REG_0> has a constant value of 0 in block <SYSTEM_LOGIC>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1290 - Hierarchical block <HORIZONTAL_KNOB> is unconnected in block <overall_system>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <VERTICAL_KNOB> is unconnected in block <overall_system>.
+   It will be removed from the design.
+WARNING:Xst:1710 - FF/Latch <0> (without init value) has a constant value of 0 in block <DEBUGLED_1>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <0> (without init value) has a constant value of 0 in block <DEBUGLED_0>. This FF/Latch will be trimmed during the optimization process.
 
 =========================================================================
 Advanced HDL Synthesis Report
 
 Macro Statistics
 # FSMs                                                 : 4
-# Adders/Subtractors                                   : 4
- 32-bit subtractor                                     : 2
- 4-bit addsub                                          : 1
- 8-bit addsub                                          : 1
+# Adders/Subtractors                                   : 3
+ 32-bit subtractor                                     : 3
 # Counters                                             : 4
  14-bit up counter                                     : 4
-# Registers                                            : 110
- Flip-Flops                                            : 110
-# Latches                                              : 4
+# Registers                                            : 118
+ Flip-Flops                                            : 118
+# Latches                                              : 3
  1-bit latch                                           : 2
- 32-bit latch                                          : 2
+ 32-bit latch                                          : 1
 
 =========================================================================
 
 =========================================================================
 *                         Low Level Synthesis                           *
 =========================================================================
-WARNING:Xst:1293 - FF/Latch <CUR_PAGE_REG_0> has a constant value of 0 in block <system_logic>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <CUR_PAGE_REG_1> has a constant value of 0 in block <system_logic>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <CUR_PAGE_REG_2> has a constant value of 0 in block <system_logic>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <CUR_PAGE_REG_3> has a constant value of 0 in block <system_logic>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <CUR_COL_REG_0> has a constant value of 0 in block <system_logic>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <CUR_COL_REG_1> has a constant value of 0 in block <system_logic>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <CUR_COL_REG_2> has a constant value of 0 in block <system_logic>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <CUR_COL_REG_3> has a constant value of 0 in block <system_logic>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <CUR_COL_REG_4> has a constant value of 0 in block <system_logic>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <CUR_COL_REG_5> has a constant value of 0 in block <system_logic>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <CUR_COL_REG_6> has a constant value of 0 in block <system_logic>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <CUR_COL_REG_7> has a constant value of 0 in block <system_logic>. This FF/Latch will be trimmed during the optimization process.
 INFO:Xst:2261 - The FF/Latch <LCD_READY_REG> in Unit <lcd_serializer> is equivalent to the following FF/Latch, which will be removed : <CS_REG> 
+WARNING:Xst:1710 - FF/Latch <DEBUGLED_0> (without init value) has a constant value of 0 in block <system_logic>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <DEBUGLED_1> (without init value) has a constant value of 0 in block <system_logic>. This FF/Latch will be trimmed during the optimization process.
 INFO:Xst:2146 - In block <overall_system>, Counter <VERTICAL_KNOB/DEBOUNCE_A/q_reg> <HORIZONTAL_KNOB/DEBOUNCE_A/q_reg> <VERTICAL_KNOB/DEBOUNCE_B/q_reg> <HORIZONTAL_KNOB/DEBOUNCE_B/q_reg> are equivalent, XST will keep only <VERTICAL_KNOB/DEBOUNCE_A/q_reg>.
 
 Optimizing unit <overall_system> ...
 
 Optimizing unit <system_logic> ...
+WARNING:Xst:2677 - Node <VERTICAL_KNOB/STATE_REG_FSM_FFd2> of sequential type is unconnected in block <overall_system>.
+WARNING:Xst:2677 - Node <VERTICAL_KNOB/STATE_REG_FSM_FFd1> of sequential type is unconnected in block <overall_system>.
+WARNING:Xst:2677 - Node <VERTICAL_KNOB/CW_REG> of sequential type is unconnected in block <overall_system>.
+WARNING:Xst:2677 - Node <VERTICAL_KNOB/CCW_REG> of sequential type is unconnected in block <overall_system>.
+WARNING:Xst:2677 - Node <VERTICAL_KNOB/DELAY_A_REG> of sequential type is unconnected in block <overall_system>.
+WARNING:Xst:2677 - Node <HORIZONTAL_KNOB/STATE_REG_FSM_FFd2> of sequential type is unconnected in block <overall_system>.
+WARNING:Xst:2677 - Node <HORIZONTAL_KNOB/STATE_REG_FSM_FFd1> of sequential type is unconnected in block <overall_system>.
+WARNING:Xst:2677 - Node <HORIZONTAL_KNOB/CW_REG> of sequential type is unconnected in block <overall_system>.
+WARNING:Xst:2677 - Node <HORIZONTAL_KNOB/CCW_REG> of sequential type is unconnected in block <overall_system>.
+WARNING:Xst:2677 - Node <HORIZONTAL_KNOB/DELAY_A_REG> of sequential type is unconnected in block <overall_system>.
+WARNING:Xst:2677 - Node <VERTICAL_KNOB/DEBOUNCE_A/q_reg_0> of sequential type is unconnected in block <overall_system>.
+WARNING:Xst:2677 - Node <VERTICAL_KNOB/DEBOUNCE_A/q_reg_1> of sequential type is unconnected in block <overall_system>.
+WARNING:Xst:2677 - Node <VERTICAL_KNOB/DEBOUNCE_A/q_reg_2> of sequential type is unconnected in block <overall_system>.
+WARNING:Xst:2677 - Node <VERTICAL_KNOB/DEBOUNCE_A/q_reg_3> of sequential type is unconnected in block <overall_system>.
+WARNING:Xst:2677 - Node <VERTICAL_KNOB/DEBOUNCE_A/q_reg_4> of sequential type is unconnected in block <overall_system>.
+WARNING:Xst:2677 - Node <VERTICAL_KNOB/DEBOUNCE_A/q_reg_5> of sequential type is unconnected in block <overall_system>.
+WARNING:Xst:2677 - Node <VERTICAL_KNOB/DEBOUNCE_A/q_reg_6> of sequential type is unconnected in block <overall_system>.
+WARNING:Xst:2677 - Node <VERTICAL_KNOB/DEBOUNCE_A/q_reg_7> of sequential type is unconnected in block <overall_system>.
+WARNING:Xst:2677 - Node <VERTICAL_KNOB/DEBOUNCE_A/q_reg_8> of sequential type is unconnected in block <overall_system>.
+WARNING:Xst:2677 - Node <VERTICAL_KNOB/DEBOUNCE_A/q_reg_9> of sequential type is unconnected in block <overall_system>.
+WARNING:Xst:2677 - Node <VERTICAL_KNOB/DEBOUNCE_A/q_reg_10> of sequential type is unconnected in block <overall_system>.
+WARNING:Xst:2677 - Node <VERTICAL_KNOB/DEBOUNCE_A/q_reg_11> of sequential type is unconnected in block <overall_system>.
+WARNING:Xst:2677 - Node <VERTICAL_KNOB/DEBOUNCE_A/q_reg_12> of sequential type is unconnected in block <overall_system>.
+WARNING:Xst:2677 - Node <VERTICAL_KNOB/DEBOUNCE_A/q_reg_13> of sequential type is unconnected in block <overall_system>.
+WARNING:Xst:2677 - Node <HORIZONTAL_KNOB/DEBOUNCE_A/state_reg_FSM_FFd3> of sequential type is unconnected in block <overall_system>.
+WARNING:Xst:2677 - Node <HORIZONTAL_KNOB/DEBOUNCE_A/state_reg_FSM_FFd1> of sequential type is unconnected in block <overall_system>.
+WARNING:Xst:2677 - Node <HORIZONTAL_KNOB/DEBOUNCE_A/state_reg_FSM_FFd2> of sequential type is unconnected in block <overall_system>.
+WARNING:Xst:2677 - Node <HORIZONTAL_KNOB/DEBOUNCE_B/state_reg_FSM_FFd3> of sequential type is unconnected in block <overall_system>.
+WARNING:Xst:2677 - Node <HORIZONTAL_KNOB/DEBOUNCE_B/state_reg_FSM_FFd1> of sequential type is unconnected in block <overall_system>.
+WARNING:Xst:2677 - Node <HORIZONTAL_KNOB/DEBOUNCE_B/state_reg_FSM_FFd2> of sequential type is unconnected in block <overall_system>.
+WARNING:Xst:2677 - Node <VERTICAL_KNOB/DEBOUNCE_A/state_reg_FSM_FFd3> of sequential type is unconnected in block <overall_system>.
+WARNING:Xst:2677 - Node <VERTICAL_KNOB/DEBOUNCE_A/state_reg_FSM_FFd1> of sequential type is unconnected in block <overall_system>.
+WARNING:Xst:2677 - Node <VERTICAL_KNOB/DEBOUNCE_A/state_reg_FSM_FFd2> of sequential type is unconnected in block <overall_system>.
+WARNING:Xst:2677 - Node <VERTICAL_KNOB/DEBOUNCE_B/state_reg_FSM_FFd3> of sequential type is unconnected in block <overall_system>.
+WARNING:Xst:2677 - Node <VERTICAL_KNOB/DEBOUNCE_B/state_reg_FSM_FFd1> of sequential type is unconnected in block <overall_system>.
+WARNING:Xst:2677 - Node <VERTICAL_KNOB/DEBOUNCE_B/state_reg_FSM_FFd2> of sequential type is unconnected in block <overall_system>.
 
 Mapping all equations...
 Building and optimizing final netlist ...
-Found area constraint ratio of 100 (+ 5) on block overall_system, actual ratio is 5.
-FlipFlop SYSTEM_LOGIC/STATE_REG_FSM_FFd25 has been replicated 1 time(s)
+Found area constraint ratio of 100 (+ 5) on block overall_system, actual ratio is 4.
 
 Final Macro Processing ...
+
+Processing Unit <overall_system> :
+	Found 2-bit shift register for signal <LCD_SERIALIZER/ISDATA_REG>.
+Unit <overall_system> processed.
 
 =========================================================================
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 170
- Flip-Flops                                            : 170
+# Registers                                            : 156
+ Flip-Flops                                            : 156
+# Shift Registers                                      : 1
+ 2-bit shift register                                  : 1
 
 =========================================================================
 
@@ -480,33 +524,34 @@ Design Statistics
 # IOs                              : 14
 
 Cell Usage :
-# BELS                             : 454
+# BELS                             : 478
 #      GND                         : 1
-#      INV                         : 63
-#      LUT1                        : 15
-#      LUT2                        : 18
-#      LUT3                        : 56
-#      LUT3_L                      : 5
-#      LUT4                        : 91
+#      INV                         : 94
+#      LUT1                        : 3
+#      LUT2                        : 11
+#      LUT2_D                      : 4
+#      LUT2_L                      : 1
+#      LUT3                        : 15
+#      LUT3_L                      : 1
+#      LUT4                        : 118
 #      LUT4_D                      : 1
-#      LUT4_L                      : 2
-#      MUXCY                       : 123
+#      MUXCY                       : 129
+#      MUXF5                       : 3
 #      VCC                         : 1
-#      XORCY                       : 78
-# FlipFlops/Latches                : 236
-#      FD                          : 114
-#      FDC                         : 12
-#      FDE                         : 17
-#      FDR                         : 4
-#      FDS                         : 22
+#      XORCY                       : 96
+# FlipFlops/Latches                : 189
+#      FD                          : 117
+#      FDE                         : 20
+#      FDR                         : 1
+#      FDS                         : 18
 #      FDSE                        : 1
 #      LD                          : 32
-#      LD_1                        : 34
-# Clock Buffers                    : 3
-#      BUFG                        : 2
+# Shift Registers                  : 1
+#      SRL16                       : 1
+# Clock Buffers                    : 2
+#      BUFG                        : 1
 #      BUFGP                       : 1
-# IO Buffers                       : 12
-#      IBUF                        : 4
+# IO Buffers                       : 8
 #      OBUF                        : 8
 =========================================================================
 
@@ -515,13 +560,14 @@ Device utilization summary:
 
 Selected Device : 3s400aft256-4 
 
- Number of Slices:                      182  out of   3584     5%  
- Number of Slice Flip Flops:            234  out of   7168     3%  
- Number of 4 input LUTs:                251  out of   7168     3%  
+ Number of Slices:                      165  out of   3584     4%  
+ Number of Slice Flip Flops:            189  out of   7168     2%  
+ Number of 4 input LUTs:                249  out of   7168     3%  
+    Number used as logic:               248
+    Number used as Shift registers:       1
  Number of IOs:                          14
- Number of bonded IOBs:                  13  out of    195     6%  
-    IOB Flip Flops:                       2
- Number of GCLKs:                         3  out of     24    12%  
+ Number of bonded IOBs:                   9  out of    195     4%  
+ Number of GCLKs:                         2  out of     24     8%  
 
 ---------------------------
 Partition Resource Summary:
@@ -541,35 +587,24 @@ NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
 
 Clock Information:
 ------------------
--------------------------------------------------------------------------+--------------------------------------+-------+
-Clock Signal                                                             | Clock buffer(FF name)                | Load  |
--------------------------------------------------------------------------+--------------------------------------+-------+
-CLK                                                                      | BUFGP                                | 170   |
-SYSTEM_LOGIC/STATE_REG_FSM_FFd252                                        | BUFG                                 | 32    |
-SYSTEM_LOGIC/COUNTER_NEXT_or00001(SYSTEM_LOGIC/COUNTER_NEXT_or0000:O)    | BUFG(*)(SYSTEM_LOGIC/COUNTER_NEXT_31)| 32    |
-SYSTEM_LOGIC/DEBUGLED_1_or0000(SYSTEM_LOGIC/DEBUGLED_1_or0000_wg_cy<5>:O)| NONE(*)(SYSTEM_LOGIC/DEBUGLED_1)     | 1     |
-SYSTEM_LOGIC/DEBUGLED_0_or0000(SYSTEM_LOGIC/DEBUGLED_0_or0000_wg_cy<5>:O)| NONE(*)(SYSTEM_LOGIC/DEBUGLED_0)     | 1     |
--------------------------------------------------------------------------+--------------------------------------+-------+
-(*) These 3 clock signal(s) are generated by combinatorial logic,
-and XST is not able to identify which are the primary clock signals.
-Please use the CLOCK_SIGNAL constraint to specify the clock signal(s) generated by combinatorial logic.
-INFO:Xst:2169 - HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
+-----------------------------------+------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)  | Load  |
+-----------------------------------+------------------------+-------+
+CLK                                | BUFGP                  | 158   |
+SYSTEM_LOGIC/STATE_REG_FSM_FFd301  | BUFG                   | 32    |
+-----------------------------------+------------------------+-------+
 
 Asynchronous Control Signals Information:
 ----------------------------------------
------------------------------------+----------------------------------------------------+-------+
-Control Signal                     | Buffer(FF name)                                    | Load  |
------------------------------------+----------------------------------------------------+-------+
-N0(XST_GND:G)                      | NONE(HORIZONTAL_KNOB/DEBOUNCE_A/state_reg_FSM_FFd1)| 12    |
------------------------------------+----------------------------------------------------+-------+
+No asynchronous control signals found in this design
 
 Timing Summary:
 ---------------
 Speed Grade: -4
 
-   Minimum period: 6.291ns (Maximum Frequency: 158.969MHz)
-   Minimum input arrival time before clock: 3.577ns
-   Maximum output required time after clock: 5.668ns
+   Minimum period: 7.126ns (Maximum Frequency: 140.331MHz)
+   Minimum input arrival time before clock: No path found
+   Maximum output required time after clock: 5.531ns
    Maximum combinational path delay: No path found
 
 Timing Detail:
@@ -578,54 +613,29 @@ All values displayed in nanoseconds (ns)
 
 =========================================================================
 Timing constraint: Default period analysis for Clock 'CLK'
-  Clock period: 6.291ns (frequency: 158.969MHz)
-  Total number of paths / destination ports: 1606 / 150
+  Clock period: 7.126ns (frequency: 140.331MHz)
+  Total number of paths / destination ports: 6535 / 166
 -------------------------------------------------------------------------
-Delay:               6.291ns (Levels of Logic = 9)
-  Source:            SYSTEM_LOGIC/COUNTER_REG_8 (FF)
-  Destination:       SYSTEM_LOGIC/STATE_REG_FSM_FFd10 (FF)
+Delay:               7.126ns (Levels of Logic = 5)
+  Source:            SYSTEM_LOGIC/STATE_REG_FSM_FFd9 (FF)
+  Destination:       SYSTEM_LOGIC/COUNTER_REG_17 (FF)
   Source Clock:      CLK rising
   Destination Clock: CLK rising
 
-  Data Path: SYSTEM_LOGIC/COUNTER_REG_8 to SYSTEM_LOGIC/STATE_REG_FSM_FFd10
+  Data Path: SYSTEM_LOGIC/STATE_REG_FSM_FFd9 to SYSTEM_LOGIC/COUNTER_REG_17
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FD:C->Q               2   0.591   0.590  SYSTEM_LOGIC/COUNTER_REG_8 (SYSTEM_LOGIC/COUNTER_REG_8)
-     LUT4:I0->O            1   0.648   0.000  SYSTEM_LOGIC/STATE_REG_cmp_eq0001_wg_lut<0> (SYSTEM_LOGIC/STATE_REG_cmp_eq0001_wg_lut<0>)
-     MUXCY:S->O            1   0.632   0.000  SYSTEM_LOGIC/STATE_REG_cmp_eq0001_wg_cy<0> (SYSTEM_LOGIC/STATE_REG_cmp_eq0001_wg_cy<0>)
-     MUXCY:CI->O           1   0.065   0.000  SYSTEM_LOGIC/STATE_REG_cmp_eq0001_wg_cy<1> (SYSTEM_LOGIC/STATE_REG_cmp_eq0001_wg_cy<1>)
-     MUXCY:CI->O           1   0.065   0.000  SYSTEM_LOGIC/STATE_REG_cmp_eq0001_wg_cy<2> (SYSTEM_LOGIC/STATE_REG_cmp_eq0001_wg_cy<2>)
-     MUXCY:CI->O           1   0.065   0.000  SYSTEM_LOGIC/STATE_REG_cmp_eq0001_wg_cy<3> (SYSTEM_LOGIC/STATE_REG_cmp_eq0001_wg_cy<3>)
-     MUXCY:CI->O           1   0.065   0.000  SYSTEM_LOGIC/STATE_REG_cmp_eq0001_wg_cy<4> (SYSTEM_LOGIC/STATE_REG_cmp_eq0001_wg_cy<4>)
-     MUXCY:CI->O           1   0.269   0.452  SYSTEM_LOGIC/STATE_REG_cmp_eq0001_wg_cy<5> (SYSTEM_LOGIC/STATE_REG_cmp_eq0001_wg_cy<5>)
-     LUT3:I2->O           52   0.648   1.301  SYSTEM_LOGIC/STATE_REG_cmp_eq0001_wg_cy<7>1 (SYSTEM_LOGIC/STATE_REG_cmp_eq0001)
-     LUT3:I2->O            1   0.648   0.000  SYSTEM_LOGIC/STATE_REG_FSM_FFd10-In1 (SYSTEM_LOGIC/STATE_REG_FSM_FFd10-In1)
-     FDS:D                     0.252          SYSTEM_LOGIC/STATE_REG_FSM_FFd10
+     FD:C->Q               5   0.591   0.776  SYSTEM_LOGIC/STATE_REG_FSM_FFd9 (SYSTEM_LOGIC/STATE_REG_FSM_FFd9)
+     LUT4:I0->O            2   0.648   0.479  SYSTEM_LOGIC/LCD_BYTE_NEXT<1>9 (SYSTEM_LOGIC/LCD_BYTE_NEXT<1>9)
+     LUT4:I2->O            1   0.648   0.000  SYSTEM_LOGIC/COUNTER_REG_or0001_wg_lut<4> (SYSTEM_LOGIC/COUNTER_REG_or0001_wg_lut<4>)
+     MUXCY:S->O            5   0.708   0.713  SYSTEM_LOGIC/COUNTER_REG_or0001_wg_cy<4> (SYSTEM_LOGIC/COUNTER_REG_or0001)
+     LUT2_D:I1->O         15   0.643   1.020  SYSTEM_LOGIC/COUNTER_REG_mux0000<0>11_1 (SYSTEM_LOGIC/COUNTER_REG_mux0000<0>11)
+     LUT4:I3->O            1   0.648   0.000  SYSTEM_LOGIC/COUNTER_REG_mux0000<10>1 (SYSTEM_LOGIC/COUNTER_REG_mux0000<10>)
+     FD:D                      0.252          SYSTEM_LOGIC/COUNTER_REG_10
     ----------------------------------------
-    Total                      6.291ns (3.948ns logic, 2.343ns route)
-                                       (62.8% logic, 37.2% route)
-
-=========================================================================
-Timing constraint: Default OFFSET IN BEFORE for Clock 'CLK'
-  Total number of paths / destination ports: 12 / 12
--------------------------------------------------------------------------
-Offset:              3.577ns (Levels of Logic = 3)
-  Source:            H_ROT_A (PAD)
-  Destination:       HORIZONTAL_KNOB/DEBOUNCE_A/state_reg_FSM_FFd3 (FF)
-  Destination Clock: CLK rising
-
-  Data Path: H_ROT_A to HORIZONTAL_KNOB/DEBOUNCE_A/state_reg_FSM_FFd3
-                                Gate     Net
-    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
-    ----------------------------------------  ------------
-     IBUF:I->O             2   0.849   0.590  H_ROT_A_IBUF (H_ROT_A_IBUF)
-     LUT2:I0->O            2   0.648   0.590  HORIZONTAL_KNOB/DEBOUNCE_A/state_reg_FSM_FFd2-In11 (HORIZONTAL_KNOB/DEBOUNCE_A/state_reg_FSM_N0)
-     LUT4:I0->O            1   0.648   0.000  HORIZONTAL_KNOB/DEBOUNCE_A/state_reg_FSM_FFd3-In1 (HORIZONTAL_KNOB/DEBOUNCE_A/state_reg_FSM_FFd3-In)
-     FDC:D                     0.252          HORIZONTAL_KNOB/DEBOUNCE_A/state_reg_FSM_FFd3
-    ----------------------------------------
-    Total                      3.577ns (2.397ns logic, 1.180ns route)
-                                       (67.0% logic, 33.0% route)
+    Total                      7.126ns (4.138ns logic, 2.988ns route)
+                                       (58.1% logic, 41.9% route)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'CLK'
@@ -647,54 +657,16 @@ Offset:              5.531ns (Levels of Logic = 1)
                                        (92.4% logic, 7.6% route)
 
 =========================================================================
-Timing constraint: Default OFFSET OUT AFTER for Clock 'SYSTEM_LOGIC/DEBUGLED_1_or0000'
-  Total number of paths / destination ports: 1 / 1
--------------------------------------------------------------------------
-Offset:              5.668ns (Levels of Logic = 1)
-  Source:            SYSTEM_LOGIC/DEBUGLED_1 (LATCH)
-  Destination:       debugled<1> (PAD)
-  Source Clock:      SYSTEM_LOGIC/DEBUGLED_1_or0000 rising
-
-  Data Path: SYSTEM_LOGIC/DEBUGLED_1 to debugled<1>
-                                Gate     Net
-    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
-    ----------------------------------------  ------------
-     LD_1:G->Q             1   0.728   0.420  SYSTEM_LOGIC/DEBUGLED_1 (SYSTEM_LOGIC/DEBUGLED_1)
-     OBUF:I->O                 4.520          debugled_1_OBUF (debugled<1>)
-    ----------------------------------------
-    Total                      5.668ns (5.248ns logic, 0.420ns route)
-                                       (92.6% logic, 7.4% route)
-
-=========================================================================
-Timing constraint: Default OFFSET OUT AFTER for Clock 'SYSTEM_LOGIC/DEBUGLED_0_or0000'
-  Total number of paths / destination ports: 1 / 1
--------------------------------------------------------------------------
-Offset:              5.668ns (Levels of Logic = 1)
-  Source:            SYSTEM_LOGIC/DEBUGLED_0 (LATCH)
-  Destination:       debugled<0> (PAD)
-  Source Clock:      SYSTEM_LOGIC/DEBUGLED_0_or0000 rising
-
-  Data Path: SYSTEM_LOGIC/DEBUGLED_0 to debugled<0>
-                                Gate     Net
-    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
-    ----------------------------------------  ------------
-     LD_1:G->Q             1   0.728   0.420  SYSTEM_LOGIC/DEBUGLED_0 (SYSTEM_LOGIC/DEBUGLED_0)
-     OBUF:I->O                 4.520          debugled_0_OBUF (debugled<0>)
-    ----------------------------------------
-    Total                      5.668ns (5.248ns logic, 0.420ns route)
-                                       (92.6% logic, 7.4% route)
-
-=========================================================================
 
 
-Total REAL time to Xst completion: 11.00 secs
-Total CPU time to Xst completion: 11.44 secs
+Total REAL time to Xst completion: 12.00 secs
+Total CPU time to Xst completion: 12.54 secs
  
 --> 
 
-Total memory usage is 259556 kilobytes
+Total memory usage is 257764 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :   22 (   0 filtered)
-Number of infos    :   13 (   0 filtered)
+Number of warnings :   56 (   0 filtered)
+Number of infos    :   15 (   0 filtered)
 

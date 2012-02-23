@@ -48,6 +48,7 @@ ARCHITECTURE behavior OF tb_system IS
          V_ROT_B : IN  std_logic;
          SI : OUT  std_logic;
          RESETLCD : OUT  std_logic;
+			RESETBTN : IN std_logic;
          CS : OUT  std_logic;
          A0 : OUT  std_logic;
 			debugled : OUT STD_LOGIC_VECTOR(2 downto 0);
@@ -62,6 +63,7 @@ ARCHITECTURE behavior OF tb_system IS
    signal H_ROT_B : std_logic := '0';
    signal V_ROT_A : std_logic := '0';
    signal V_ROT_B : std_logic := '0';
+	signal RESETBTN : std_logic:= '0';
 
  	--Outputs
    signal SI : std_logic;
@@ -86,6 +88,7 @@ BEGIN
           V_ROT_B => V_ROT_B,
           SI => SI,
           RESETLCD => RESETLCD,
+			 RESETBTN => RESETBTN,
           CS => CS,
           A0 => A0,
           debugled => debugled,

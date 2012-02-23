@@ -217,3 +217,114 @@ map -intstyle ise -p xc3s400a-ft256-4 -cm area -ir off -pr off -c 100 -o overall
 par -w -intstyle ise -ol high -t 1 overall_system_map.ncd overall_system.ncd overall_system.pcf 
 trce -intstyle ise -v 3 -s 4 -n 3 -fastpaths -xml overall_system.twx overall_system.ncd -o overall_system.twr overall_system.pcf -ucf constraints.ucf 
 bitgen -intstyle ise -f overall_system.ut overall_system.ncd 
+xst -intstyle ise -ifn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.xst" -ofn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.syr" 
+xst -intstyle ise -ifn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.xst" -ofn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.syr" 
+xst -intstyle ise -ifn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.xst" -ofn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.syr" 
+xst -intstyle ise -ifn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.xst" -ofn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.syr" 
+xst -intstyle ise -ifn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.xst" -ofn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.syr" 
+xst -intstyle ise -ifn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.xst" -ofn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc constraints.ucf -p xc3s400a-ft256-4 "overall_system.ngc" overall_system.ngd  
+map -intstyle ise -p xc3s400a-ft256-4 -cm area -ir off -pr off -c 100 -o overall_system_map.ncd overall_system.ngd overall_system.pcf 
+par -w -intstyle ise -ol high -t 1 overall_system_map.ncd overall_system.ncd overall_system.pcf 
+trce -intstyle ise -v 3 -s 4 -n 3 -fastpaths -xml overall_system.twx overall_system.ncd -o overall_system.twr overall_system.pcf -ucf constraints.ucf 
+bitgen -intstyle ise -f overall_system.ut overall_system.ncd 
+xst -intstyle ise -ifn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.xst" -ofn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc constraints.ucf -p xc3s400a-ft256-4 "overall_system.ngc" overall_system.ngd  
+map -intstyle ise -p xc3s400a-ft256-4 -cm area -ir off -pr off -c 100 -o overall_system_map.ncd overall_system.ngd overall_system.pcf 
+par -w -intstyle ise -ol high -t 1 overall_system_map.ncd overall_system.ncd overall_system.pcf 
+trce -intstyle ise -v 3 -s 4 -n 3 -fastpaths -xml overall_system.twx overall_system.ncd -o overall_system.twr overall_system.pcf -ucf constraints.ucf 
+bitgen -intstyle ise -f overall_system.ut overall_system.ncd 
+xst -intstyle ise -ifn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.xst" -ofn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc constraints.ucf -p xc3s400a-ft256-4 "overall_system.ngc" overall_system.ngd  
+map -intstyle ise -p xc3s400a-ft256-4 -cm area -ir off -pr off -c 100 -o overall_system_map.ncd overall_system.ngd overall_system.pcf 
+par -w -intstyle ise -ol high -t 1 overall_system_map.ncd overall_system.ncd overall_system.pcf 
+trce -intstyle ise -v 3 -s 4 -n 3 -fastpaths -xml overall_system.twx overall_system.ncd -o overall_system.twr overall_system.pcf -ucf constraints.ucf 
+bitgen -intstyle ise -f overall_system.ut overall_system.ncd 
+xst -intstyle ise -ifn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.xst" -ofn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc constraints.ucf -p xc3s400a-ft256-4 "overall_system.ngc" overall_system.ngd  
+map -intstyle ise -p xc3s400a-ft256-4 -cm area -ir off -pr off -c 100 -o overall_system_map.ncd overall_system.ngd overall_system.pcf 
+par -w -intstyle ise -ol high -t 1 overall_system_map.ncd overall_system.ncd overall_system.pcf 
+trce -intstyle ise -v 3 -s 4 -n 3 -fastpaths -xml overall_system.twx overall_system.ncd -o overall_system.twr overall_system.pcf -ucf constraints.ucf 
+bitgen -intstyle ise -f overall_system.ut overall_system.ncd 
+xst -intstyle ise -ifn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.xst" -ofn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc constraints.ucf -p xc3s400a-ft256-4 "overall_system.ngc" overall_system.ngd  
+map -intstyle ise -p xc3s400a-ft256-4 -cm area -ir off -pr off -c 100 -o overall_system_map.ncd overall_system.ngd overall_system.pcf 
+par -w -intstyle ise -ol high -t 1 overall_system_map.ncd overall_system.ncd overall_system.pcf 
+trce -intstyle ise -v 3 -s 4 -n 3 -fastpaths -xml overall_system.twx overall_system.ncd -o overall_system.twr overall_system.pcf -ucf constraints.ucf 
+bitgen -intstyle ise -f overall_system.ut overall_system.ncd 
+xst -intstyle ise -ifn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.xst" -ofn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc constraints.ucf -p xc3s400a-ft256-4 "overall_system.ngc" overall_system.ngd  
+map -intstyle ise -p xc3s400a-ft256-4 -cm area -ir off -pr off -c 100 -o overall_system_map.ncd overall_system.ngd overall_system.pcf 
+par -w -intstyle ise -ol high -t 1 overall_system_map.ncd overall_system.ncd overall_system.pcf 
+trce -intstyle ise -v 3 -s 4 -n 3 -fastpaths -xml overall_system.twx overall_system.ncd -o overall_system.twr overall_system.pcf -ucf constraints.ucf 
+bitgen -intstyle ise -f overall_system.ut overall_system.ncd 
+xst -intstyle ise -ifn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.xst" -ofn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc constraints.ucf -p xc3s400a-ft256-4 "overall_system.ngc" overall_system.ngd  
+map -intstyle ise -p xc3s400a-ft256-4 -cm area -ir off -pr off -c 100 -o overall_system_map.ncd overall_system.ngd overall_system.pcf 
+par -w -intstyle ise -ol high -t 1 overall_system_map.ncd overall_system.ncd overall_system.pcf 
+trce -intstyle ise -v 3 -s 4 -n 3 -fastpaths -xml overall_system.twx overall_system.ncd -o overall_system.twr overall_system.pcf -ucf constraints.ucf 
+bitgen -intstyle ise -f overall_system.ut overall_system.ncd 
+xst -intstyle ise -ifn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.xst" -ofn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc constraints.ucf -p xc3s400a-ft256-4 "overall_system.ngc" overall_system.ngd  
+map -intstyle ise -p xc3s400a-ft256-4 -cm area -ir off -pr off -c 100 -o overall_system_map.ncd overall_system.ngd overall_system.pcf 
+par -w -intstyle ise -ol high -t 1 overall_system_map.ncd overall_system.ncd overall_system.pcf 
+trce -intstyle ise -v 3 -s 4 -n 3 -fastpaths -xml overall_system.twx overall_system.ncd -o overall_system.twr overall_system.pcf -ucf constraints.ucf 
+bitgen -intstyle ise -f overall_system.ut overall_system.ncd 
+xst -intstyle ise -ifn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.xst" -ofn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc constraints.ucf -p xc3s400a-ft256-4 "overall_system.ngc" overall_system.ngd  
+map -intstyle ise -p xc3s400a-ft256-4 -cm area -ir off -pr off -c 100 -o overall_system_map.ncd overall_system.ngd overall_system.pcf 
+par -w -intstyle ise -ol high -t 1 overall_system_map.ncd overall_system.ncd overall_system.pcf 
+trce -intstyle ise -v 3 -s 4 -n 3 -fastpaths -xml overall_system.twx overall_system.ncd -o overall_system.twr overall_system.pcf -ucf constraints.ucf 
+bitgen -intstyle ise -f overall_system.ut overall_system.ncd 
+xst -intstyle ise -ifn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.xst" -ofn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc constraints.ucf -p xc3s400a-ft256-4 "overall_system.ngc" overall_system.ngd  
+map -intstyle ise -p xc3s400a-ft256-4 -cm area -ir off -pr off -c 100 -o overall_system_map.ncd overall_system.ngd overall_system.pcf 
+par -w -intstyle ise -ol high -t 1 overall_system_map.ncd overall_system.ncd overall_system.pcf 
+trce -intstyle ise -v 3 -s 4 -n 3 -fastpaths -xml overall_system.twx overall_system.ncd -o overall_system.twr overall_system.pcf -ucf constraints.ucf 
+bitgen -intstyle ise -f overall_system.ut overall_system.ncd 
+xst -intstyle ise -ifn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.xst" -ofn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.syr" 
+xst -intstyle ise -ifn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.xst" -ofn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.syr" 
+xst -intstyle ise -ifn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.xst" -ofn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc constraints.ucf -p xc3s400a-ft256-4 "overall_system.ngc" overall_system.ngd  
+map -intstyle ise -p xc3s400a-ft256-4 -cm area -ir off -pr off -c 100 -o overall_system_map.ncd overall_system.ngd overall_system.pcf 
+par -w -intstyle ise -ol high -t 1 overall_system_map.ncd overall_system.ncd overall_system.pcf 
+trce -intstyle ise -v 3 -s 4 -n 3 -fastpaths -xml overall_system.twx overall_system.ncd -o overall_system.twr overall_system.pcf -ucf constraints.ucf 
+bitgen -intstyle ise -f overall_system.ut overall_system.ncd 
+xst -intstyle ise -ifn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.xst" -ofn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc constraints.ucf -p xc3s400a-ft256-4 "overall_system.ngc" overall_system.ngd  
+map -intstyle ise -p xc3s400a-ft256-4 -cm area -ir off -pr off -c 100 -o overall_system_map.ncd overall_system.ngd overall_system.pcf 
+par -w -intstyle ise -ol high -t 1 overall_system_map.ncd overall_system.ncd overall_system.pcf 
+trce -intstyle ise -v 3 -s 4 -n 3 -fastpaths -xml overall_system.twx overall_system.ncd -o overall_system.twr overall_system.pcf -ucf constraints.ucf 
+bitgen -intstyle ise -f overall_system.ut overall_system.ncd 
+xst -intstyle ise -ifn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.xst" -ofn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc constraints.ucf -p xc3s400a-ft256-4 "overall_system.ngc" overall_system.ngd  
+map -intstyle ise -p xc3s400a-ft256-4 -cm area -ir off -pr off -c 100 -o overall_system_map.ncd overall_system.ngd overall_system.pcf 
+par -w -intstyle ise -ol high -t 1 overall_system_map.ncd overall_system.ncd overall_system.pcf 
+trce -intstyle ise -v 3 -s 4 -n 3 -fastpaths -xml overall_system.twx overall_system.ncd -o overall_system.twr overall_system.pcf -ucf constraints.ucf 
+bitgen -intstyle ise -f overall_system.ut overall_system.ncd 
+xst -intstyle ise -ifn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.xst" -ofn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc constraints.ucf -p xc3s400a-ft256-4 "overall_system.ngc" overall_system.ngd  
+map -intstyle ise -p xc3s400a-ft256-4 -cm area -ir off -pr off -c 100 -o overall_system_map.ncd overall_system.ngd overall_system.pcf 
+par -w -intstyle ise -ol high -t 1 overall_system_map.ncd overall_system.ncd overall_system.pcf 
+trce -intstyle ise -v 3 -s 4 -n 3 -fastpaths -xml overall_system.twx overall_system.ncd -o overall_system.twr overall_system.pcf -ucf constraints.ucf 
+bitgen -intstyle ise -f overall_system.ut overall_system.ncd 
+xst -intstyle ise -ifn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.xst" -ofn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.syr" 
+xst -intstyle ise -ifn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.xst" -ofn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc constraints.ucf -p xc3s400a-ft256-4 "overall_system.ngc" overall_system.ngd  
+map -intstyle ise -p xc3s400a-ft256-4 -cm area -ir off -pr off -c 100 -o overall_system_map.ncd overall_system.ngd overall_system.pcf 
+par -w -intstyle ise -ol high -t 1 overall_system_map.ncd overall_system.ncd overall_system.pcf 
+trce -intstyle ise -v 3 -s 4 -n 3 -fastpaths -xml overall_system.twx overall_system.ncd -o overall_system.twr overall_system.pcf -ucf constraints.ucf 
+bitgen -intstyle ise -f overall_system.ut overall_system.ncd 
+xst -intstyle ise -ifn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.xst" -ofn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc constraints.ucf -p xc3s400a-ft256-4 "overall_system.ngc" overall_system.ngd  
+map -intstyle ise -p xc3s400a-ft256-4 -cm area -ir off -pr off -c 100 -o overall_system_map.ncd overall_system.ngd overall_system.pcf 
+par -w -intstyle ise -ol high -t 1 overall_system_map.ncd overall_system.ncd overall_system.pcf 
+trce -intstyle ise -v 3 -s 4 -n 3 -fastpaths -xml overall_system.twx overall_system.ncd -o overall_system.twr overall_system.pcf -ucf constraints.ucf 
+bitgen -intstyle ise -f overall_system.ut overall_system.ncd 
+xst -intstyle ise -ifn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.xst" -ofn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.syr" 
+xst -intstyle ise -ifn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.xst" -ofn "D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/overall_system.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc constraints.ucf -p xc3s400a-ft256-4 "overall_system.ngc" overall_system.ngd  
+map -intstyle ise -p xc3s400a-ft256-4 -cm area -ir off -pr off -c 100 -o overall_system_map.ncd overall_system.ngd overall_system.pcf 
+par -w -intstyle ise -ol high -t 1 overall_system_map.ncd overall_system.ncd overall_system.pcf 
+trce -intstyle ise -v 3 -s 4 -n 3 -fastpaths -xml overall_system.twx overall_system.ncd -o overall_system.twr overall_system.pcf -ucf constraints.ucf 
+bitgen -intstyle ise -f overall_system.ut overall_system.ncd 

@@ -1,11 +1,19 @@
 Release 12.2 Drc M.63c (nt64)
 Copyright (c) 1995-2010 Xilinx, Inc.  All rights reserved.
 
-Thu Feb 23 12:25:35 2012
+Thu Feb 23 15:24:50 2012
 
 drc -z overall_system.ncd overall_system.pcf
 
+WARNING:PhysDesignRules:367 - The signal <H_ROT_A_IBUF> is incomplete. The
+   signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal <H_ROT_B_IBUF> is incomplete. The
+   signal does not drive any load pins in the design.
 WARNING:PhysDesignRules:367 - The signal <RESETBTN_IBUF> is incomplete. The
    signal does not drive any load pins in the design.
-DRC detected 0 errors and 1 warnings.  Please see the previously displayed
+WARNING:PhysDesignRules:367 - The signal <V_ROT_A_IBUF> is incomplete. The
+   signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal <V_ROT_B_IBUF> is incomplete. The
+   signal does not drive any load pins in the design.
+DRC detected 0 errors and 5 warnings.  Please see the previously displayed
 individual error or warning messages for more details.

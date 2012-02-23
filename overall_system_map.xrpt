@@ -5,7 +5,7 @@
     The structure and the elements are likely to change over the next few releases.
     This means code written to parse this file will need to be revisited each subsequent release.-->
 
-  <application stringID="Map" timeStamp="Thu Feb 23 12:24:52 2012">
+  <application stringID="Map" timeStamp="Thu Feb 23 15:23:57 2012">
     <section stringID="User_Env">
       <table stringID="User_EnvVar">
         <column stringID="variable"/>
@@ -68,29 +68,29 @@
       <section stringID="MAP_DESIGN_SUMMARY">
         <item dataType="int" stringID="MAP_NUM_ERRORS" value="0"/>
         <item dataType="int" stringID="MAP_FILTERED_WARNINGS" value="0"/>
-        <item dataType="int" stringID="MAP_NUM_WARNINGS" value="1"/>
-        <item UNITS="KB" dataType="int" stringID="MAP_PEAK_MEMORY" value="263588"/>
-        <item stringID="MAP_TOTAL_REAL_TIME" value="3 secs "/>
+        <item dataType="int" stringID="MAP_NUM_WARNINGS" value="5"/>
+        <item UNITS="KB" dataType="int" stringID="MAP_PEAK_MEMORY" value="263204"/>
+        <item stringID="MAP_TOTAL_REAL_TIME" value="4 secs "/>
         <item stringID="MAP_TOTAL_CPU_TIME" value="3 secs "/>
       </section>
       <section stringID="MAP_SLICE_REPORTING">
-        <item dataType="int" label="Number of Slice Flip Flops" stringID="MAP_NUM_SLICE_FF" value="170"/>
-        <item dataType="int" stringID="MAP_NUM_SLICE_LATCH" value="64"/>
+        <item dataType="int" label="Number of Slice Flip Flops" stringID="MAP_NUM_SLICE_FF" value="157"/>
+        <item dataType="int" stringID="MAP_NUM_SLICE_LATCH" value="32"/>
         <item dataType="int" stringID="MAP_AVAILABLE_SLICEL" value="1792"/>
         <item dataType="int" stringID="MAP_AVAILABLE_SLICEM" value="1792"/>
         <item dataType="int" stringID="MAP_FLOPS_PER_SLICE" value="2"/>
         <item dataType="int" stringID="MAP_LUTS_PER_SLICE" value="2"/>
-        <item AVAILABLE="1792" dataType="int" stringID="MAP_NUM_SLICEM" value="0"/>
-        <item AVAILABLE="1792" dataType="int" stringID="MAP_NUM_SLICEL" value="0"/>
+        <item AVAILABLE="1792" dataType="int" stringID="MAP_NUM_SLICEM" value="1"/>
+        <item AVAILABLE="1792" dataType="int" stringID="MAP_NUM_SLICEL" value="1"/>
         <item dataType="int" label="Number of 4 input LUTs" stringID="MAP_NUM_4_INPUT_LUT" value="252"/>
-        <item dataType="int" label="Number of occupied Slices" stringID="MAP_AGG_SLICE" value="197"/>
+        <item dataType="int" label="Number of occupied Slices" stringID="MAP_AGG_SLICE" value="171"/>
         <item dataType="int" label="Number of Slices containing unrelated logic" stringID="MAP_NUM_SLICE_UNRELATED" value="0"/>
-        <item dataType="int" label="Number of route-thrus" stringID="MAP_NUM_LUT_RT" value="15"/>
+        <item dataType="int" label="Number of route-thrus" stringID="MAP_NUM_LUT_RT" value="3"/>
         <item dataType="int" stringID="MAP_NUM_DP_RAM" value="0"/>
         <item dataType="int" stringID="MAP_NUM_RAM32" value="0"/>
         <item dataType="int" stringID="MAP_NUM_RAM16" value="0"/>
         <item dataType="int" stringID="MAP_NUM_ROM16" value="0"/>
-        <item dataType="int" label="Number used as Shift registers" stringID="MAP_NUM_SHIFT" value="0"/>
+        <item dataType="int" label="Number used as Shift registers" stringID="MAP_NUM_SHIFT" value="1"/>
       </section>
       <section stringID="MAP_IOB_REPORTING">
         <section stringID="MAP_IOB_DATA">
@@ -100,7 +100,7 @@
           <item AVAILABLE="195" dataType="int" stringID="MAP_AGG_BONDED_IO" value="14"/>
           <item AVAILABLE="157" dataType="int" stringID="MAP_AGG_UNBONDED_IO" value="0"/>
           <item AVAILABLE="0" dataType="int" label="IOB Flip Flops" stringID="MAP_NUM_IOB_FF" value="0"/>
-          <item AVAILABLE="0" dataType="int" stringID="MAP_NUM_IOB_LATCH" value="2"/>
+          <item AVAILABLE="0" dataType="int" stringID="MAP_NUM_IOB_LATCH" value="0"/>
           <item AVAILABLE="0" dataType="int" stringID="MAP_NUM_DIFFM" value="0"/>
           <item AVAILABLE="64" dataType="int" stringID="MAP_NUM_DIFFMTB" value="0"/>
           <item AVAILABLE="0" dataType="int" stringID="MAP_NUM_BONDED_DIFFM" value="0"/>
@@ -114,7 +114,7 @@
       <section stringID="MAP_HARD_IP_REPORTING">
         <item AVAILABLE="0" dataType="int" stringID="MAP_NUM_RAMB16" value="0"/>
         <item AVAILABLE="0" dataType="int" stringID="MAP_NUM_MULT18X18" value="0"/>
-        <item AVAILABLE="24" dataType="int" label="Number of BUFGMUXs" stringID="MAP_NUM_BUFGMUX" value="3"/>
+        <item AVAILABLE="24" dataType="int" label="Number of BUFGMUXs" stringID="MAP_NUM_BUFGMUX" value="2"/>
         <item AVAILABLE="4" dataType="int" stringID="MAP_NUM_DCM" value="0"/>
         <item AVAILABLE="1" dataType="int" stringID="MAP_NUM_ICAP" value="0"/>
         <item AVAILABLE="1" dataType="int" stringID="MAP_NUM_STARTUP" value="0"/>
@@ -242,7 +242,6 @@
             <item label="IO&#xA;Standard" sort="smart" stringID="IO_STANDARD" value="LVCMOS25"/>
             <item label="Drive&#xA;Strength" stringID="DRIVE_STRENGTH" value="12"/>
             <item label="Slew&#xA;Rate" stringID="SLEW_RATE" value="SLOW"/>
-            <item label="Reg&#xA;(s)" stringID="REGS" value="OFF1"/>
             <item label="IBUF/IFD&#xA;Delay" stringID="IBUF_IFD_DELAY" value="0 / 0"/>
             <item label="Suspend" stringID="SUSPEND" value="3STATE"/>
           </row>
@@ -253,7 +252,6 @@
             <item label="IO&#xA;Standard" sort="smart" stringID="IO_STANDARD" value="LVCMOS25"/>
             <item label="Drive&#xA;Strength" stringID="DRIVE_STRENGTH" value="12"/>
             <item label="Slew&#xA;Rate" stringID="SLEW_RATE" value="SLOW"/>
-            <item label="Reg&#xA;(s)" stringID="REGS" value="OFF1"/>
             <item label="IBUF/IFD&#xA;Delay" stringID="IBUF_IFD_DELAY" value="0 / 0"/>
             <item label="Suspend" stringID="SUSPEND" value="3STATE"/>
           </row>
@@ -271,7 +269,7 @@
       </section>
       <section stringID="MAP_RPM_MACROS">
         <section stringID="MAP_SHAPE_SECTION">
-          <item dataType="int" stringID="MAP_NUM_SHAPE" value="11"/>
+          <item dataType="int" stringID="MAP_NUM_SHAPE" value="8"/>
         </section>
       </section>
       <section stringID="MAP_GUIDE_REPORT"/>

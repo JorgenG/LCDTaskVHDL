@@ -9,37 +9,37 @@ Target Device  : xc3s400a
 Target Package : ft256
 Target Speed   : -4
 Mapper Version : spartan3a -- $Revision: 1.52 $
-Mapped Date    : Thu Feb 23 12:24:48 2012
+Mapped Date    : Thu Feb 23 15:23:54 2012
 
 Design Summary
 --------------
 Number of errors:      0
-Number of warnings:    1
+Number of warnings:    5
 Logic Utilization:
-  Total Number Slice Registers:         234 out of   7,168    3%
-    Number used as Flip Flops:          170
-    Number used as Latches:              64
-  Number of 4 input LUTs:               237 out of   7,168    3%
+  Total Number Slice Registers:         189 out of   7,168    2%
+    Number used as Flip Flops:          157
+    Number used as Latches:              32
+  Number of 4 input LUTs:               249 out of   7,168    3%
 Logic Distribution:
-  Number of occupied Slices:            197 out of   3,584    5%
-    Number of Slices containing only related logic:     197 out of     197 100%
-    Number of Slices containing unrelated logic:          0 out of     197   0%
+  Number of occupied Slices:            171 out of   3,584    4%
+    Number of Slices containing only related logic:     171 out of     171 100%
+    Number of Slices containing unrelated logic:          0 out of     171   0%
       *See NOTES below for an explanation of the effects of unrelated logic.
   Total Number of 4 input LUTs:         252 out of   7,168    3%
-    Number used as logic:               237
-    Number used as a route-thru:         15
+    Number used as logic:               248
+    Number used as a route-thru:          3
+    Number used as Shift registers:       1
 
   The Slice Logic Distribution report is not meaningful if the design is
   over-mapped for a non-slice resource or if Placement fails.
 
   Number of bonded IOBs:                 14 out of     195    7%
-    IOB Latches:                          2
-  Number of BUFGMUXs:                     3 out of      24   12%
+  Number of BUFGMUXs:                     2 out of      24    8%
 
-Average Fanout of Non-Clock Nets:                2.34
+Average Fanout of Non-Clock Nets:                2.35
 
 Peak Memory Usage:  257 MB
-Total REAL time to MAP completion:  3 secs 
+Total REAL time to MAP completion:  4 secs 
 Total CPU time to MAP completion:   3 secs 
 
 NOTES:
@@ -84,13 +84,28 @@ Section 2 - Warnings
 WARNING:Security:42 - Your software subscription period has lapsed. Your current
 version of Xilinx tools will continue to function, but you no longer qualify for
 Xilinx software updates or new releases.
+WARNING:PhysDesignRules:367 - The signal <H_ROT_A_IBUF> is incomplete. The
+   signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal <H_ROT_B_IBUF> is incomplete. The
+   signal does not drive any load pins in the design.
 WARNING:PhysDesignRules:367 - The signal <RESETBTN_IBUF> is incomplete. The
+   signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal <V_ROT_A_IBUF> is incomplete. The
+   signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal <V_ROT_B_IBUF> is incomplete. The
    signal does not drive any load pins in the design.
 
 Section 3 - Informational
 -------------------------
 INFO:Security:54 - 'xc3s400a' is a WebPack part.
 INFO:LIT:243 - Logical network RESETBTN_IBUF has no load.
+INFO:LIT:395 - The above info message is repeated 4 more times for the following
+   (max. 5 shown):
+   V_ROT_A_IBUF,
+   V_ROT_B_IBUF,
+   H_ROT_A_IBUF,
+   H_ROT_B_IBUF
+   To see the details of these info messages, please use the -detail switch.
 INFO:MapLib:562 - No environment variables are currently set.
 INFO:LIT:244 - All of the single ended outputs in this design are using slew
    rate limited output drivers. The delay on speed critical single ended outputs
@@ -98,7 +113,7 @@ INFO:LIT:244 - All of the single ended outputs in this design are using slew
 
 Section 4 - Removed Logic Summary
 ---------------------------------
-   2 block(s) optimized away
+   3 block(s) optimized away
 
 Section 5 - Removed Logic
 -------------------------
@@ -129,8 +144,8 @@ Section 6 - IOB Properties
 | SI                                 | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW    |              |          | 0 / 0    | 3STATE           |
 | V_ROT_A                            | IBUF             | INPUT     | LVCMOS25             |       |          |         |              |          | 0 / 0    |                  |
 | V_ROT_B                            | IBUF             | INPUT     | LVCMOS25             |       |          |         |              |          | 0 / 0    |                  |
-| debugled<0>                        | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW    | OFF1         |          | 0 / 0    | 3STATE           |
-| debugled<1>                        | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW    | OFF1         |          | 0 / 0    | 3STATE           |
+| debugled<0>                        | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW    |              |          | 0 / 0    | 3STATE           |
+| debugled<1>                        | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW    |              |          | 0 / 0    | 3STATE           |
 | debugled<2>                        | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW    |              |          | 0 / 0    | 3STATE           |
 +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
