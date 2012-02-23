@@ -35,7 +35,9 @@ entity lcd_serializer is
 			  CLK : in STD_LOGIC;
            LCD_READY, LCD_CLK : out  STD_LOGIC;
            SI : out  STD_LOGIC;
-           CS : out  STD_LOGIC
+           CS : out  STD_LOGIC;
+			  ISDATA : in STD_LOGIC;
+			  A0 : out STD_LOGIC
   );
 end lcd_serializer;
 
@@ -45,6 +47,7 @@ architecture Behavioral of lcd_serializer is
 								wait0, wait1, wait2, wait3, wait4, wait5, wait6, wait7);
 	signal STATE_REG, STATE_NEXT : STATE_TYPE;
 	signal DATA_NEXT, DATA_REG : STD_LOGIC;
+	signal ISDATA_NEXT, ISDATA_REG : STD_LOGIC;
 	signal CS_NEXT, CS_REG : STD_LOGIC; -- Chip select is active low.
 	signal LCD_READY_NEXT, LCD_READY_REG, LCD_CLK_REG, LCD_CLK_NEXT : STD_LOGIC;
 begin
@@ -57,6 +60,7 @@ begin
 				CS_REG <= CS_NEXT;
 				LCD_READY_REG <= LCD_READY_NEXT;
 				LCD_CLK_REG <= LCD_CLK_NEXT;
+				ISDATA_REG <= ISDATA_NEXT;
 			end if;
       
 	end process;
@@ -65,6 +69,7 @@ begin
 	LCD_READY <= LCD_READY_REG;
 	CS <= CS_REG;
 	LCD_CLK <= LCD_CLK_REG;
+	A0 <= ISDATA_REG;
 	
 	process(CLK, STATE_REG)
 		begin
@@ -73,6 +78,7 @@ begin
 			LCD_READY_NEXT <= '0';
 			LCD_CLK_NEXT <= '0';
 			STATE_NEXT <= STATE_REG;
+			ISDATA_NEXT <= ISDATA;
 			
 			case STATE_REG is
 				when idle =>

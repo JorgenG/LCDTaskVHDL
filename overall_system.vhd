@@ -35,6 +35,7 @@ entity overall_system is
            H_ROT_B : in  STD_LOGIC;
            V_ROT_A : in  STD_LOGIC;
            V_ROT_B : in  STD_LOGIC;
+			  RESETBTN : in std_logic;
            SI : out  STD_LOGIC;
            RESETLCD : out  STD_LOGIC;
            CS : out  STD_LOGIC;
@@ -50,9 +51,7 @@ architecture Behavioral of overall_system is
 
 begin
 	
-	RESETLCD <= '1';
 	SCLK <= LCD_CLK;
-	A0 <= LCD_ISDATA_SIG;
 	
 	LCD_SERIALIZER : entity work.lcd_serializer (Behavioral)
 	port map(
@@ -62,7 +61,9 @@ begin
 		lcd_ready => LCD_READY_SIG,
 		lcd_clk => LCD_CLK,
 		cs => CS,
-		si => SI
+		si => SI,
+		a0 => A0,
+		isdata => LCD_ISDATA_SIG
 	);
 	
 	HORIZONTAL_KNOB : entity work.rotation_detector (Behavioral)
@@ -94,6 +95,7 @@ begin
 		lcd_start => LCD_START_SIG,
 		lcd_isdata => LCD_ISDATA_SIG,
 		lcd_ready => LCD_READY_SIG,
+		reset => RESETLCD,
 		debugled => DEBUGLED
 	);
 

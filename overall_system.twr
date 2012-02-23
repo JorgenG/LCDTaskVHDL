@@ -44,10 +44,10 @@ Setup/Hold to clock CLK
             |Max Setup to|Max Hold to |                  | Clock  |
 Source      | clk (edge) | clk (edge) |Internal Clock(s) | Phase  |
 ------------+------------+------------+------------------+--------+
-H_ROT_A     |    3.250(R)|   -0.575(R)|CLK_BUFGP         |   0.000|
-H_ROT_B     |    1.557(R)|   -0.426(R)|CLK_BUFGP         |   0.000|
-V_ROT_A     |    1.721(R)|   -0.515(R)|CLK_BUFGP         |   0.000|
-V_ROT_B     |    2.889(R)|   -1.121(R)|CLK_BUFGP         |   0.000|
+H_ROT_A     |    2.463(R)|   -1.069(R)|CLK_BUFGP         |   0.000|
+H_ROT_B     |    3.293(R)|   -0.869(R)|CLK_BUFGP         |   0.000|
+V_ROT_A     |    1.747(R)|    0.002(R)|CLK_BUFGP         |   0.000|
+V_ROT_B     |    1.766(R)|   -0.327(R)|CLK_BUFGP         |   0.000|
 ------------+------------+------------+------------------+--------+
 
 Clock CLK to Pad
@@ -55,10 +55,11 @@ Clock CLK to Pad
             | clk (edge) |                  | Clock  |
 Destination |   to PAD   |Internal Clock(s) | Phase  |
 ------------+------------+------------------+--------+
-A0          |    8.448(R)|CLK_BUFGP         |   0.000|
-CS          |    7.327(R)|CLK_BUFGP         |   0.000|
-SCLK        |    8.774(R)|CLK_BUFGP         |   0.000|
-SI          |    8.612(R)|CLK_BUFGP         |   0.000|
+A0          |    7.279(R)|CLK_BUFGP         |   0.000|
+CS          |    7.426(R)|CLK_BUFGP         |   0.000|
+RESETLCD    |    8.649(R)|CLK_BUFGP         |   0.000|
+SCLK        |    8.244(R)|CLK_BUFGP         |   0.000|
+SI          |    7.862(R)|CLK_BUFGP         |   0.000|
 ------------+------------+------------------+--------+
 
 Clock to Setup on destination clock CLK
@@ -66,11 +67,11 @@ Clock to Setup on destination clock CLK
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-CLK            |    6.454|         |         |         |
+CLK            |    6.080|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 
-Analysis completed Thu Feb 23 09:26:16 2012 
+Analysis completed Thu Feb 23 12:25:30 2012 
 --------------------------------------------------------------------------------
 
 Trace Settings:

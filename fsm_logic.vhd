@@ -20,6 +20,7 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
+
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
 use IEEE.NUMERIC_STD.ALL;
@@ -32,6 +33,7 @@ use IEEE.NUMERIC_STD.ALL;
 entity system_logic is
     Port ( H_CW, H_CCW, V_CW, V_CCW, LCD_READY : in  STD_LOGIC;
            CLK : in  STD_LOGIC;
+			  RESET : out STD_LOGIC;
 			  DEBUGLED : out STD_LOGIC_VECTOR(2 downto 0);
 			  LCD_BYTE : out STD_LOGIC_VECTOR(7 downto 0);
 			  LCD_START, LCD_ISDATA : out STD_LOGIC);
@@ -39,9 +41,10 @@ entity system_logic is
 end system_logic;
 
 architecture Behavioral of system_logic is
-	constant N: integer:=17; -- Clock cycles the LCD_Serializer uses from IDle -> idle
+	constant N: integer:=16; -- Clock cycles the LCD_Serializer uses from IDle -> idle
 	signal COUNTER_REG, COUNTER_NEXT : integer:=N;
 	signal BOOTTIME_REG, BOOTTIME_NEXT : integer:=100;
+	signal RESET_REG, RESET_NEXT : std_logic;
 	signal CUR_PAGE_REG, CUR_PAGE_NEXT, NEW_PAGE_REG, NEW_PAGE_NEXT : STD_LOGIC_VECTOR(3 downto 0):= (others => '0');
 	signal CUR_COL_REG, CUR_COL_NEXT, NEW_COL_REG, NEW_COL_NEXT : STD_LOGIC_VECTOR(7 downto 0):= (others => '0');
 	signal LCD_BYTE_REG, LCD_BYTE_NEXT : STD_LOGIC_VECTOR(7 downto 0);
@@ -55,6 +58,7 @@ begin
 	LCD_BYTE <= LCD_BYTE_REG;
 	LCD_START <= LCD_START_REG;
 	LCD_ISDATA <= LCD_ISDATA_REG;
+	RESET <= RESET_REG;
 	
 	process(CLK)
 	begin
@@ -69,12 +73,14 @@ begin
 			CUR_COL_REG <= CUR_COL_NEXT;
 			NEW_COL_REG <= NEW_COL_NEXT;
 			BOOTTIME_REG <= BOOTTIME_NEXT;
+			RESET_REG <= RESET_NEXT;
 		end if;
 	end process;
 	
 	process(CLK, STATE_REG, LCD_READY, V_CW, V_CCW, H_CW, H_CCW)
 	begin
 		STATE_NEXT <= STATE_REG;
+		RESET_NEXT <= '1';
 		LCD_BYTE_NEXT <= "00000000";
 		LCD_START_NEXT <= '0';
 		LCD_ISDATA_NEXT <= '0';
@@ -86,6 +92,7 @@ begin
 		case STATE_REG is
 			when BOOTTIME =>
 				BOOTTIME_NEXT <= BOOTTIME_REG - 1;
+				RESET_NEXT <= '0';
 				if(BOOTTIME_REG = 0) then
 					STATE_NEXT <= INIT0;
 				end if;
@@ -199,7 +206,7 @@ begin
 				COUNTER_NEXT <= COUNTER_REG - 1;
 				if(COUNTER_REG = 0) then
 					COUNTER_NEXT <= N;
-					STATE_NEXT <= INIT14;
+					STATE_NEXT <= IDLE;
 				end if;
 				
 			when INIT14 =>
@@ -230,18 +237,16 @@ begin
 			end if;
 			
 			when INIT17 =>
-			LCD_BYTE_NEXT <= "10100101";
-			LCD_START_NEXT <= '1';
-			--LCD_ISDATA_NEXT <= '0';
+			LCD_BYTE_NEXT <= "11111111";
+			LCD_START_NEXT <= '1';		
+			LCD_ISDATA_NEXT <= '0';			
 			COUNTER_NEXT <= COUNTER_REG - 1;
 			if(COUNTER_REG = 0) then
 				COUNTER_NEXT <= N;
 				STATE_NEXT <= IDLE;
 			end if;
 				
-			when IDLE =>
-				DEBUGLED(0) <= '1';
-				DEBUGLED(1) <= '0';
+			when IDLE =>								
 				DEBUGLED(2) <= '1';
 				if(V_CW = '1') then
 					STATE_NEXT <= UP;
@@ -253,6 +258,7 @@ begin
 					STATE_NEXT <= LEFT;
 				end if;
 			when UP =>
+				DEBUGLED(0) <= '1';
 				STATE_NEXT <= CLEARCURRENT;
 				if(CUR_PAGE_REG = "0000") then
 					NEW_PAGE_NEXT <= "0100";
@@ -260,6 +266,7 @@ begin
 					NEW_PAGE_NEXT <= std_logic_vector(unsigned(CUR_PAGE_REG) - 1);
 				end if;
 			when DOWN =>
+				DEBUGLED(0) <= '0';
 				STATE_NEXT <= CLEARCURRENT;
 				if(CUR_PAGE_REG = "0100") then
 					NEW_PAGE_NEXT <= "0000";
@@ -274,6 +281,7 @@ begin
 					NEW_COL_NEXT <= std_logic_vector(unsigned(CUR_COL_REG) - 1);
 				end if;
 			when RIGHT =>
+				DEBUGLED(1) <= '1';
 				STATE_NEXT <= CLEARCURRENT;
 				if(CUR_COL_REG = "10000011") then
 					NEW_COL_NEXT <= "00000000";
@@ -281,6 +289,7 @@ begin
 					NEW_COL_NEXT <= std_logic_vector(unsigned(CUR_COL_REG) + 1);
 				end if;
 			when CLEARCURRENT =>
+				DEBUGLED(1) <= '0';
 				LCD_BYTE_NEXT <= "00000000";
 				LCD_ISDATA_NEXT <= '1';
 				COUNTER_NEXT <= COUNTER_REG - 1;

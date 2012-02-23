@@ -50,9 +50,7 @@ ARCHITECTURE behavior OF tb_system IS
          RESETLCD : OUT  std_logic;
          CS : OUT  std_logic;
          A0 : OUT  std_logic;
-         btn : IN  std_logic_vector(2 downto 0);
-         debugled1 : OUT  std_logic;
-         debugled2 : OUT  std_logic;
+			debugled : OUT STD_LOGIC_VECTOR(2 downto 0);
          SCLK : OUT  std_logic
         );
     END COMPONENT;
@@ -64,16 +62,14 @@ ARCHITECTURE behavior OF tb_system IS
    signal H_ROT_B : std_logic := '0';
    signal V_ROT_A : std_logic := '0';
    signal V_ROT_B : std_logic := '0';
-   signal btn : std_logic_vector(2 downto 0) := (others => '0');
 
  	--Outputs
    signal SI : std_logic;
    signal RESETLCD : std_logic;
    signal CS : std_logic;
    signal A0 : std_logic;
-   signal debugled1 : std_logic;
-   signal debugled2 : std_logic;
    signal SCLK : std_logic;
+	signal debugled : std_logic_vector (2 downto 0);
 
    -- Clock period definitions
    constant CLK_period : time := 62.5 ns;
@@ -92,9 +88,7 @@ BEGIN
           RESETLCD => RESETLCD,
           CS => CS,
           A0 => A0,
-          btn => btn,
-          debugled1 => debugled1,
-          debugled2 => debugled2,
+          debugled => debugled,
           SCLK => SCLK
         );
 

@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2012-02-22T11:13:23</DateModified>
+  <DateModified>2012-02-23T11:08:36</DateModified>
   <ModuleName>overall_system</ModuleName>
-  <SummaryTimeStamp>2012-02-22T10:57:42</SummaryTimeStamp>
+  <SummaryTimeStamp>2012-02-23T10:32:23</SummaryTimeStamp>
   <SavedFilePath>D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys/iseconfig/overall_system.xreport</SavedFilePath>
   <ImplementationReportsDirectory>D:/FPGA Prosjekter/Digitale Systemer/Xilinx/LCDTaskDigSys\</ImplementationReportsDirectory>
   <DateInitialized>2012-02-21T16:18:59</DateInitialized>

@@ -1,5 +1,5 @@
 //! **************************************************************************
-// Written by: Map M.63c on Thu Feb 23 09:25:37 2012
+// Written by: Map M.63c on Thu Feb 23 12:24:51 2012
 //! **************************************************************************
 
 SCHEMATIC START;
@@ -12,8 +12,9 @@ COMP "debugled<1>" LOCATE = SITE "A7" LEVEL 1;
 COMP "debugled<2>" LOCATE = SITE "D7" LEVEL 1;
 COMP "CS" LOCATE = SITE "A9" LEVEL 1;
 COMP "SI" LOCATE = SITE "A12" LEVEL 1;
-COMP "CLK" LOCATE = SITE "N9" LEVEL 1;
+COMP "CLK" LOCATE = SITE "C10" LEVEL 1;
 COMP "RESETLCD" LOCATE = SITE "A10" LEVEL 1;
+COMP "RESETBTN" LOCATE = SITE "H4" LEVEL 1;
 COMP "V_ROT_A" LOCATE = SITE "D13" LEVEL 1;
 COMP "V_ROT_B" LOCATE = SITE "C13" LEVEL 1;
 SCHEMATIC END;

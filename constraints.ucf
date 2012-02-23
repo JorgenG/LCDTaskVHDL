@@ -1,9 +1,10 @@
-NET "clk" LOC = N9;
+NET "clk" LOC = C10;
 NET "h_rot_a" LOC = A8;
 NET "h_rot_b" LOC = B8;
 NET "v_rot_a" LOC = D13;
 NET "v_rot_b" LOC = C13;
 NET "si" LOC = A12;
+NET "RESETBTN" LOC = H4;
 NET "resetlcd" LOC = A10;
 NET "cs" LOC = A9;
 NET "a0" LOC = A11;

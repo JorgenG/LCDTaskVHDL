@@ -41,7 +41,7 @@ architecture Behavioral of rotation_detector is
 	type STATES is (idle, cw_state, ccw_state);
 	signal STATE_REG, STATE_NEXT : STATES;
 	signal DELAY_A_REG : STD_LOGIC;
-	signal DB_ROT_A, DB_ROT_B : STD_LOGIC;
+	signal DB_ROT_A, DB_ROT_B, CW_REG, CW_NEXT, CCW_REG, CCW_NEXT : STD_LOGIC;
 	signal TICK_A : STD_LOGIC;
 begin
 
@@ -66,15 +66,19 @@ begin
 		if(clk'event and clk='1') then
 			DELAY_A_REG <= DB_ROT_A;
 			STATE_REG <= STATE_NEXT;
+			CW_REG <= CW_NEXT;
+			CCW_REG <= CCW_NEXT;
 		end if;
 	end process;
 	
 	TICK_A <= (not DELAY_A_REG) and DB_ROT_A;
+	CW <= CW_REG;
+	CCW <= CCW_REG;
 
 	process(CLK, STATE_REG, TICK_A)
 	begin
-		CW <= '0';
-		CCW <= '0';
+		CW_NEXT <= '0';
+		CCW_NEXT <= '0';
 		STATE_NEXT <= STATE_REG;
 		
 		case STATE_REG is
@@ -85,9 +89,9 @@ begin
 					STATE_NEXT <= ccw_state;
 				end if;
 			when cw_state =>
-				CW <= '1';
+				CW_NEXT <= '1';
 			when ccw_state =>
-				CCW <= '1';
+				CCW_NEXT <= '1';
 		end case;
 	end process;
 

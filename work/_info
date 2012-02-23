@@ -16,7 +16,7 @@ L5
 VYGm^anYlNNn3ODk4:O8T53
 Z8 OP;C;10.0c;49
 31
-Z9 !s108 1329982058.457000
+Z9 !s108 1329991580.404000
 Z10 !s90 -reportprogress|300|-explicit|-93|debouncer.vhd|
 Z11 !s107 debouncer.vhd|
 Z12 o-explicit -93 -O0
@@ -39,7 +39,7 @@ R12
 R13
 !s100 dl5TPLI]_RgzXV]VA8A>23
 Elcd_serializer
-Z15 w1329902529
+Z15 w1329991518
 R3
 R4
 R5
@@ -47,22 +47,22 @@ Z16 8lcdserializer.vhd
 Z17 Flcdserializer.vhd
 l0
 L32
-VaL:gI6_XVYl<_k3SLmoGY2
+VhmNW`7R[;Bl1mYkVJ:Q@X3
 R8
 31
-Z18 !s108 1329982058.518000
+Z18 !s108 1329991580.469000
 Z19 !s90 -reportprogress|300|-explicit|-93|lcdserializer.vhd|
 Z20 !s107 lcdserializer.vhd|
 R12
 R13
-!s100 _KeNK[T8Y7m0a>`[fWPdd0
+!s100 db_]V0HJ0ZnTd9]Y;H=^h0
 Abehavioral
 R3
 R4
-Z21 DEx4 work 14 lcd_serializer 0 22 aL:gI6_XVYl<_k3SLmoGY2
-l50
-L42
-VI<8UY1=@?eDo[Rz@QJD5;3
+Z21 DEx4 work 14 lcd_serializer 0 22 hmNW`7R[;Bl1mYkVJ:Q@X3
+l53
+L44
+VY<H?mj@:fKRAMY09gm=5Q1
 R8
 31
 R18
@@ -70,9 +70,9 @@ R19
 R20
 R12
 R13
-!s100 _7cPg2JVmL8Hc^C<2GT8O0
+!s100 1FdfGWX8N0ebSDX6_4OP?1
 Eoverall_system
-Z22 w1329904575
+Z22 w1329991569
 R3
 R4
 R5
@@ -80,27 +80,26 @@ Z23 8overall_system.vhd
 Z24 Foverall_system.vhd
 l0
 L32
-VVXT]ANY@FdbLaVQI:fN>M3
+VUcjhQKg3:om:QnTlPM6Rz2
 R8
 31
-Z25 !s108 1329982058.797000
+Z25 !s108 1329991580.679000
 Z26 !s90 -reportprogress|300|-explicit|-93|overall_system.vhd|
 Z27 !s107 overall_system.vhd|
 R12
 R13
-!s100 ORD[MYR9DEKE]]10E=VI60
+!s100 S3codMm6Jm5?m7lcB0Vi=0
 Abehavioral
 R2
-Z28 DEx4 work 12 system_logic 0 22 ]84_7mknH1YJ``D[FKm3Z1
+Z28 DEx4 work 12 system_logic 0 22 4;hRV_<?a:I5BEX_XET343
 Z29 DEx4 work 17 rotation_detector 0 22 LaeAH>KBz`;4<cVnFe9mo0
 R21
 R3
 R4
-DEx4 work 14 overall_system 0 22 VXT]ANY@FdbLaVQI:fN>M3
-l52
-L47
-VLJXiaY`7h<9<[I0QUQ7Xj2
-!s100 URVdjMRFnehzgEJQmYC1_1
+DEx4 work 14 overall_system 0 22 UcjhQKg3:om:QnTlPM6Rz2
+l51
+L46
+VafE``8gRX__jfL]YNM=i41
 R8
 31
 R25
@@ -108,6 +107,7 @@ R26
 R27
 R12
 R13
+!s100 oea3:M[3zdOl[`F5z4C?e1
 Erotation_detector
 Z30 w1329836978
 R3
@@ -120,7 +120,7 @@ L32
 VLaeAH>KBz`;4<cVnFe9mo0
 R8
 31
-Z33 !s108 1329982058.729000
+Z33 !s108 1329991580.593000
 Z34 !s90 -reportprogress|300|-explicit|-93|edge_detector.vhd|
 Z35 !s107 edge_detector.vhd|
 R12
@@ -144,7 +144,7 @@ R12
 R13
 !s100 [hWJkeGfQ78Ud>IL>zgCD2
 Esystem_logic
-Z36 w1329982039
+Z36 w1329990345
 R2
 R3
 R4
@@ -153,23 +153,23 @@ Z37 8fsm_logic.vhd
 Z38 Ffsm_logic.vhd
 l0
 L32
-V]84_7mknH1YJ``D[FKm3Z1
+V4;hRV_<?a:I5BEX_XET343
 R8
 31
-Z39 !s108 1329982058.570000
+Z39 !s108 1329991580.520000
 Z40 !s90 -reportprogress|300|-explicit|-93|fsm_logic.vhd|
 Z41 !s107 fsm_logic.vhd|
 R12
 R13
-!s100 4ca`@9HXEeKBj;flnlnLI0
+!s100 `;XQMRW1@c[eRDhOz`1ka2
 Abehavioral
 R2
 R3
 R4
 R28
-l52
-L40
-V9BS4`MblYRV=<I=_]YO]i1
+l53
+L41
+VaE]Of[Ba8;X1m`ce>bDo42
 R8
 31
 R39
@@ -177,9 +177,9 @@ R40
 R41
 R12
 R13
-!s100 CXT7E2Qg2AORdC_XN7nHN0
+!s100 Khc6aNO=NOLo<i0EdnKnX0
 Etb_system
-Z42 w1329895641
+Z42 w1329987644
 R3
 R4
 R5
@@ -191,7 +191,7 @@ V92ll4dIY_D8R=UFo0I^IN0
 !s100 SQfJUiR:kof>z=@1`bnoW1
 R8
 31
-Z45 !s108 1329982058.864000
+Z45 !s108 1329991580.768000
 Z46 !s90 -reportprogress|300|-explicit|-93|tb_system.vhd|
 Z47 !s107 tb_system.vhd|
 R12
@@ -200,10 +200,10 @@ Abehavior
 R3
 R4
 Z48 DEx4 work 9 tb_system 0 22 92ll4dIY_D8R=UFo0I^IN0
-l82
+l78
 L38
-Z49 VR7d;lCobN=6lHK=8Q5Ach1
-Z50 !s100 3:`RGKzkJ@M1T]_SF^6_20
+Z49 VMfMk[Yf5Tz0NT<keD5[X@2
+Z50 !s100 LV=_5CcX_DCV[bABm;W^h0
 R8
 31
 R45

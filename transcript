@@ -74,9 +74,9 @@
 # Loading work.system_logic(behavioral)
 # ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
 #           File in use by:   Hostname:   ProcessID: 5
-#           Attempting to use alternate WLF file "./wlftrdk27j".
+#           Attempting to use alternate WLF file "./wlftxqf5zg".
 # ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlftrdk27j
+#           Using alternate file: ./wlftxqf5zg
 # .main_pane.wave.interior.cs.body.pw.wf
 # .main_pane.structure.interior.cs.body.struct
 # .main_pane.objects.interior.cs.body.tree
@@ -98,11 +98,8 @@
 #    Time: 31250 ps  Iteration: 2  Instance: /tb_system/uut/VERTICAL_KNOB/DEBOUNCE_B
 #  
 restart
-add wave  \
-sim:/tb_system/uut/SYSTEM_LOGIC/BOOTTIME_REG \
-sim:/tb_system/uut/SYSTEM_LOGIC/BOOTTIME_NEXT \
-sim:/tb_system/uut/SYSTEM_LOGIC/STATE_REG
 add wave sim:/tb_system/uut/LCD_SERIALIZER/*
+add wave sim:/tb_system/uut/SYSTEM_LOGIC/*
 run
 # ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
 #    Time: 0 ps  Iteration: 0  Instance: /tb_system/uut/VERTICAL_KNOB/DEBOUNCE_B
