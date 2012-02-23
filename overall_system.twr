@@ -39,16 +39,27 @@ Data Sheet report:
 -----------------
 All values displayed in nanoseconds (ns)
 
+Setup/Hold to clock CLK
+------------+------------+------------+------------------+--------+
+            |Max Setup to|Max Hold to |                  | Clock  |
+Source      | clk (edge) | clk (edge) |Internal Clock(s) | Phase  |
+------------+------------+------------+------------------+--------+
+H_ROT_A     |    1.971(R)|   -0.455(R)|CLK_BUFGP         |   0.000|
+H_ROT_B     |    1.970(R)|   -0.714(R)|CLK_BUFGP         |   0.000|
+V_ROT_A     |    2.399(R)|   -0.475(R)|CLK_BUFGP         |   0.000|
+V_ROT_B     |    3.112(R)|   -0.730(R)|CLK_BUFGP         |   0.000|
+------------+------------+------------+------------------+--------+
+
 Clock CLK to Pad
 ------------+------------+------------------+--------+
             | clk (edge) |                  | Clock  |
 Destination |   to PAD   |Internal Clock(s) | Phase  |
 ------------+------------+------------------+--------+
-A0          |    7.278(R)|CLK_BUFGP         |   0.000|
-CS          |    7.477(R)|CLK_BUFGP         |   0.000|
-RESETLCD    |    8.054(R)|CLK_BUFGP         |   0.000|
-SCLK        |    8.085(R)|CLK_BUFGP         |   0.000|
-SI          |    8.126(R)|CLK_BUFGP         |   0.000|
+A0          |    8.371(R)|CLK_BUFGP         |   0.000|
+CS          |    7.628(R)|CLK_BUFGP         |   0.000|
+RESETLCD    |    7.282(R)|CLK_BUFGP         |   0.000|
+SCLK        |    8.747(R)|CLK_BUFGP         |   0.000|
+SI          |    8.978(R)|CLK_BUFGP         |   0.000|
 ------------+------------+------------------+--------+
 
 Clock to Setup on destination clock CLK
@@ -56,18 +67,18 @@ Clock to Setup on destination clock CLK
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-CLK            |    7.019|         |         |         |
+CLK            |    7.411|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 
-Analysis completed Thu Feb 23 15:24:44 2012 
+Analysis completed Thu Feb 23 16:30:06 2012 
 --------------------------------------------------------------------------------
 
 Trace Settings:
 -------------------------
 Trace Settings 
 
-Peak Memory Usage: 174 MB
+Peak Memory Usage: 179 MB
 
 
 

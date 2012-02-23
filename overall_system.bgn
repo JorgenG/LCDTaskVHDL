@@ -6,7 +6,7 @@ C:\Xilinx\12.2\ISE_DS\ISE\.
 speed -4
 Opened constraints file overall_system.pcf.
 
-Thu Feb 23 15:24:50 2012
+Thu Feb 23 16:30:09 2012
 
 C:\Xilinx\12.2\ISE_DS\ISE\bin\nt64\unwrapped\bitgen.exe -intstyle ise -w -g DebugBitstream:No -g Binary:no -g CRC:Enable -g Reset_on_err:No -g ConfigRate:25 -g ProgPin:PullUp -g DonePin:PullUp -g TckPin:PullUp -g TdiPin:PullUp -g TdoPin:PullUp -g TmsPin:PullUp -g UnusedPin:PullDown -g UserID:0xFFFFFFFF -g StartUpClk:CClk -g DONE_cycle:4 -g GTS_cycle:5 -g GWE_cycle:6 -g LCK_cycle:NoWait -g Security:None -g DonePipe:No -g DriveDone:No -g en_sw_gsr:No -g en_porb:Yes -g drive_awake:No -g sw_clk:Startupclk -g sw_gwe_cycle:5 -g sw_gts_cycle:4 overall_system.ncd 
 
@@ -115,17 +115,9 @@ There were 0 CONFIG constraint(s) processed from overall_system.pcf.
 
 
 Running DRC.
-WARNING:PhysDesignRules:367 - The signal <H_ROT_A_IBUF> is incomplete. The
-   signal does not drive any load pins in the design.
-WARNING:PhysDesignRules:367 - The signal <H_ROT_B_IBUF> is incomplete. The
-   signal does not drive any load pins in the design.
 WARNING:PhysDesignRules:367 - The signal <RESETBTN_IBUF> is incomplete. The
    signal does not drive any load pins in the design.
-WARNING:PhysDesignRules:367 - The signal <V_ROT_A_IBUF> is incomplete. The
-   signal does not drive any load pins in the design.
-WARNING:PhysDesignRules:367 - The signal <V_ROT_B_IBUF> is incomplete. The
-   signal does not drive any load pins in the design.
-DRC detected 0 errors and 5 warnings.  Please see the previously displayed
+DRC detected 0 errors and 1 warnings.  Please see the previously displayed
 individual error or warning messages for more details.
 INFO:Security:54 - 'xc3s400a' is a WebPack part.
 WARNING:Security:42 - Your software subscription period has lapsed. Your current

@@ -1,7 +1,7 @@
 Release 12.2 - par M.63c (nt64)
 Copyright (c) 1995-2010 Xilinx, Inc.  All rights reserved.
 
-Thu Feb 23 15:24:39 2012
+Thu Feb 23 16:29:59 2012
 
 
 # NOTE: This file is designed to be imported into a spreadsheet program
@@ -74,7 +74,7 @@ D4||DIFFMLR|IO_L02P_3|UNUSED||3|||||||||
 D5||DIFFSTB|IO_L20N_0/PUDC_B|UNUSED||0|||||||||
 D6||IBUF|IP_0|UNUSED||0|||||||||
 D7|debugled<2>|IOB|IO_L16P_0|OUTPUT|LVCMOS25*|0|12|SLOW|NONE**|||LOCATED|NO|NONE|
-D8|debugled<0>|IOB|IO_L11N_0/GCLK9|OUTPUT|LVCMOS25*|0|12|SLOW|NONE**|||LOCATED|NO|NONE|
+D8|debugled<0>|IOB|IO_L11N_0/GCLK9|OUTPUT|LVCMOS25*|0|12|SLOW|NONE**|||LOCATED|YES|NONE|
 D9||DIFFSTB|IO_L09N_0/GCLK5|UNUSED||0|||||||||
 D10||DIFFMTB|IO_L06P_0|UNUSED||0|||||||||
 D11||DIFFSTB|IO_L03N_0|UNUSED||0|||||||||

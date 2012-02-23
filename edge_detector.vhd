@@ -90,8 +90,10 @@ begin
 				end if;
 			when cw_state =>
 				CW_NEXT <= '1';
+				STATE_NEXT <= idle;
 			when ccw_state =>
 				CCW_NEXT <= '1';
+				STATE_NEXT <= idle;
 		end case;
 	end process;
 

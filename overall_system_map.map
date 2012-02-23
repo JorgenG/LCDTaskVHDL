@@ -9,7 +9,7 @@ Target Device  : xc3s400a
 Target Package : ft256
 Target Speed   : -4
 Mapper Version : spartan3a -- $Revision: 1.52 $
-Mapped Date    : Thu Feb 23 15:23:54 2012
+Mapped Date    : Thu Feb 23 16:29:13 2012
 
 vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 INFO:Security:54 - 'xc3s400a' is a WebPack part.
@@ -22,15 +22,7 @@ Running directed packing...
 Running delay-based LUT packing...
 Running related packing...
 Updating timing models...
-WARNING:PhysDesignRules:367 - The signal <H_ROT_A_IBUF> is incomplete. The
-   signal does not drive any load pins in the design.
-WARNING:PhysDesignRules:367 - The signal <H_ROT_B_IBUF> is incomplete. The
-   signal does not drive any load pins in the design.
 WARNING:PhysDesignRules:367 - The signal <RESETBTN_IBUF> is incomplete. The
-   signal does not drive any load pins in the design.
-WARNING:PhysDesignRules:367 - The signal <V_ROT_A_IBUF> is incomplete. The
-   signal does not drive any load pins in the design.
-WARNING:PhysDesignRules:367 - The signal <V_ROT_B_IBUF> is incomplete. The
    signal does not drive any load pins in the design.
 
 Design Summary
@@ -38,33 +30,33 @@ Design Summary
 
 Design Summary:
 Number of errors:      0
-Number of warnings:    5
+Number of warnings:    1
 Logic Utilization:
-  Total Number Slice Registers:         189 out of   7,168    2%
-    Number used as Flip Flops:          157
+  Total Number Slice Registers:         366 out of   7,168    5%
+    Number used as Flip Flops:          334
     Number used as Latches:              32
-  Number of 4 input LUTs:               249 out of   7,168    3%
+  Number of 4 input LUTs:               489 out of   7,168    6%
 Logic Distribution:
-  Number of occupied Slices:            171 out of   3,584    4%
-    Number of Slices containing only related logic:     171 out of     171 100%
-    Number of Slices containing unrelated logic:          0 out of     171   0%
+  Number of occupied Slices:            350 out of   3,584    9%
+    Number of Slices containing only related logic:     350 out of     350 100%
+    Number of Slices containing unrelated logic:          0 out of     350   0%
       *See NOTES below for an explanation of the effects of unrelated logic.
-  Total Number of 4 input LUTs:         252 out of   7,168    3%
-    Number used as logic:               248
-    Number used as a route-thru:          3
-    Number used as Shift registers:       1
+  Total Number of 4 input LUTs:         505 out of   7,168    7%
+    Number used as logic:               489
+    Number used as a route-thru:         16
 
   The Slice Logic Distribution report is not meaningful if the design is
   over-mapped for a non-slice resource or if Placement fails.
 
   Number of bonded IOBs:                 14 out of     195    7%
+    IOB Latches:                          1
   Number of BUFGMUXs:                     2 out of      24    8%
 
-Average Fanout of Non-Clock Nets:                2.35
+Average Fanout of Non-Clock Nets:                2.60
 
-Peak Memory Usage:  257 MB
+Peak Memory Usage:  260 MB
 Total REAL time to MAP completion:  4 secs 
-Total CPU time to MAP completion:   3 secs 
+Total CPU time to MAP completion:   4 secs 
 
 NOTES:
 
