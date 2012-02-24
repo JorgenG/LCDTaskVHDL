@@ -49,9 +49,6 @@ architecture Behavioral of system_logic is
 	type cmd_array is array(0 to 13) of std_logic_vector(7 downto 0);
 	
 	signal initcommands : cmd_array;
-	signal clearpage2 : cmd_array;
-	signal clearpage3 : cmd_array;
-	signal clearpage4 : cmd_array;
 	
 	signal CMDCOUNTER_REG, CMDCOUNTER_NEXT : integer:=0;
 	signal COUNTER_REG, COUNTER_NEXT : integer:=N;
@@ -266,6 +263,7 @@ begin
 				if(CLEARCOUNTER_REG = 0) then
 					CLEARCOUNTER_NEXT <= DRAWZEROS;
 					STATE_NEXT <= DRAWNEXT1;
+					NEW_PAGE_NEXT <= 0;
 				end if;
 				
 			when IDLE =>				
