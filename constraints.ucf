@@ -10,6 +10,7 @@ NET "cs" LOC = A9;
 NET "a0" LOC = A11;
 NET "sclk" LOC = B12;
 
-NET "debugled<0>" LOC = D8;
-NET "debugled<1>" LOC = A7;
-NET "debugled<2>" LOC = D7;
+NET "debugled<0>" LOC = D11;
+NET "debugled<1>" LOC = C11;
+NET "debugled<2>" LOC = C12;
+NET "debugled<3>" LOC = D8;

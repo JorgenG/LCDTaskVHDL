@@ -33,7 +33,7 @@ entity lcd_serializer is
     Port ( LCD_BYTE : in  STD_LOGIC_VECTOR(7 downto 0);
            LCD_START : in  STD_LOGIC;
 			  CLK : in STD_LOGIC;
-           LCD_READY, LCD_CLK : out  STD_LOGIC;
+           WRITE_DONE, LCD_CLK : out  STD_LOGIC;
            SI : out  STD_LOGIC;
            CS : out  STD_LOGIC;
 			  ISDATA : in STD_LOGIC;
@@ -43,13 +43,13 @@ end lcd_serializer;
 
 architecture Behavioral of lcd_serializer is
 
-	type STATE_TYPE is (idle, data0, data1, data2, data3, data4, data5, data6, data7,
+	type STATE_TYPE is (idle, prepare, data0, data1, data2, data3, data4, data5, data6, data7,
 								wait0, wait1, wait2, wait3, wait4, wait5, wait6, wait7);
 	signal STATE_REG, STATE_NEXT : STATE_TYPE;
 	signal DATA_NEXT, DATA_REG : STD_LOGIC;
 	signal ISDATA_NEXT, ISDATA_REG : STD_LOGIC;
 	signal CS_NEXT, CS_REG : STD_LOGIC; -- Chip select is active low.
-	signal LCD_READY_NEXT, LCD_READY_REG, LCD_CLK_REG, LCD_CLK_NEXT : STD_LOGIC;
+	signal WRITE_DONE_NEXT, WRITE_DONE_REG, LCD_CLK_REG, LCD_CLK_NEXT : STD_LOGIC;
 begin
 
 	process(CLK)
@@ -58,7 +58,7 @@ begin
 				STATE_REG <= STATE_NEXT;
 				DATA_REG <= DATA_NEXT;
 				CS_REG <= CS_NEXT;
-				LCD_READY_REG <= LCD_READY_NEXT;
+				WRITE_DONE_REG <= WRITE_DONE_NEXT;
 				LCD_CLK_REG <= LCD_CLK_NEXT;
 				ISDATA_REG <= ISDATA_NEXT;
 			end if;
@@ -66,7 +66,7 @@ begin
 	end process;
 	
 	SI <= DATA_REG;
-	LCD_READY <= LCD_READY_REG;
+	WRITE_DONE <= WRITE_DONE_REG;
 	CS <= CS_REG;
 	LCD_CLK <= LCD_CLK_REG;
 	A0 <= ISDATA_REG;
@@ -75,19 +75,22 @@ begin
 		begin
 			DATA_NEXT <= '0';
 			CS_NEXT <= '0';
-			LCD_READY_NEXT <= '0';
 			LCD_CLK_NEXT <= '0';
+			WRITE_DONE_NEXT <= '0';
 			STATE_NEXT <= STATE_REG;
 			ISDATA_NEXT <= ISDATA;
 			
 			case STATE_REG is
 				when idle =>
-					CS_NEXT <= '1';					
-					LCD_READY_NEXT <= '1';
+					CS_NEXT <= '1';	
 					if(LCD_START = '1') then
-						LCD_READY_NEXT <= '0';
-						STATE_NEXT <= data0;
+						STATE_NEXT <= prepare;
 					end if;
+				
+				-- To let the data byte propagate to the LCD_SERIALIZER
+				when prepare =>
+					CS_NEXT <= '1';
+					STATE_NEXT <= data0;
 					
 				when data0 =>	
 					DATA_NEXT <= LCD_BYTE(7);
@@ -159,7 +162,7 @@ begin
 				when wait7 =>
 					DATA_NEXT <= LCD_BYTE(0);
 					LCD_CLK_NEXT <= '1';
-					LCD_READY_NEXT <= '1';
+					WRITE_DONE_NEXT <= '1';
 					STATE_NEXT <= idle;
 				
 			end case;
