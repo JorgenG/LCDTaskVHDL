@@ -48,7 +48,7 @@ architecture Behavioral of system_logic is
 	
 	signal initcommands : cmd_array;
 	
-	signal BOOTTIMER_REG, BOOTTIMER_NEXT : integer:=50000; -- Will create a 3.125 ms delay before booting init to avoid chitter.
+	signal BOOTTIMER_REG, BOOTTIMER_NEXT : integer:=100000; -- Will create a 6.25 ms delay before booting init to avoid chitter.
 	signal CMDCOUNTER_REG, CMDCOUNTER_NEXT : integer:=0;
 	signal COLCNTR_REG, COLCNTR_NEXT : integer:=COLUMNS-1;
 	
@@ -64,7 +64,7 @@ architecture Behavioral of system_logic is
 	signal LCD_BYTE_REG, LCD_BYTE_NEXT : STD_LOGIC_VECTOR(7 downto 0);
 	signal LCD_START_REG, LCD_START_NEXT, LCD_ISDATA_REG, LCD_ISDATA_NEXT : STD_LOGIC;
 	type STATES is (	BOOTTIME, INIT, IDLE, UP, DOWN, LEFT,
-							RIGHT, SETPAGE, SETCOLA, SETCOLB, SETADDR, WAITFORMEMORY, LOADCURMEMORY, WRITEMEMORY, WRITELCD, SETPAGE1, SETPAGE2, SETPAGE3, SETPAGE4, CLEARPAGE1, CLEARPAGE2, CLEARPAGE3, CLEARPAGE4,
+							RIGHT, SETPAGE, SETCOLA, SETCOLB, SETADDR, WAITFORMEMORY, LOADCURMEMORY, WRITEMEMORY1, WRITEMEMORY2, WRITELCD, SETPAGE1, SETPAGE2, SETPAGE3, SETPAGE4, CLEARPAGE1, CLEARPAGE2, CLEARPAGE3, CLEARPAGE4,
 							SETCOLP2A, SETCOLP2B, SETCOLP3A, SETCOLP3B, SETCOLP4A, SETCOLP4B);
 	signal STATE_REG, STATE_NEXT : STATES;					
 begin
@@ -90,6 +90,7 @@ begin
 	RESET <= RESET_REG;
 	DATA_OUT <= DOUT_REG;
 	WRITE_ENABLE <= WE_REG;
+	ADDRESS <= ADDRESS_REG;
 	
 	process(CLK)
 	begin
@@ -267,7 +268,7 @@ begin
 						COLCNTR_NEXT <= COLUMNS-1;
 						CUR_COL_NEXT <= 0;
 						CUR_PAGE_NEXT <= 0;
-						STATE_NEXT <= SETADDR;
+						STATE_NEXT <= IDLE;
 					end if;
 				end if;
 				
@@ -322,6 +323,7 @@ begin
 				
 			when SETADDR =>
 				ADDRESS_NEXT <= std_logic_vector(to_unsigned(CUR_PAGE_REG * 132 + CUR_COL_REG, 10));
+				debugled <= std_logic_vector(to_unsigned(CUR_PAGE_REG, 4));
 				STATE_NEXT <= WAITFORMEMORY;
 				
 			when WAITFORMEMORY =>
@@ -329,18 +331,17 @@ begin
 			
 			when LOADCURMEMORY =>
 				MEMORYBYTE_NEXT <= DATA_IN;
-				STATE_NEXT <= WRITEMEMORY;
+				STATE_NEXT <= WRITEMEMORY1;
 			
-			when WRITEMEMORY =>
+			when WRITEMEMORY1 =>
+				MEMORYBYTE_NEXT(PIXEL_REG) <= '1';
+				STATE_NEXT <= WRITEMEMORY2;
+				
+			when WRITEMEMORY2 =>
+				DOUT_NEXT <= MEMORYBYTE_REG;
 				WE_NEXT <= '1';
 				STATE_NEXT <= SETPAGE;
-				if(PIXEL_REG = 7) then 
-					DOUT_NEXT <= "1" & MEMORYBYTE_REG(6 downto 0);
-				elsif(PIXEL_REG = 0) then
-					DOUT_NEXT <= MEMORYBYTE_REG(7 downto 1) & "1";
-				else
-					DOUT_NEXT <= MEMORYBYTE_REG(7 downto PIXEL_REG+1) & "1" & MEMORYBYTE_REG(PIXEL_REG-1 downto 0);
-				end if;
+			
 			when SETPAGE => -- Set correct page
 				LCD_BYTE_NEXT <= "1011" & std_logic_vector(to_unsigned(CUR_PAGE_REG, 4));
 				LCD_START_NEXT <= '1';
@@ -363,7 +364,7 @@ begin
 				end if;
 				
 			when WRITELCD => 
-				LCD_BYTE_NEXT <= DOUT_REG;
+				LCD_BYTE_NEXT <= MEMORYBYTE_REG;
 				LCD_START_NEXT <= '1';
 				LCD_ISDATA_NEXT <= '1';
 				if(WRITE_DONE = '1') then

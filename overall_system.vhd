@@ -108,8 +108,8 @@ begin
 		reset => RESETLCD,
 		debugled => DEBUGLED,
 		address => ADDRESS_SIG,
-		data_in => DIN_SIG,
-		data_out => DOUT_SIG,
+		data_in => DOUT_SIG,
+		data_out => DIN_SIG,
 		write_enable => WE_SIG
 	);
 
