@@ -33,10 +33,11 @@ use IEEE.NUMERIC_STD.ALL;
 entity system_logic is
     Port ( H_CW, H_CCW, V_CW, V_CCW, WRITE_DONE : in  STD_LOGIC;
            CLK : in  STD_LOGIC;
-			  RESET : out STD_LOGIC;
+			  DATA_IN : in STD_LOGIC_VECTOR(7 downto 0);
+			  RESET, WRITE_ENABLE, LCD_START, LCD_ISDATA : out STD_LOGIC;
 			  DEBUGLED : out STD_LOGIC_VECTOR(3 downto 0);
-			  LCD_BYTE : out STD_LOGIC_VECTOR(7 downto 0);
-			  LCD_START, LCD_ISDATA : out STD_LOGIC);
+			  LCD_BYTE, DATA_OUT : out STD_LOGIC_VECTOR(7 downto 0);
+			  ADDRESS : out STD_LOGIC_VECTOR(9 downto 0));
 
 end system_logic;
 
@@ -50,13 +51,20 @@ architecture Behavioral of system_logic is
 	signal BOOTTIMER_REG, BOOTTIMER_NEXT : integer:=50000; -- Will create a 3.125 ms delay before booting init to avoid chitter.
 	signal CMDCOUNTER_REG, CMDCOUNTER_NEXT : integer:=0;
 	signal COLCNTR_REG, COLCNTR_NEXT : integer:=COLUMNS-1;
+	
+	signal PIXEL_REG, PIXEL_NEXT : integer:=0;
+	signal ADDRESS_REG, ADDRESS_NEXT : std_logic_vector(9 downto 0);
+	
+	signal WE_REG, WE_NEXT : std_logic; -- Write Enable
+	signal DOUT_REG, DOUT_NEXT : std_logic_vector(7 downto 0); -- Data out
 	signal RESET_REG, RESET_NEXT : std_logic;
-	signal CUR_PAGE_REG, CUR_PAGE_NEXT, NEW_PAGE_REG, NEW_PAGE_NEXT : integer:=0;
-	signal CUR_COL_REG, CUR_COL_NEXT, NEW_COL_REG, NEW_COL_NEXT : integer:=0;
+	signal CUR_PAGE_REG, CUR_PAGE_NEXT: integer:=0;
+	signal CUR_COL_REG, CUR_COL_NEXT: integer:=0;
+	signal MEMORYBYTE_REG, MEMORYBYTE_NEXT: std_logic_vector(7 downto 0);
 	signal LCD_BYTE_REG, LCD_BYTE_NEXT : STD_LOGIC_VECTOR(7 downto 0);
 	signal LCD_START_REG, LCD_START_NEXT, LCD_ISDATA_REG, LCD_ISDATA_NEXT : STD_LOGIC;
 	type STATES is (	BOOTTIME, INIT, IDLE, UP, DOWN, LEFT,
-							RIGHT, CLEARCURRENT1, CLEARCURRENT2, CLEARCURRENT3, DRAWNEXT1, DRAWNEXT2, DRAWNEXT3, DRAWNEXT4, SETPAGE1, SETPAGE2, SETPAGE3, SETPAGE4, CLEARPAGE1, CLEARPAGE2, CLEARPAGE3, CLEARPAGE4,
+							RIGHT, SETPAGE, SETCOLA, SETCOLB, SETADDR, WAITFORMEMORY, LOADCURMEMORY, WRITEMEMORY, WRITELCD, SETPAGE1, SETPAGE2, SETPAGE3, SETPAGE4, CLEARPAGE1, CLEARPAGE2, CLEARPAGE3, CLEARPAGE4,
 							SETCOLP2A, SETCOLP2B, SETCOLP3A, SETCOLP3B, SETCOLP4A, SETCOLP4B);
 	signal STATE_REG, STATE_NEXT : STATES;					
 begin
@@ -80,6 +88,8 @@ begin
 	LCD_START <= LCD_START_REG;
 	LCD_ISDATA <= LCD_ISDATA_REG;
 	RESET <= RESET_REG;
+	DATA_OUT <= DOUT_REG;
+	WRITE_ENABLE <= WE_REG;
 	
 	process(CLK)
 	begin
@@ -89,13 +99,16 @@ begin
 			LCD_START_REG <= LCD_START_NEXT;
 			LCD_ISDATA_REG <= LCD_ISDATA_NEXT;
 			CUR_PAGE_REG <= CUR_PAGE_NEXT;
-			NEW_PAGE_REG <= NEW_PAGE_NEXT;
 			CUR_COL_REG <= CUR_COL_NEXT;
-			NEW_COL_REG <= NEW_COL_NEXT;
 			RESET_REG <= RESET_NEXT;
+			PIXEL_REG <= PIXEL_NEXT;
 			COLCNTR_REG <= COLCNTR_NEXT;
 			CMDCOUNTER_REG <= CMDCOUNTER_NEXT;
 			BOOTTIMER_REG <= BOOTTIMER_NEXT;
+			ADDRESS_REG <= ADDRESS_NEXT;
+			WE_REG <= WE_NEXT;
+			DOUT_REG <= DOUT_NEXT;
+			MEMORYBYTE_REG <= MEMORYBYTE_NEXT;
 		end if;
 	end process;
 	
@@ -107,12 +120,15 @@ begin
 		LCD_START_NEXT <= '0';
 		LCD_ISDATA_NEXT <= '0';
 		CUR_COL_NEXT <= CUR_COL_REG;
-		NEW_COL_NEXT <= NEW_COL_REG;
 		CUR_PAGE_NEXT <= CUR_PAGE_REG;
-		NEW_PAGE_NEXT <= NEW_PAGE_REG;
 		COLCNTR_NEXT <= COLCNTR_REG;
 		CMDCOUNTER_NEXT <= CMDCOUNTER_REG;
 		BOOTTIMER_NEXT <= BOOTTIMER_REG;
+		PIXEL_NEXT <= PIXEL_REG;
+		ADDRESS_NEXT <= ADDRESS_REG;
+		WE_NEXT <= '0';
+		DOUT_NEXT <= DOUT_REG;
+		MEMORYBYTE_NEXT <= MEMORYBYTE_REG;
 		
 		case STATE_REG is		
 			when BOOTTIME =>
@@ -251,15 +267,11 @@ begin
 						COLCNTR_NEXT <= COLUMNS-1;
 						CUR_COL_NEXT <= 0;
 						CUR_PAGE_NEXT <= 0;
-						NEW_COL_NEXT <= 0;
-						NEW_PAGE_NEXT <= 0;
-						STATE_NEXT <= DRAWNEXT1;
+						STATE_NEXT <= SETADDR;
 					end if;
 				end if;
 				
-			when IDLE =>				
-				CUR_PAGE_NEXT <= NEW_PAGE_REG;
-				CUR_COL_NEXT <= NEW_COL_REG;
+			when IDLE =>		
 				if(V_CW = '1') then
 					STATE_NEXT <= DOWN;
 				elsif(V_CCW = '1') then
@@ -270,85 +282,93 @@ begin
 					STATE_NEXT <= LEFT;
 				end if;
 			when UP =>
-				STATE_NEXT <= CLEARCURRENT1;
-				if(CUR_PAGE_REG = 0) then
-					NEW_PAGE_NEXT <= 3;
-				else
-					NEW_PAGE_NEXT <= CUR_PAGE_REG - 1;
+				STATE_NEXT <= SETADDR;
+				if(PIXEL_REG = 0) then
+					PIXEL_NEXT <= 7;					
+					if(CUR_PAGE_REG = 0) then
+						CUR_PAGE_NEXT <= 3;
+					else
+						CUR_PAGE_NEXT <= CUR_PAGE_REG - 1;
+					end if;
+				else 
+					PIXEL_NEXT <= PIXEL_REG - 1;
 				end if;
 			when DOWN =>
-				STATE_NEXT <= CLEARCURRENT1;
-				if(CUR_PAGE_REG = 3) then
-					NEW_PAGE_NEXT <= 0;
-				else
-					NEW_PAGE_NEXT <= CUR_PAGE_REG + 1;
+				STATE_NEXT <= SETADDR;
+				if(PIXEL_REG = 7) then
+					PIXEL_NEXT <= 0;					
+					if(CUR_PAGE_REG = 3) then
+						CUR_PAGE_NEXT <= 0;
+					else
+						CUR_PAGE_NEXT <= CUR_PAGE_REG + 1;
+					end if;
+				else 
+					PIXEL_NEXT <= PIXEL_REG + 1;
 				end if;
 			when LEFT =>
-				STATE_NEXT <= CLEARCURRENT1;
+				STATE_NEXT <= SETADDR;
 				if(CUR_COL_REG = 0) then
-					NEW_COL_NEXT <= 131;
+					CUR_COL_NEXT <= 131;
 				else
-					NEW_COL_NEXT <= CUR_COL_REG - 1;
+					CUR_COL_NEXT <= CUR_COL_REG - 1;
 				end if;
 			when RIGHT =>
-				STATE_NEXT <= CLEARCURRENT1;
+				STATE_NEXT <= SETADDR;
 				if(CUR_COL_REG = 131) then
-					NEW_COL_NEXT <= 0;
+					CUR_COL_NEXT <= 0;
 				else
-					NEW_COL_NEXT <= CUR_COL_REG + 1;
+					CUR_COL_NEXT <= CUR_COL_REG + 1;
+				end if;			
+				
+			when SETADDR =>
+				ADDRESS_NEXT <= std_logic_vector(to_unsigned(CUR_PAGE_REG * 132 + CUR_COL_REG, 10));
+				STATE_NEXT <= WAITFORMEMORY;
+				
+			when WAITFORMEMORY =>
+				STATE_NEXT <= LOADCURMEMORY;
+			
+			when LOADCURMEMORY =>
+				MEMORYBYTE_NEXT <= DATA_IN;
+				STATE_NEXT <= WRITEMEMORY;
+			
+			when WRITEMEMORY =>
+				WE_NEXT <= '1';
+				STATE_NEXT <= SETPAGE;
+				if(PIXEL_REG = 7) then 
+					DOUT_NEXT <= "1" & MEMORYBYTE_REG(6 downto 0);
+				elsif(PIXEL_REG = 0) then
+					DOUT_NEXT <= MEMORYBYTE_REG(7 downto 1) & "1";
+				else
+					DOUT_NEXT <= MEMORYBYTE_REG(7 downto PIXEL_REG+1) & "1" & MEMORYBYTE_REG(PIXEL_REG-1 downto 0);
 				end if;
-			when CLEARCURRENT1 =>
+			when SETPAGE => -- Set correct page
+				LCD_BYTE_NEXT <= "1011" & std_logic_vector(to_unsigned(CUR_PAGE_REG, 4));
+				LCD_START_NEXT <= '1';
+				if(WRITE_DONE = '1') then
+					STATE_NEXT <= SETCOLA;
+				end if;
+				
+			when SETCOLA =>
 				LCD_BYTE_NEXT <= "0001" & std_logic_vector(to_unsigned(CUR_COL_REG, 8)(7 downto 4));
 				LCD_START_NEXT <= '1';
 				if(WRITE_DONE = '1') then
-					STATE_NEXT <= CLEARCURRENT2;
+					STATE_NEXT <= SETCOLB;
 				end if;
 				
-			when CLEARCURRENT2 =>
+			when SETCOLB =>
 				LCD_BYTE_NEXT <= "0000" & std_logic_vector(to_unsigned(CUR_COL_REG, 8)(3 downto 0));
 				LCD_START_NEXT <= '1';
 				if(WRITE_DONE = '1') then
-					STATE_NEXT <= CLEARCURRENT3;
+					STATE_NEXT <= WRITELCD;
 				end if;
 				
-			when CLEARCURRENT3 =>
-				LCD_BYTE_NEXT <= "00000000";
-				LCD_START_NEXT <= '1';
-				LCD_ISDATA_NEXT <= '1';
-				if(WRITE_DONE = '1') then
-					STATE_NEXT <= DRAWNEXT1;
-				end if;
-				
-			when DRAWNEXT1 => -- Set correct page
-				debugled <= std_logic_vector(to_unsigned(NEW_PAGE_REG, 4));
-				LCD_BYTE_NEXT <= "1011" & std_logic_vector(to_unsigned(NEW_PAGE_REG, 4));
-				LCD_START_NEXT <= '1';
-				if(WRITE_DONE = '1') then
-					STATE_NEXT <= DRAWNEXT2;
-				end if;
-				
-			when DRAWNEXT2 =>
-				LCD_BYTE_NEXT <= "0001" & std_logic_vector(to_unsigned(NEW_COL_REG, 8)(7 downto 4));
-				LCD_START_NEXT <= '1';
-				if(WRITE_DONE = '1') then
-					STATE_NEXT <= DRAWNEXT3;
-				end if;
-				
-			when DRAWNEXT3 =>
-				LCD_BYTE_NEXT <= "0000" & std_logic_vector(to_unsigned(NEW_COL_REG, 8)(3 downto 0));
-				LCD_START_NEXT <= '1';
-				if(WRITE_DONE = '1') then
-					STATE_NEXT <= DRAWNEXT4;
-				end if;
-			
-			when DRAWNEXT4 =>
-				LCD_BYTE_NEXT <= "11111111";
+			when WRITELCD => 
+				LCD_BYTE_NEXT <= DOUT_REG;
 				LCD_START_NEXT <= '1';
 				LCD_ISDATA_NEXT <= '1';
 				if(WRITE_DONE = '1') then
 					STATE_NEXT <= IDLE;
 				end if;
-			
 		end case;
 	end process;
 	

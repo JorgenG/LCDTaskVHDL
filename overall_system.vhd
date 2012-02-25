@@ -46,8 +46,9 @@ end overall_system;
 
 architecture Behavioral of overall_system is
 	signal V_CW_SIG, V_CCW_SIG, H_CW_SIG, H_CCW_SIG, 
-				WRITE_DONE_SIG, LCD_START_SIG, LCD_ISDATA_SIG, LCD_CLK : STD_LOGIC;
-	signal LCD_BYTE_SIG : STD_LOGIC_VECTOR(7 downto 0);
+				WRITE_DONE_SIG, LCD_START_SIG, LCD_ISDATA_SIG, LCD_CLK, WE_SIG : STD_LOGIC;
+	signal LCD_BYTE_SIG, DOUT_SIG, DIN_SIG : STD_LOGIC_VECTOR(7 downto 0);
+	signal ADDRESS_SIG : STD_LOGIC_VECTOR(9 downto 0);
 
 begin
 	
@@ -64,6 +65,15 @@ begin
 		si => SI,
 		a0 => A0,
 		isdata => LCD_ISDATA_SIG
+	);
+	
+	MEMORY_BANK : entity work.memory_bank (Behavioral)
+	port map(
+		clk => CLK,
+		address => ADDRESS_SIG,
+		write_enable => WE_SIG,
+		data_out => DOUT_SIG,
+		data_in => DIN_SIG
 	);
 	
 	HORIZONTAL_KNOB : entity work.rotation_detector (Behavioral)
@@ -96,7 +106,11 @@ begin
 		lcd_isdata => LCD_ISDATA_SIG,
 		write_done => WRITE_DONE_SIG,
 		reset => RESETLCD,
-		debugled => DEBUGLED
+		debugled => DEBUGLED,
+		address => ADDRESS_SIG,
+		data_in => DIN_SIG,
+		data_out => DOUT_SIG,
+		write_enable => WE_SIG
 	);
 
 end Behavioral;
